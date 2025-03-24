@@ -4,46 +4,181 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-body{
+
+body {
   font-family: 'Nunito', sans-serif;
-  background-color:#f0f6fc;
-  
-}
-h1{
-  font-family: 'Bonheur Royale', cursive;
-  @apply text-3xl font-bold text-center my-6 text-green-800;
-}
-.navs{
-  @apply flex justify-center items-center mb-20 hover:text-green-800 font-bold
+  background-color: #f0f6fc;
 }
 
-.meal-container{
-	@apply grid gap-10 grid-cols-1 md:grid-cols-2 
+/* 📌 Título principal */
+h1 {
+  font-family: 'Bonheur Royale', cursive;
+  @apply text-4xl font-bold text-center my-6 text-green-800;
 }
-.img{
-  @apply h-44 w-full object-cover rounded-3xl border-2 border-green-800;
+
+/* 📌 Navegación */
+.navs {
+  @apply flex justify-center items-center mb-10 hover:text-green-800 font-bold;
 }
-.para-menu{
-  color:#617d98;
-  font-size:16px;
-  line-height:24px;
-  font-weight:400;
-  font-style:normal;
-  @apply ml-3
+
+/* 📌 Contenedor de filtros */
+.main-category-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
 }
-.title-price{
-  @apply ml-3 flex justify-between text-green-800 font-bold;
+
+.main-category {
+  background-color: #f8f9fa;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
 }
-@media only screen and (max-width:600px){
-  .meal-container{
-    @apply mx-3 ; 
+
+.main-category.active {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.main-category:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* 📌 Contenedor de categorías */
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 10px;
+}
+
+/* 📌 Subcategorías con tamaño uniforme */
+.subcategory-section {
+  width: 100%;
+  min-width: 300px;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+/* 📌 Subcategorías alineadas correctamente a la izquierda */
+.subcategory-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2d3e50;
+  text-align: left;
+  width: 100%;
+  border-bottom: 3px solid #2d3e50;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+/* 📌 Contenedor de los elementos del menú en formato de lista */
+.meal-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 🔹 Espacio entre ítems */
+}
+
+/* 📌 Estilos para cada ítem del menú */
+.meal-card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc; /* 🔹 Línea sutil entre ítems */
+}
+
+/* 📌 Contenedor del título y precio */
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2d3e50;
+  padding-bottom: 3px;
+}
+
+/* 📌 Precio estilizado */
+.meal-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+  text-align: right;
+}
+
+/* 📌 Descripción con estilo más discreto */
+.meal-description {
+  font-size: 1rem;
+  color: #5a5a5a;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+
+/* 🔹 Ocultar descripción si está vacía o dice "sin descripción" */
+.meal-description:empty,
+.meal-description:contains("sin descripción") {
+  display: none;
+}
+
+/* 📌 RESPONSIVE */
+@media (max-width: 1024px) {
+  .meal-container {
+    max-width: 900px;
   }
-  .navs{
-    font-size: 12px;
+
+  .subcategory-title {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .meal-container {
+    max-width: 700px;
+  }
+
+  .meal-header {
+    font-size: 1.2rem;
+  }
+
+  .meal-price {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .meal-container {
+    max-width: 100%;
+  }
+
+  .meal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meal-price {
+    text-align: left;
+    margin-top: 5px;
   }
 }

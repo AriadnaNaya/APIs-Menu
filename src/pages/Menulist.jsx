@@ -1,27 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-const Menulist = ({meals}) => {
-    return (
-			<div className='meal-container'>
-				{meals.map((meal) => (
-					<div key={meal.id}>
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                            <img src={meal.img} alt='img' className='img' />
-                            <div className=" flex flex-col">
-                                <div className='title-price'>
-                                    <h5>{meal.title}</h5>
-                                    <small>{meal.price}</small>
-                                </div>
-                                <div>
-                                    <small className='ml-3 w-full'>-----------------------------------</small>
-                                    <p className='para-menu'>{meal.para}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				))}
-			</div>
-		);
-}
+const Menulist = ({ meals }) => {
+	return (
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 meal-container">
+			{meals.map((meal) => (
+				<div key={meal.id} className="meal-card w-full">
+					<div className="meal-info">
+						<div className="meal-header">
+							<h5 className="meal-title">{meal.title}</h5>
+							<small className="meal-price">{meal.price}</small>
+						</div>
+						{meal.para && meal.para.toLowerCase() !== 'sin descripción' && (
+							<p className="meal-description">{meal.para}</p>
+						)}
+					</div>
+				</div>
+			))}
+		</div>
+	);
+};
 
-export default Menulist
+export default Menulist;

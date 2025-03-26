@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f6fc;
+}
+
+/* 📌 Título principal */
+h1 {
+    font-family: 'Bonheur Royale', cursive;
+    @apply text-4xl font-bold text-center my-6 text-green-800;
+}
+
+/* 📌 Navegación */
+.navs {
+    @apply flex justify-center items-center mb-10 hover:text-green-800 font-bold;
+}
+
+/* 📌 Contenedor de filtros */
+.main-category-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.main-category {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.main-category.active {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+}
+
+.main-category:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* 📌 Contenedor de categorías */
+.category-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding: 10px;
+}
+
+/* 📌 Subcategorías con tamaño uniforme */
+.subcategory-section {
+    width: 100%;
+    min-width: 300px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+/* 📌 Subcategorías alineadas correctamente a la izquierda */
+.subcategory-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2d3e50;
+    text-align: left;
+    width: 100%;
+    border-bottom: 3px solid #2d3e50;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+/* 📌 Contenedor general de los ítems */
+.meal-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* 📌 Efecto hover para dar realce */
+.meal-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Ocultar descripción si está vacía o dice "sin descripción" */
+.meal-description:empty,
+.meal-description:contains("sin descripción") {
+    display: none;
+}
+
+/* 📌 RESPONSIVE */
+@media (max-width: 1024px) {
+    .meal-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .subcategory-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-category {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    .subcategory-title {
+        font-size: 1.5rem;
+    }
+
+    .meal-card {
+        padding: 15px;
+    }
+
+    .meal-title {
+        font-size: 1.4rem;
+    }
+
+    .meal-price {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .meal-container {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-title {
+        font-size: 1.2rem;
+    }
+
+    .meal-price {
+        font-size: 1.2rem;
+    }
+
+}
+.meal-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 12px;
+    border: 1px solid #a1d99b;
+    border-left: 4px solid #238b45;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Imagen del plato */
+.meal-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Info textual */
+.meal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+/* Encabezado con nombre y precio */
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.meal-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #006d77;
+}
+
+.meal-price {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+/* Descripción */
+.meal-description {
+    font-size: 0.9rem;
+    color: #444;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+

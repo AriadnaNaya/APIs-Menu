@@ -1,49 +1,76 @@
-import React, { useState } from 'react';
-import { data } from '../../data';
-import Menulist from './Menulist';
-
-const mainCategories = ['🍣 Sushi & Rolls', '🍽️ Comida', '🍷 Bebidas', '📜 Todo el Menú'];
-
-const categoryGroups = {
-	'🍣 Sushi & Rolls': ['Rolls','hotRolls', 'maki', 'soyPaperRolls', 'geishas', 'nigiriSashimi', 'temakis', 'sushiCombinado', 'veggies'],
-	'🍽️ Comida': ['entradas', 'townKitchen'],
-	'🍷 Bebidas': ['cervezas', 'cocktails', 'sake', 'vinosBlancos', 'vinosTintos', 'vinosEspumantes', 'vinosPorCopas', 'bebidasSinAlcohol', 'mocktails'],
-	'📜 Todo el Menú': [
-		'entradas', 'Rolls', 'hotRolls', 'maki', 'soyPaperRolls',
-		'geishas', 'nigiriSashimi', 'temakis', 'sushiCombinado', 'veggies',
-		'postres', 'cervezas', 'cocktails', 'sake',
-		'vinosBlancos', 'vinosTintos', 'vinosEspumantes',
-		'vinosPorCopas', 'bebidasSinAlcohol', 'mocktails', 'townKitchen'
-	]
-};
+import React from 'react';
+import {
+	Typography,
+	Container,
+	Box,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Header from '../components/Header';
+import MenuList from '../components/MenuList';
+import data from '../data/menuData';
+import formatTitle from '../utils/formatTitle';
+import grupoCategorias from '../utils/grupoCategorias';
 
 const Home = () => {
-	const [selectedCategory, setSelectedCategory] = useState('🍣 Sushi & Rolls');
-
 	return (
 		<div>
-			<h1 className='h1'>Menú Sushi Town</h1>
+			<Header />
 
-			<div className='main-category-container'>
-				{mainCategories.map((category) => (
-					<button
-						key={category}
-						className={`main-category ${selectedCategory === category ? 'active' : ''}`}
-						onClick={() => setSelectedCategory(category)}
-					>
-						{category}
-					</button>
-				))}
-			</div>
+			{/* Título principal */}
+			<Typography variant="h3" sx={{ my: 3, textAlign: 'center' }}>
+				Sushi Town Menu
+			</Typography>
 
-			<div className='category-container'>
-				{categoryGroups[selectedCategory].map((subCategory) => (
-					<div key={subCategory} className='subcategory-section'>
-						<h3 className="subcategory-title">{subCategory}</h3>
-						<Menulist meals={data.filter((meal) => meal.tipo === subCategory)} />
-					</div>
-				))}
-			</div>
+			{/* Contenedor blanco */}
+			<Container maxWidth="lg" sx={{ backgroundColor: '#fff', p: 2, borderRadius: 2 }}>
+				{/* Sección para cada grupo */}
+				<Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+					{Object.entries(grupoCategorias).map(([grupo, tipos]) => (
+						<Box key={grupo}>
+							<Typography variant="h4" sx={{ mb: 2 }}>
+								{formatTitle(grupo)}
+							</Typography>
+							<Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+								{tipos.map((tipo) => (
+									<Accordion
+										key={tipo}
+										defaultExpanded
+										disableGutters
+										square
+										sx={{
+											boxShadow: 'none',
+											borderBottom: '1px solid #333',
+											'&:before': { display: 'none' }
+										}}
+									>
+										<AccordionSummary
+											expandIcon={<ExpandMoreIcon />}
+											sx={{
+												minHeight: 48,
+												pb: 0,
+												'& .MuiAccordionSummary-content': {
+													margin: 0,
+													whiteSpace: 'normal'
+												}
+											}}
+										>
+											<Typography variant="h5">
+												{formatTitle(tipo)}
+											</Typography>
+										</AccordionSummary>
+										<AccordionDetails sx={{ px: 2, pt: 1, pb: 3 }}>
+											<MenuList meals={data[tipo]} />
+										</AccordionDetails>
+									</Accordion>
+								))}
+							</Box>
+						</Box>
+					))}
+				</Box>
+			</Container>
 		</div>
 	);
 };

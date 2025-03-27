@@ -1,26 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import {
+	AppBar,
+	Toolbar,
+	Button,
+	IconButton,
+	Drawer,
+	List,
+	ListItem,
+	ListItemText
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import useMobile from '../hooks/useMobile';
 
 const Header = () => {
+	const [openDrawer, setOpenDrawer] = useState(false);
+	const isMobile = useMobile();
+
+	const menuItems = [
+		{ text: 'Inicio', to: '/' },
+		{ text: '🍣 Sushi & Rolls', to: '/menu/sushi-rolls' },
+		{ text: '🍽️ Comida', to: '/menu/comida' },
+		{ text: '🍷 Bebidas', to: '/menu/bebidas' },
+		{ text: '🍰 Postres', to: '/menu/postres' }
+	];
+
+	const handleDrawerOpen = () => {
+		setOpenDrawer(true);
+	};
+
+	const handleDrawerClose = () => {
+		setOpenDrawer(false);
+	};
+
 	return (
-		<header className='header'>
-			<nav className='nav'>
-				<ul className='nav-list'>
-					<li className='nav-item'>
-						<NavLink to='/' className='nav-link'>Inicio</NavLink>
-					</li>
-					<li className='nav-item'>
-						<NavLink to='/menu/sushi-rolls' className='nav-link'>🍣 Sushi & Rolls</NavLink>
-					</li>
-					<li className='nav-item'>
-						<NavLink to='/menu/comida' className='nav-link'>🍽️ Comida</NavLink>
-					</li>
-					<li className='nav-item'>
-						<NavLink to='/menu/bebidas' className='nav-link'>🍷 Bebidas</NavLink>
-					</li>
-				</ul>
-			</nav>
-		</header>
+		<AppBar position="static" color="default" elevation={1}>
+			<Toolbar sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+				{isMobile ? (
+					<>
+						<IconButton color="inherit" edge="start" onClick={handleDrawerOpen} sx={{ mr: 2 }}>
+							<MenuIcon />
+						</IconButton>
+						<Drawer anchor="left" open={openDrawer} onClose={handleDrawerClose}>
+							<List sx={{ width: 200 }}>
+								{menuItems.map((item) => (
+									<ListItem
+										button
+										component={NavLink}
+										to={item.to}
+										key={item.text}
+										onClick={handleDrawerClose}
+									>
+										<ListItemText primary={item.text} />
+									</ListItem>
+								))}
+							</List>
+						</Drawer>
+					</>
+				) : (
+					<>
+						{menuItems.map((item) => (
+							<Button key={item.text} component={NavLink} to={item.to} color="inherit" sx={{ mr: 2 }}>
+								{item.text}
+							</Button>
+						))}
+					</>
+				)}
+			</Toolbar>
+		</AppBar>
 	);
 };
 

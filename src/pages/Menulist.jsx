@@ -1,29 +1,99 @@
-import React from 'react';
+// ✅ MenuList.jsx (cards con expansión usando Material UI)
+import React, { useState } from 'react';
+import {
+	Card,
+	CardContent,
+	CardActions,
+	Collapse,
+	Typography,
+	Chip,
+	Box,
+	IconButton,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const Menulist = ({ meals }) => {
+const MenuList = ({ meals }) => {
+	const [expandedCards, setExpandedCards] = useState({});
+
+	const toggleExpand = (idx) => {
+		setExpandedCards((prev) => ({ ...prev, [idx]: !prev[idx] }));
+	};
+
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 meal-container">
-			{meals.map((meal) => (
-				<div key={meal.id} className="meal-card">
-					<img
-						src={meal.img || "https://via.placeholder.com/80"}
-						alt={meal.title}
-						className="meal-image"
-					/>
-					<div className="meal-info">
-						<div className="meal-header">
-							<h5 className="meal-title">{meal.title}</h5>
-							<small className="meal-price">{meal.price}</small>
-						</div>
-						{meal.para && meal.para.toLowerCase() !== 'sin descripción' && (
-							<p className="meal-description">{meal.para}</p>
-						)}
-					</div>
-				</div>
+		<section className="subcategory-section">
+			<div className="meal-container">
+				{meals.map((meal, idx) => {
+					const hasVariants = meal.variantes && meal.variantes.length > 0;
+					const expanded = expandedCards[idx] || false;
 
-			))}
-		</div>
+					return (
+						<Card
+							key={idx}
+							variant="outlined"
+							className="meal-card"
+							sx={{ borderRadius: 2, boxShadow: 1, borderColor: '#cce7cc', mb: 2 }}
+						>
+							<CardContent>
+								{meal.img && (
+									<img
+										src={meal.img}
+										alt={meal.nombre || meal.title}
+										style={{ width: '100%', maxHeight: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '10px' }}
+									/>
+								)}
+								<Typography variant="h6">
+									{meal.nombre || meal.title}
+								</Typography>
+								{meal.precio && !hasVariants && (
+									<Typography variant="subtitle2" color="primary">
+										{typeof meal.precio === 'number' ? `$${meal.precio.toLocaleString('es-AR')}` : meal.precio}
+									</Typography>
+								)}
+								{meal.descripcion && meal.descripcion.toLowerCase() !== 'sin descripción' && (
+									<Typography variant="body2" color="text.secondary">
+										{meal.descripcion}
+									</Typography>
+								)}
+							</CardContent>
+
+							{hasVariants && (
+								<>
+									<CardActions disableSpacing>
+										<IconButton onClick={() => toggleExpand(idx)} aria-expanded={expanded} aria-label="mostrar más">
+											<ExpandMoreIcon style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: '0.3s' }} />
+										</IconButton>
+									</CardActions>
+									<Collapse in={expanded} timeout="auto" unmountOnExit>
+										<CardContent>
+											<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
+												{meal.variantes.map((v, i) => (
+													<Chip
+														key={i}
+														label={`${v.cantidad}: $${v.precio.toLocaleString('es-AR')}`}
+														size="small"
+														sx={{ fontWeight: 500, backgroundColor: '#2e7d32', color: '#fff' }}
+													/>
+												))}
+											</Box>
+											{meal.variantes?.some((v) => v.descripcion) && (
+												<ul className="mt-2 space-y-1 text-xs text-gray-600">
+													{meal.variantes.filter((v) => v.descripcion).map((v, i) => (
+														<li key={i}>
+															<strong>{v.cantidad}:</strong> {v.descripcion}
+														</li>
+													))}
+												</ul>
+											)}
+										</CardContent>
+									</Collapse>
+								</>
+							)}
+						</Card>
+					);
+				})}
+			</div>
+		</section>
 	);
 };
 
-export default Menulist;
+export default MenuList;

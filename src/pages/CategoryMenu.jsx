@@ -8,7 +8,7 @@ const CategoryMenu = () => {
     const { category } = useParams();
     const filteredMeals = category === 'all'
         ? data
-        : data.filter((meal) => meal.type.toLowerCase() === category.toLowerCase());
+        : data.filter((meal) => meal.tipo?.toLowerCase() === category.toLowerCase());
 
     return (
         <div>

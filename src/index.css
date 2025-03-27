@@ -26,7 +26,7 @@ h1 {
   @apply flex justify-center items-center mb-10 hover:text-green-800 font-bold;
 }
 
-/* 📌 Filtros (categorías) */
+/* 📌 Botones de categorías */
 .main-category-container {
   display: flex;
   justify-content: center;
@@ -57,7 +57,7 @@ h1 {
   color: white;
 }
 
-/* 📌 Categorías */
+/* 📌 Contenedor general */
 .category-container {
   display: flex;
   flex-direction: column;
@@ -66,6 +66,7 @@ h1 {
   padding: 10px;
 }
 
+/* 📌 Sección de subcategoría */
 .subcategory-section {
   width: 100%;
   max-width: 1200px;
@@ -88,31 +89,32 @@ h1 {
   text-transform: capitalize;
 }
 
-/* 📌 Lista de ítems */
+/* 📌 Grid de ítems */
 .meal-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
   padding: 8px;
 }
 
-/* 📌 Lista de descripciones de variantes */
+/* 📌 Alineación opcional si se usan estilos externos en .meal-card */
+.meal-card {
+  /* vacío, ya no se necesita nada si se usa sx={} en MUI */
+}
+
 ul.mt-2.space-y-1.text-xs.text-gray-600 {
   margin-top: 12px;
   padding-left: 16px;
   font-size: 0.85rem;
   color: #444;
+  list-style-type: disc;
 }
 
-/* 📱 Responsivo */
+/* 📱 RESPONSIVE */
 @media (max-width: 1024px) {
-  .meal-container {
-    max-width: 900px;
-  }
-
   .subcategory-title {
     font-size: 1.7rem;
   }
@@ -120,8 +122,8 @@ ul.mt-2.space-y-1.text-xs.text-gray-600 {
 
 @media (max-width: 768px) {
   .meal-container {
-    max-width: 90%;
-    padding: 0 16px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
   }
 
   .subcategory-title {
@@ -130,11 +132,6 @@ ul.mt-2.space-y-1.text-xs.text-gray-600 {
 }
 
 @media (max-width: 480px) {
-  .meal-container {
-    max-width: 100%;
-    padding: 0 10px;
-  }
-
   .subcategory-title {
     font-size: 1.3rem;
     text-align: center;

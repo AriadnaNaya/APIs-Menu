@@ -1,4 +1,4 @@
-// ✅ MenuList.jsx (cards con expansión usando Material UI)
+// ✅ MenuList.jsx (cards con expansión vertical para variantes)
 import React, { useState } from 'react';
 import {
 	Card,
@@ -9,6 +9,7 @@ import {
 	Chip,
 	Box,
 	IconButton,
+	Stack,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -31,14 +32,27 @@ const MenuList = ({ meals }) => {
 							key={idx}
 							variant="outlined"
 							className="meal-card"
-							sx={{ borderRadius: 2, boxShadow: 1, borderColor: '#cce7cc', mb: 2 }}
+							sx={{
+								borderRadius: 2,
+								boxShadow: 1,
+								borderColor: '#cce7cc',
+								width: '100%',
+								maxWidth: 360,
+								justifySelf: 'start', // ⬅️ Alinear a la izquierda
+							}}
 						>
 							<CardContent>
 								{meal.img && (
 									<img
 										src={meal.img}
 										alt={meal.nombre || meal.title}
-										style={{ width: '100%', maxHeight: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '10px' }}
+										style={{
+											width: '100%',
+											maxHeight: '120px',
+											objectFit: 'contain',
+											borderRadius: '8px',
+											marginBottom: '10px',
+										}}
 									/>
 								)}
 								<Typography variant="h6">
@@ -46,7 +60,9 @@ const MenuList = ({ meals }) => {
 								</Typography>
 								{meal.precio && !hasVariants && (
 									<Typography variant="subtitle2" color="primary">
-										{typeof meal.precio === 'number' ? `$${meal.precio.toLocaleString('es-AR')}` : meal.precio}
+										{typeof meal.precio === 'number'
+											? `$${meal.precio.toLocaleString('es-AR')}`
+											: meal.precio}
 									</Typography>
 								)}
 								{meal.descripcion && meal.descripcion.toLowerCase() !== 'sin descripción' && (
@@ -60,12 +76,17 @@ const MenuList = ({ meals }) => {
 								<>
 									<CardActions disableSpacing>
 										<IconButton onClick={() => toggleExpand(idx)} aria-expanded={expanded} aria-label="mostrar más">
-											<ExpandMoreIcon style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: '0.3s' }} />
+											<ExpandMoreIcon
+												style={{
+													transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
+													transition: '0.3s',
+												}}
+											/>
 										</IconButton>
 									</CardActions>
 									<Collapse in={expanded} timeout="auto" unmountOnExit>
 										<CardContent>
-											<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
+											<Stack direction="column" spacing={1} mt={1}>
 												{meal.variantes.map((v, i) => (
 													<Chip
 														key={i}
@@ -74,7 +95,7 @@ const MenuList = ({ meals }) => {
 														sx={{ fontWeight: 500, backgroundColor: '#2e7d32', color: '#fff' }}
 													/>
 												))}
-											</Box>
+											</Stack>
 											{meal.variantes?.some((v) => v.descripcion) && (
 												<ul className="mt-2 space-y-1 text-xs text-gray-600">
 													{meal.variantes.filter((v) => v.descripcion).map((v, i) => (

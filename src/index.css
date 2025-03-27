@@ -10,23 +10,24 @@
   box-sizing: border-box;
 }
 
+/* Puedes mantener estos estilos si se usan en elementos no-MUI */
 body {
   font-family: 'Nunito', sans-serif;
   background-color: #f0f6fc;
 }
 
-/* 📌 Título principal */
+/* Título principal (opcional si usas MUI Typography para h1) */
 h1 {
   font-family: 'Bonheur Royale', cursive;
   @apply text-4xl font-bold text-center my-6 text-green-800;
 }
 
-/* 📌 Navegación */
+/* Navegación */
 .navs {
   @apply flex justify-center items-center mb-10 hover:text-green-800 font-bold;
 }
 
-/* 📌 Botones de categorías */
+/* Botones de categorías */
 .main-category-container {
   display: flex;
   justify-content: center;
@@ -57,7 +58,7 @@ h1 {
   color: white;
 }
 
-/* 📌 Contenedor general */
+/* Contenedor general */
 .category-container {
   display: flex;
   flex-direction: column;
@@ -66,7 +67,7 @@ h1 {
   padding: 10px;
 }
 
-/* 📌 Sección de subcategoría */
+/* Sección de subcategoría */
 .subcategory-section {
   width: 100%;
   max-width: 1200px;
@@ -89,7 +90,7 @@ h1 {
   text-transform: capitalize;
 }
 
-/* 📌 Grid de ítems */
+/* Grid de ítems */
 .meal-container {
   width: 100%;
   max-width: 1200px;
@@ -100,9 +101,9 @@ h1 {
   padding: 8px;
 }
 
-/* 📌 Alineación opcional si se usan estilos externos en .meal-card */
+/* Clases adicionales */
 .meal-card {
-  /* vacío, ya no se necesita nada si se usa sx={} en MUI */
+  /* vacío, si usas sx={} en MUI */
 }
 
 ul.mt-2.space-y-1.text-xs.text-gray-600 {
@@ -113,7 +114,7 @@ ul.mt-2.space-y-1.text-xs.text-gray-600 {
   list-style-type: disc;
 }
 
-/* 📱 RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
   .subcategory-title {
     font-size: 1.7rem;
@@ -125,7 +126,6 @@ ul.mt-2.space-y-1.text-xs.text-gray-600 {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 16px;
   }
-
   .subcategory-title {
     font-size: 1.5rem;
   }
@@ -136,7 +136,6 @@ ul.mt-2.space-y-1.text-xs.text-gray-600 {
     font-size: 1.3rem;
     text-align: center;
   }
-
   .main-category {
     font-size: 0.9rem;
     padding: 10px 16px;

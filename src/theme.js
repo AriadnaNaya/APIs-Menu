@@ -3,14 +3,14 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#00c886', // Color principal (usado en bordes, textos destacados, etc.)
+            main: '#00c886', // Color principal para bordes, botones, etc.
             contrastText: '#fff'
         },
         secondary: {
             main: '#007bff'
         },
         background: {
-            default: '#f0f6fc' // Color de fondo del body
+            default: '#f0f6fc' // Color de fondo general
         }
     },
     typography: {
@@ -18,7 +18,7 @@ const theme = createTheme({
         h1: {
             fontFamily: "'Bonheur Royale', cursive",
             fontWeight: 700,
-            fontSize: '3rem'
+            fontSize: '2.5rem'
         },
         h3: {
             fontFamily: "'Bonheur Royale', cursive",
@@ -42,7 +42,7 @@ const theme = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    textTransform: 'none' // Evita que se conviertan en mayúsculas por defecto
+                    textTransform: 'none' // Evita mayúsculas por defecto
                 }
             }
         }

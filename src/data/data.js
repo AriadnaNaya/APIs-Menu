@@ -1,7 +1,7 @@
 export const data = [
 	{
 		nombre: "CHOW FAN",
-		img: "",
+		img: "/img/chowfan.png",
 		descripcion: "Salteado de arroz con vegetales y huevo. Si se agrega proteína:",
 		variantes: [
 			{ cantidad: "Pollo", precio: 17152 },
@@ -416,7 +416,7 @@ export const data = [
 	},
 	{
 		nombre: "CRISPY",
-		img: "",
+		img: "/img/crispysalmon.jpeg",
 		descripcion: "Arroz, salmón, queso saborizado. Rebozado en escama de papa y frito.",
 		precio: "$14,500",
 		tipo: "hotRolls",
@@ -424,7 +424,7 @@ export const data = [
 	},
 	{
 		nombre: "OKINAWA",
-		img: "",
+		img: "/img/okinawa.png",
 		descripcion: "Láminas de salmón rosado, philadelphia y palta. Rebozado y frito.",
 		precio: "$17,604",
 		tipo: "hotRolls",
@@ -432,7 +432,7 @@ export const data = [
 	},
 	{
 		nombre: "CHIPOTLE",
-		img: "",
+		img: "/img/chipotle.jpg",
 		descripcion: "Arroz, salmón rosado, queso saborizado. Frito y cubierto en mayo de chipotle.",
 		precio: "$15,500",
 		tipo: "hotRolls",
@@ -440,7 +440,7 @@ export const data = [
 	},
 	{
 		nombre: "CHUTNEY",
-		img: "",
+		img: "/img/chutney.jpg",
 		descripcion: "Arroz, langostinos, queso saborizado. Frito y cubierto en chutney de tomate.",
 		precio: "$15,500",
 		tipo: "hotRolls",
@@ -448,7 +448,7 @@ export const data = [
 	},
 	{
 		nombre: "PORKY",
-		img: "",
+		img: "/img/porky.png",
 		descripcion: "Arroz, bondiola estofada, bbq, philadelphia. Frito y cubierto en alioli.",
 		precio: "$14,500",
 		tipo: "hotRolls",
@@ -456,7 +456,7 @@ export const data = [
 	},
 	{
 		nombre: "ONCE",
-		img: "",
+		img: "/img/once.png",
 		descripcion: "Arroz, salmón, queso saborizado. Frito y cubierto en ceviche.",
 		precio: "$17,645",
 		tipo: "hotRolls",
@@ -464,7 +464,7 @@ export const data = [
 	},
 	{
 		nombre: "HOT GEISHA x 5 unidades",
-		img: "",
+		img: "/img/geishasushi.png",
 		descripcion: "Lámina de salmón, queso saborizado y verdeo. Frito en tempura.",
 		precio: "$16,364",
 		tipo: "hotRolls",
@@ -472,7 +472,7 @@ export const data = [
 	},
 	{
 		nombre: "SAKE MAKI",
-		img: "",
+		img: "/img/sakemaki.png",
 		descripcion: "Relleno de salmón rosado.",
 		precio: "$13,308",
 		tipo: "maki",
@@ -480,7 +480,7 @@ export const data = [
 	},
 	{
 		nombre: "IKURA",
-		img: "",
+		img: "/img/ikura.jpeg",
 		descripcion: "Langostino, philadelphia, salmón ahumado y palta. Envuelto en salmón rosado y caviar.",
 		precio: "$17,103",
 		tipo: "maki",
@@ -488,7 +488,7 @@ export const data = [
 	},
 	{
 		nombre: "TUNA",
-		img: "",
+		img: "/img/tuna.png",
 		descripcion: "Relleno de atún y salmón rosado cocidos, mayonesa y verdeo.",
 		precio: "$12,251",
 		tipo: "maki",
@@ -496,7 +496,7 @@ export const data = [
 	},
 	{
 		nombre: "FRESHTOWN",
-		img: "",
+		img: "/img/freshtown.jpeg",
 		descripcion: "Mango, ananá, frutilla, limón, almíbar.",
 		precio: "$4,800",
 		tipo: "mocktails",
@@ -504,7 +504,7 @@ export const data = [
 	},
 	{
 		nombre: "CITRIC",
-		img: "",
+		img: "/img/citric.png",
 		descripcion: "Jugo de naranja y limón, almíbar.",
 		precio: "$4,650",
 		tipo: "mocktails",
@@ -512,7 +512,7 @@ export const data = [
 	},
 	{
 		nombre: "POMELADA",
-		img: "",
+		img: "/img/pomelada.jpeg",
 		descripcion: "Jugo de pomelo y limón, almíbar de romero y romero fresco.",
 		precio: "$4,800",
 		tipo: "mocktails",
@@ -520,7 +520,7 @@ export const data = [
 	},
 	{
 		nombre: "NIGIRI SAKE",
-		img: "",
+		img: "/img/nigiri.png",
 		descripcion: "Lámina de salmón rosado sobre arroz avinagrado.",
 		precio: "$10,706",
 		tipo: "nigiriSashimi",
@@ -528,7 +528,7 @@ export const data = [
 	},
 	{
 		nombre: "NIGIRI AHUMADO",
-		img: "",
+		img: "/img/nigiriahumado.webp",
 		descripcion: "Lámina de salmón ahumado sobre arroz avinagrado.",
 		precio: "$12,739",
 		tipo: "nigiriSashimi",
@@ -536,7 +536,7 @@ export const data = [
 	},
 	{
 		nombre: "NIGIRI PINK TROUT",
-		img: "",
+		img: "/img/nigiripink.jpg",
 		descripcion: "Lámina de trucha gravlax sobre arroz avinagrado.",
 		precio: "$9,983",
 		tipo: "nigiriSashimi",
@@ -544,7 +544,7 @@ export const data = [
 	},
 	{
 		nombre: "NIGIRI RED TUNA",
-		img: "",
+		img: "/img/nigirituna.jpeg",
 		descripcion: "Lámina de atún rojo sobre arroz avinagrado.",
 		precio: "$12,820",
 		tipo: "nigiriSashimi",
@@ -552,7 +552,7 @@ export const data = [
 	},
 	{
 		nombre: "NIGIRI FLAME",
-		img: "",
+		img: "/img/nigiriflame.png",
 		descripcion: "Lámina de salmón flambeada, salsa huancaína y maíz cancha.",
 		precio: "$12,739",
 		tipo: "nigiriSashimi",
@@ -560,7 +560,7 @@ export const data = [
 	},
 	{
 		nombre: "NIGIRI TEST!",
-		img: "",
+		img: "/img/nigiris.png",
 		descripcion: "Degustación de cuatro variedades de nigiri.",
 		precio: "$12,468",
 		tipo: "nigiriSashimi",
@@ -568,7 +568,7 @@ export const data = [
 	},
 	{
 		nombre: "SASHIMI SAKE",
-		img: "",
+		img: "/img/sashimi.jpg",
 		descripcion: "Láminas de salmón delicadamente cortadas.",
 		precio: "$10,706",
 		tipo: "nigiriSashimi",
@@ -576,7 +576,7 @@ export const data = [
 	},
 	{
 		nombre: "SASHIMI PINK TROUT",
-		img: "",
+		img: "/img/sashimitrout.png",
 		descripcion: "Láminas de trucha delicadamente cortadas.",
 		precio: "$9,893",
 		tipo: "nigiriSashimi",
@@ -584,7 +584,7 @@ export const data = [
 	},
 	{
 		nombre: "SASHIMI SPICY",
-		img: "",
+		img: "/img/sashimispicy.png",
 		descripcion: "Láminas de salmón rosado cubiertas en togarashi y selladas en plancha.",
 		precio: "$12,073",
 		tipo: "nigiriSashimi",
@@ -592,7 +592,7 @@ export const data = [
 	},
 	{
 		nombre: "SASHIMI RED TUNA",
-		img: "",
+		img: "/img/sashimituna.jpeg",
 		descripcion: "Láminas de atún rojo delicadamente cortadas.",
 		precio: "$12,820",
 		tipo: "nigiriSashimi",
@@ -608,7 +608,7 @@ export const data = [
 	},
 	{
 		nombre: "TEMAKI SAKE",
-		img: "",
+		img: "/img/temakisake.png",
 		descripcion: "Cono de alga y arroz, salmón rosado, palta y philadelphia.",
 		precio: "$15,964",
 		tipo: "temakis",
@@ -616,7 +616,7 @@ export const data = [
 	},
 	{
 		nombre: "TEMAKI EBI",
-		img: "",
+		img: "/img/temakiebi.jpeg",
 		descripcion: "Cono de alga y arroz, langostinos, palta y philadelphia.",
 		precio: "$15,368",
 		tipo: "temakis",
@@ -624,7 +624,7 @@ export const data = [
 	},
 	{
 		nombre: "TEMAKI PINK TROUT",
-		img: "",
+		img: "/img/temakipinktrout.png",
 		descripcion: "Cono de alga y arroz, trucha gravlax, philadelphia y pepino.",
 		precio: "$15,368",
 		tipo: "temakis",
@@ -632,7 +632,7 @@ export const data = [
 	},
 	{
 		nombre: "TEMAKI RED TUNA",
-		img: "",
+		img: "/img/temakiredtuna.png",
 		descripcion: "Cono de alga y arroz, atún rojo, philadelphia y mango.",
 		precio: "$16,872",
 		tipo: "temakis",
@@ -640,7 +640,7 @@ export const data = [
 	},
 	{
 		nombre: "FUTOMAKI",
-		img: "",
+		img: "/img/futomaki.png",
 		descripcion: "Maki relleno con mix de vegetales y philadelphia (opción vegana).",
 		precio: "$10,421",
 		tipo: "veggies",
@@ -648,7 +648,7 @@ export const data = [
 	},
 	{
 		nombre: "VEGGIE MANGO",
-		img: "",
+		img: "/img/veggiemango.png",
 		descripcion: "Roll relleno de mango, philadelphia y batata frita.",
 		precio: "$11,065",
 		tipo: "veggies",
@@ -656,7 +656,7 @@ export const data = [
 	},
 	{
 		nombre: "VEGGIE NUTS",
-		img: "",
+		img: "/img/veggienuts.png",
 		descripcion: "Roll relleno con queso brie, tomate confitado y rúcula. Cubierto en nuez garrapiñada.",
 		precio: "$12,500",
 		tipo: "veggies",
@@ -664,7 +664,7 @@ export const data = [
 	},
 	{
 		nombre: "ARUGULA & BRIE x 4 unidades",
-		img: "",
+		img: "/img/arugula.png",
 		descripcion: "Nigiri cubierto en queso brie, tomate confitado y rúcula.",
 		precio: "$11,302",
 		tipo: "veggies",
@@ -672,7 +672,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Chardonnay",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -680,7 +680,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Sauvignon Blanc",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -688,7 +688,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Moscatel de Alejandría",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -696,7 +696,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Dulce Natural",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -704,7 +704,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Blanc de Blancs",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosBlancos",
@@ -712,7 +712,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Chardonnay",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosBlancos",
@@ -720,7 +720,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Chardonnay",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosBlancos",
@@ -728,7 +728,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Sauvignon Blanc",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosBlancos",
@@ -736,7 +736,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Chardo Chardo",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$32,586",
 		tipo: "vinosBlancos",
@@ -744,7 +744,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Extra Brut",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$19,203",
 		tipo: "vinosEspumantes",
@@ -752,7 +752,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Nature",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$25,553",
 		tipo: "vinosEspumantes",
@@ -760,7 +760,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$5,262",
 		tipo: "vinosPorCopas",
@@ -768,7 +768,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Malbec",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -776,7 +776,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Cabernet Sauvignon",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -784,7 +784,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Red Blend",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$18,370",
 		tipo: "vinosTintos",
@@ -792,7 +792,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Pinot Noir Reserve",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$17,200",
 		tipo: "vinosTintos",
@@ -800,7 +800,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Malbec Mac Atenuada",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -808,7 +808,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Red Blend Malbec",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosTintos",
@@ -816,7 +816,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Red Blend Cabernet Franc",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosTintos",
@@ -832,7 +832,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Malbec",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -840,7 +840,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Cabernet Franc",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -1112,7 +1112,7 @@ export const data = [
 	},
 	{
 		nombre: "RED TUNA & MANGO",
-		img: "",
+		img: "/img/tunamango.png",
 		descripcion: "Atún rojo, mango y palta.",
 		precio: "17.136",
 		tipo: "soyPaperRolls",
@@ -1120,7 +1120,7 @@ export const data = [
 	},
 	{
 		nombre: "OAHU COCONUT",
-		img: "",
+		img: "/img/oahu.png",
 		descripcion: "Langostinos rebozados, coco en escamas, palta y mayosriracha.",
 		precio: "17.472",
 		tipo: "soyPaperRolls",

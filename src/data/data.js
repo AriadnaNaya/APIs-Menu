@@ -14,56 +14,56 @@ export const data = [
 	},
 	{
 		nombre: "BREADED STEAK",
-		img: "",
+		img: "/img/breadedsteak.png",
 		descripcion: "250g de ojo de bife en panko especiado, servido con papas triple cocción.",
 		precio: 18569,
 		tipo:"townKitchen"
 	},
 	{
 		nombre: "SALMON TEPPAN",
-		img: "",
+		img: "/img/salmongrillado.png",
 		descripcion: "Salmón rosado grillado, arroz y vegetales grillados.",
 		precio: 28989,
 		tipo:"townKitchen"
 	},
 	{
 		nombre: "CATCH OF THE DAY",
-		img: "",
+		img: "/img/pesca.jpeg",
 		descripcion: "Pesca fresca del día.",
 		precio: 19779,
 		tipo:"townKitchen"
 	},
 	{
 		nombre: "PULLED PORK SANDWICH",
-		img: "",
+		img: "/img/pulledpork.jpg",
 		descripcion: "Bondiola desmenuzada en teriyaki, coleslaw y papas fritas.",
 		precio: 15452,
 		tipo:"townKitchen"
 	},
 	{
 		nombre: "DOUBLE CHEESE BURGER",
-		img: "",
+		img: "/img/doblecheese.jpeg",
 		descripcion: "Doble cuarto de libra de carne, cheddar, panceta, salsa y papas fritas.",
 		precio: 15452,
 		tipo:"townKitchen"
 	},
 	{
 		nombre: "CHICKEN SANDWICH",
-		img: "",
+		img: "/img/chickensandwich.jpeg",
 		descripcion: "Pechuga de pollo en panko, cheddar, lechuga, special mayo y papas fritas.",
 		precio: 15452,
 		tipo:"townKitchen"
 	},
 	{
 		nombre: "FISH SANDWICH",
-		img: "",
+		img: "/img/fishsandwich.jpeg",
 		descripcion: "Pesca blanca del día en panko, cheddar, alioli de cilantro y papas fritas.",
 		precio: 15452,
 		tipo:"townKitchen"
 	},
 	{
 		nombre: "POKE BOWLS",
-		img: "",
+		img: "/img/pokebowl.jpg",
 		descripcion: "Base de arroz avinagrado, zanahoria, remolacha y:",
 		variantes: [
 			{
@@ -704,7 +704,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Blanc de Blancs",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosBlancos",
@@ -1128,7 +1128,7 @@ export const data = [
 	},
 	{
 		nombre: "BROWNIE",
-		img: "",
+		img: "/img/brownie.jpeg",
 		descripcion: "Torta húmeda de chocolate y nuez, servida con helado de crema.",
 		precio: "9.983",
 		tipo: "postres",
@@ -1136,7 +1136,7 @@ export const data = [
 	},
 	{
 		nombre: "KEY LIME PIE",
-		img: "",
+		img: "/img/lemonpie.jpeg",
 		descripcion: "Torta de lima con crema de leche.",
 		precio: "9.983",
 		tipo: "postres",
@@ -1144,7 +1144,7 @@ export const data = [
 	},
 	{
 		nombre: "CROCANTE DE MANZANA",
-		img: "",
+		img: "/img/applecrumble.webp",
 		descripcion: "Tarta de manzana con crumble crust y nueces, servida con helado.",
 		precio: "9.716",
 		tipo: "postres",

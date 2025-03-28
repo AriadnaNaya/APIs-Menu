@@ -1104,7 +1104,7 @@ export const data = [
 	},
 	{
 		nombre: "LUJURIA",
-		img: "/img/.jpeg",
+		img: "/img/lujuria.png",
 		descripcion: "Tamago, philadelphia y verdeo. Envuelto en salmón. Cubierto con batata frita y maracuyá.",
 		precio: "18.234",
 		tipo: "rolls",

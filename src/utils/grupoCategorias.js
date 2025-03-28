@@ -1,5 +1,6 @@
 const grupoCategorias = {
     'sushi-rolls': [
+        'rolls',
         'sushiCombinado',
         'geishas',
         'hotRolls',

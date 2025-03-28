@@ -672,7 +672,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Chardonnay",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -680,7 +680,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Sauvignon Blanc",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -688,7 +688,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Moscatel de Alejandría",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -696,7 +696,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Dulce Natural",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -712,7 +712,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Chardonnay",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosBlancos",
@@ -720,7 +720,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Chardonnay",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosBlancos",
@@ -728,7 +728,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Sauvignon Blanc",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosBlancos",
@@ -736,7 +736,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Chardo Chardo",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$32,586",
 		tipo: "vinosBlancos",
@@ -744,7 +744,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Extra Brut",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$19,203",
 		tipo: "vinosEspumantes",
@@ -752,7 +752,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Nature",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$25,553",
 		tipo: "vinosEspumantes",
@@ -760,7 +760,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$5,262",
 		tipo: "vinosPorCopas",
@@ -768,7 +768,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Malbec",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -776,7 +776,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Cabernet Sauvignon",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -784,7 +784,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Red Blend",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$18,370",
 		tipo: "vinosTintos",
@@ -792,7 +792,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Pinot Noir Reserve",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$17,200",
 		tipo: "vinosTintos",
@@ -800,7 +800,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Malbec Mac Atenuada",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -808,7 +808,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Red Blend Malbec",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosTintos",
@@ -816,7 +816,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Red Blend Cabernet Franc",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosTintos",
@@ -832,7 +832,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Malbec",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -840,7 +840,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Cabernet Franc",
-		img: "/img/.jpeg",
+		img: "",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -920,194 +920,194 @@ export const data = [
 	},
 	{
 		nombre: "PHILADELPHIA",
-		img: "",
+		img: "/img/philadelphia.jpeg",
 		descripcion: "Salmón rosado y philadelphia.",
 		precio: "13.972",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 99
 	},
 	{
 		nombre: "NEW YORK",
-		img: "",
+		img: "/img/newyork.jpeg",
 		descripcion: "Salmón rosado y palta.",
 		precio: "13.959",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 100
 	},
 	{
 		nombre: "NEW YORK & PHILADELPHIA",
-		img: "",
+		img: "/img/nykphila.png",
 		descripcion: "Salmón rosado, philadelphia y palta.",
 		precio: "14.826",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 101
 	},
 	{
 		nombre: "OJO DE TIGRE",
-		img: "",
+		img: "/img/ojotigre.webp",
 		descripcion: "Crispy skin de salmón rosado y salmón rosado fresco.",
 		precio: "13.728",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 102
 	},
 	{
 		nombre: "ACAPULCO",
-		img: "",
+		img: "/img/acapulco.png",
 		descripcion: "Salmón rosado, philadelphia y guacamole.",
 		precio: "14.121",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 103
 	},
 	{
 		nombre: "HONSU",
-		img: "",
+		img: "/img/honsu.png",
 		descripcion: "Salmón rosado, philadelphia, cubierto en palta.",
 		precio: "14.426",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 104
 	},
 	{
 		nombre: "HONEY",
-		img: "",
+		img: "/img/honey.png",
 		descripcion: "Salmón rosado cocido, coronado con batata frita.",
 		precio: "12.780",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 105
 	},
 	{
 		nombre: "SUMMER MANGO",
-		img: "",
+		img: "/img/supermango.webp",
 		descripcion: "Salmón rosado, queso, verdeo, tempura. Cubierto con mango flambeado.",
 		precio: "16.628",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 106
 	},
 	{
 		nombre: "CEVICHE ROLL",
-		img: "",
+		img: "/img/cevicheroll.webp",
 		descripcion: "Pescado blanco marinado en leche de tigre, cebolla y jalapeño.",
 		precio: "15.070",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 107
 	},
 	{
 		nombre: "TARTAR",
-		img: "",
+		img: "/img/tartarroll.png",
 		descripcion: "Salmón cubierto en batata frita, tartar de salmón rosado y ahumado.",
 		precio: "16.099",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 108
 	},
 	{
 		nombre: "SMOKE",
-		img: "",
+		img: "/img/smoke.png",
 		descripcion: "Salmón ahumado, philadelphia.",
 		precio: "16.290",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 109
 	},
 	{
 		nombre: "NUTS",
-		img: "",
+		img: "/img/nuts.png",
 		descripcion: "Salmón ahumado, brie, tomate y rúcula. Cubierto en nuez garrapiñada.",
 		precio: "17.469",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 110
 	},
 	{
 		nombre: "MOLTEN",
-		img: "",
+		img: "/img/molten.png",
 		descripcion: "Langostinos tempura, philadelphia y palta. Cubierto en queso flambeado.",
 		precio: "15.490",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 111
 	},
 	{
 		nombre: "DINAMITA",
-		img: "",
+		img: "/img/dinamita.png",
 		descripcion: "Langostinos tempura, palta. Cubierto con caviar.",
 		precio: "15.883",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 112
 	},
 	{
 		nombre: "AVOCADO",
-		img: "",
+		img: "/img/avocado.png",
 		descripcion: "Langostinos tempura, crocante de batata y guacamole.",
 		precio: "15.327",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 113
 	},
 	{
 		nombre: "MATSUBA",
-		img: "",
+		img: "/img/matsuba.png",
 		descripcion: "Langostinos tempura, honey mustard.",
 		precio: "14.379",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 114
 	},
 	{
 		nombre: "OSAKA",
-		img: "",
+		img: "/img/osaka.jpg",
 		descripcion: "Langostinos, palta y philadelphia. Cubierto en salmón rosado.",
 		precio: "16.113",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 115
 	},
 	{
 		nombre: "EBI",
-		img: "",
+		img: "/img/ebi.jpg",
 		descripcion: "Langostinos, palta y philadelphia. Cubierto en caviar.",
 		precio: "15.829",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 116
 	},
 	{
 		nombre: "RAINBOW",
-		img: "",
+		img: "/img/rainbow.png",
 		descripcion: "Salmón rosado, philadelphia, palta y verdeo. Envuelto en salmón.",
 		precio: "15.612",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 117
 	},
 	{
 		nombre: "BALAT",
-		img: "",
+		img: "/img/balat.png",
 		descripcion: "Salmón, queso, palta y verdeo. Envuelto en salmón, atún rojo y pesca blanca, cubierto en caviar.",
 		precio: "17.248",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 118
 	},
 	{
 		nombre: "CRUNCH",
-		img: "",
+		img: "/img/crunch.png",
 		descripcion: "Lámina de philadelphia, tamago, salmón y ananá macerado. Cubierto en nuez garrapiñada.",
 		precio: "18.255",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 119
 	},
 	{
 		nombre: "FEEL",
-		img: "",
+		img: "/img/feel.png",
 		descripcion: "Lámina de tamago, salmón rosado, philadelphia y verdeo.",
 		precio: "15.544",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 120
 	},
 	{
 		nombre: "PASION FRUIT",
-		img: "",
+		img: "/img/pasionFruit.png",
 		descripcion: "Tamago, salmón, philadelphia y verdeo. Cubierto con batata frita y maracuyá.",
 		precio: "16.073",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 121
 	},
 	{
 		nombre: "LUJURIA",
-		img: "",
+		img: "/img/.jpeg",
 		descripcion: "Tamago, philadelphia y verdeo. Envuelto en salmón. Cubierto con batata frita y maracuyá.",
 		precio: "18.234",
-		tipo: "Rolls",
+		tipo: "rolls",
 		id: 122
 	},
 	{

@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import MenuPage from './pages/MenuPage';
+import Menu from './pages/Menu.jsx';
 
 const App = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<MenuPage />} />
-			<Route path="/menu/:category" element={<MenuPage />} />
+			<Route path="/" element={<Menu />} />
+			<Route path="/menu/:category" element={<Menu />} />
 		</Routes>
 	);
 };

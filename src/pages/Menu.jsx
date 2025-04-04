@@ -15,7 +15,7 @@ import data from '../data/menuData';
 import formatTitle from '../utils/formatTitle';
 import grupoCategorias from '../utils/grupoCategorias';
 
-const MenuPage = ({ category: propCategory }) => {
+const Menu = ({ category: propCategory }) => {
     // Usa la prop "category" si se pasa, o bien el parámetro de la URL
     const params = useParams();
     const category = propCategory || params.category;
@@ -124,4 +124,4 @@ const MenuPage = ({ category: propCategory }) => {
     );
 };
 
-export default MenuPage;
+export default Menu;

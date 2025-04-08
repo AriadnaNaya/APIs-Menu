@@ -16,16 +16,16 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
 
     return (
         <Card
+            className="meal-card"
             sx={{
                 display: 'flex',
                 alignItems: 'center',
                 width: 350,
                 border: '1px solid #00c886',
                 borderRadius: 2,
-                boxShadow: 'none',
-                cursor: hasVariants ? 'pointer' : 'default'
+                boxShadow: 'none'
             }}
-            onClick={hasVariants ? onToggle : undefined}
+            onClick={onToggle}
         >
             {meal.img && (
                 <CardMedia
@@ -83,32 +83,6 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
                         </Typography>
                     )}
                 </CardContent>
-                {hasVariants && (
-                    <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-                        <Box display="flex" flexDirection="column" gap={1} px={2} pb={2}>
-                            {meal.variantes.map((variant, i) => (
-                                <Button
-                                    key={i}
-                                    variant="contained"
-                                    sx={{
-                                        justifyContent: 'space-between',
-                                        borderRadius: 10,
-                                        backgroundColor: 'green'
-                                    }}
-                                >
-                                    <span>{variant.cantidad}</span>
-                                    <span>
-                    {variant.precio.toLocaleString('es-AR', {
-                        style: 'currency',
-                        currency: 'ARS',
-                        minimumFractionDigits: 0
-                    })}
-                  </span>
-                                </Button>
-                            ))}
-                        </Box>
-                    </Collapse>
-                )}
             </Box>
         </Card>
     );

@@ -103,7 +103,29 @@ h1 {
 
 /* Clases adicionales */
 .meal-card {
-  /* vacío, si usas sx={} en MUI */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.meal-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.meal-variantes h4 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.meal-variantes ul {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.meal-variantes li {
+  font-size: 0.95rem;
+  color: #444;
 }
 
 ul.mt-2.space-y-1.text-xs.text-gray-600 {

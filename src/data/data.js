@@ -137,7 +137,7 @@ export const data = [
 	{
 		nombre: "Gaseosa",
 		img: "/img/gaseosa.png",
-		descripcion: "Sin descripción",
+		descripcion: "Gaseosa línea Coca",
 		precio: "$4,000",
 		tipo: "bebidasSinAlcohol",
 		id: 1

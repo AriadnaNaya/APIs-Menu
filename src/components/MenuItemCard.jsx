@@ -5,9 +5,7 @@ import {
     CardContent,
     CardMedia,
     Typography,
-    Button,
-    Box,
-    Collapse
+    Box
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
@@ -16,73 +14,98 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
 
     return (
         <Card
-            className="meal-card"
             sx={{
+                width: 360,           // Ancho fijo para la card
+                height: 130,          // Alto fijo para todas las cards
                 display: 'flex',
-                alignItems: 'center',
-                width: 350,
                 border: '1px solid #00c886',
                 borderRadius: 2,
-                boxShadow: 'none'
+                boxShadow: 'none',
+                overflow: 'hidden',
+                cursor: 'pointer'
             }}
             onClick={onToggle}
         >
             {meal.img && (
                 <CardMedia
                     component="img"
-                    sx={{
-                        width: 60,
-                        height: 60,
-                        objectFit: 'cover',
-                        margin: 1,
-                        borderRadius: 1
-                    }}
                     image={meal.img}
                     alt={meal.nombre}
                     loading="lazy"
+                    sx={{
+                        width: 100,        // Ancho fijo para la imagen
+                        height: '100%',    // Ocupa la altura total de la card
+                        objectFit: 'cover'
+                    }}
                 />
             )}
-            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <CardContent sx={{ p: 1, pb: 0 }}>
-                    <Box
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                    p: 1,
+                    overflow: 'hidden'
+                }}
+            >
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Typography
+                        variant="subtitle1"
                         sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            mb: 0.5
+                            fontWeight: 'bold',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
                         }}
                     >
-                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mr: 1 }}>
-                            {meal.nombre}
-                        </Typography>
-                        {hasVariants ? (
-                            <KeyboardArrowDownIcon
-                                sx={{
-                                    transition: 'transform 0.3s',
-                                    transform: isExpanded ? 'rotate(180deg)' : 'none',
-                                    color: '#888'
-                                }}
-                            />
-                        ) : (
-                            meal.precio && (
-                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#00c886' }}>
-                                    {typeof meal.precio === 'number'
-                                        ? meal.precio.toLocaleString('es-AR', {
-                                            style: 'currency',
-                                            currency: 'ARS',
-                                            minimumFractionDigits: 0
-                                        })
-                                        : meal.precio}
-                                </Typography>
-                            )
-                        )}
-                    </Box>
-                    {meal.descripcion?.toLowerCase() !== 'sin descripción' && (
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                            {meal.descripcion}
-                        </Typography>
+                        {meal.nombre}
+                    </Typography>
+                    {hasVariants ? (
+                        <KeyboardArrowDownIcon
+                            sx={{
+                                transition: 'transform 0.3s',
+                                transform: isExpanded ? 'rotate(180deg)' : 'none',
+                                color: '#888'
+                            }}
+                        />
+                    ) : (
+                        meal.precio && (
+                            <Typography
+                                variant="subtitle1"
+                                sx={{ fontWeight: 'bold', color: '#00c886' }}
+                            >
+                                {typeof meal.precio === 'number'
+                                    ? meal.precio.toLocaleString('es-AR', {
+                                        style: 'currency',
+                                        currency: 'ARS',
+                                        minimumFractionDigits: 0
+                                    })
+                                    : meal.precio}
+                            </Typography>
+                        )
                     )}
-                </CardContent>
+                </Box>
+                {meal.descripcion?.toLowerCase() !== 'sin descripción' && (
+                    <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{
+                            mt: 0.5,
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,         // Limitar a 2 líneas la descripción
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden'
+                        }}
+                    >
+                        {meal.descripcion}
+                    </Typography>
+                )}
             </Box>
         </Card>
     );

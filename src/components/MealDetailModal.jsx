@@ -37,7 +37,12 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
             </DialogTitle>
             <DialogContent sx={{ textAlign: 'center' }}>
                 <Fade in timeout={300} key={fadeKey}>
-                    <Box>
+                    <Box
+                        sx={{
+                            transform: 'scale(0.95)',
+                            animation: 'zoomFadeIn 0.3s ease-out forwards'
+                        }}
+                    >
                         {meal.img && (
                             <img
                                 src={meal.img}

@@ -95,6 +95,7 @@ export const data = [
 	},
 	{
 		nombre: 'SAKE',
+		img: "",
 		descripcion: 'Rolls y makis de salmón rosado y ahumado, nigiri, sashimi y geishas de salmón.',
 		variantes: [
 			{ cantidad: '15 P', precio: 25313 },
@@ -672,7 +673,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Chardonnay",
-		img: "",
+		img: "/img/alamoschardonay.jpg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -680,7 +681,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Sauvignon Blanc",
-		img: "",
+		img: "/img/alamosblanc.png",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -688,7 +689,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Moscatel de Alejandría",
-		img: "",
+		img: "/img/alamosmoscatel.jpg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -696,7 +697,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Dulce Natural",
-		img: "",
+		img: "/img/alamosdulcenatural.webp",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -704,7 +705,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Blanc de Blancs",
-		img: "",
+		img: "/img/nicasiablanc.webp",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosBlancos",
@@ -712,7 +713,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Chardonnay",
-		img: "",
+		img: "/img/enemigochardo.jpg",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosBlancos",
@@ -720,7 +721,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Chardonnay",
-		img: "",
+		img: "/img/saintfelicien.jpg",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosBlancos",
@@ -728,7 +729,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Sauvignon Blanc",
-		img: "",
+		img: "/img/felicienblanc.png",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosBlancos",
@@ -736,7 +737,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Chardo Chardo",
-		img: "",
+		img: "/img/dvcatena.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$32,586",
 		tipo: "vinosBlancos",
@@ -744,7 +745,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Extra Brut",
-		img: "",
+		img: "/img/alamosextrabrut.jpg",
 		descripcion: "Sin descripción",
 		precio: "$19,203",
 		tipo: "vinosEspumantes",
@@ -752,7 +753,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Nature",
-		img: "",
+		img: "/img/alamosnature.webp",
 		descripcion: "Sin descripción",
 		precio: "$25,553",
 		tipo: "vinosEspumantes",
@@ -760,7 +761,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos",
-		img: "",
+		img: "/img/copavino.webp",
 		descripcion: "Sin descripción",
 		precio: "$5,262",
 		tipo: "vinosPorCopas",
@@ -768,7 +769,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Malbec",
-		img: "",
+		img: "/img/alamosmalbec.png",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -776,7 +777,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Cabernet Sauvignon",
-		img: "",
+		img: "/img/alamoscarbenet.png",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -784,7 +785,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Red Blend",
-		img: "",
+		img: "/img/alamosredblend.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$18,370",
 		tipo: "vinosTintos",
@@ -792,7 +793,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Pinot Noir Reserve",
-		img: "",
+		img: "/img/alamospinotnoir.jpg",
 		descripcion: "Sin descripción",
 		precio: "$17,200",
 		tipo: "vinosTintos",
@@ -800,7 +801,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Malbec Mac Atenuada",
-		img: "",
+		img: "/img/alamosmaceracion.webp",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -808,7 +809,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Red Blend Malbec",
-		img: "",
+		img: "/img/nicasiared.webp",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosTintos",
@@ -816,7 +817,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Red Blend Cabernet Franc",
-		img: "",
+		img: "/img/nicasiaredcabernet.png",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosTintos",
@@ -824,7 +825,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Bonarda",
-		img: "",
+		img: "/img/elenemigo.webp",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -832,7 +833,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Malbec",
-		img: "",
+		img: "/img/elenemigomalbec.png",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -840,7 +841,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Cabernet Franc",
-		img: "",
+		img: "/img/elenemigocabernet.jpg",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -848,7 +849,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Malbec",
-		img: "",
+		img: "/img/saintfelicienmalbec.png",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosTintos",
@@ -856,7 +857,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Cabernet Sauvignon",
-		img: "",
+		img: "/img/saintfeliciencabernet.webp",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosTintos",
@@ -864,7 +865,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Cabernet Merlot",
-		img: "",
+		img: "/img/saintfelicienmerlot.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$21,028",
 		tipo: "vinosTintos",
@@ -872,7 +873,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Syrah",
-		img: "",
+		img: "/img/saintfeliciensyrah.png",
 		descripcion: "Sin descripción",
 		precio: "$21,028",
 		tipo: "vinosTintos",
@@ -880,7 +881,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Cabernet Malbec",
-		img: "",
+		img: "/img/dvcatenacabernetmalbec.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$27,200",
 		tipo: "vinosTintos",
@@ -888,7 +889,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Syrah Syrah",
-		img: "",
+		img: "/img/dvcatenasyrah.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$27,200",
 		tipo: "vinosTintos",
@@ -896,7 +897,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Cabernet – Cabernet",
-		img: "",
+		img: "/img/dvcatenacarbernet.webp",
 		descripcion: "Sin descripción",
 		precio: "$27,200",
 		tipo: "vinosTintos",
@@ -904,7 +905,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Malbec – Malbec",
-		img: "",
+		img: "/img/dvcatenamalbec.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$45,759",
 		tipo: "vinosTintos",
@@ -912,7 +913,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Malbec – Malbec",
-		img: "",
+		img: "/img/dvcatenamalbec.jpeg",
 		descripcion: "Sin descripción",
 		precio: "$45,759",
 		tipo: "vinosTintos",

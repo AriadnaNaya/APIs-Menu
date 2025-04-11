@@ -22,7 +22,12 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
                 borderRadius: 2,
                 boxShadow: 'none',
                 overflow: 'hidden',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                '&:hover': {
+                    transform: 'scale(1.03)',
+                    boxShadow: '0 8px 20px rgba(0, 200, 134, 0.15)'
+                }
             }}
             onClick={onToggle}
         >
@@ -66,16 +71,7 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
                     >
                         {meal.nombre}
                     </Typography>
-                    {hasVariants ? (
-                        <KeyboardArrowDownIcon
-                            sx={{
-                                transition: 'transform 0.3s',
-                                transform: isExpanded ? 'rotate(180deg)' : 'none',
-                                color: '#888'
-                            }}
-                        />
-                    ) : (
-                        meal.precio && (
+                    {meal.precio && (
                             <Typography
                                 variant="subtitle1"
                                 sx={{ fontWeight: 'bold', color: '#00c886' }}
@@ -88,8 +84,7 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
                                     })
                                     : meal.precio}
                             </Typography>
-                        )
-                    )}
+                        )}
                 </Box>
                 {meal.descripcion?.toLowerCase() !== 'sin descripción' && (
                     <Typography

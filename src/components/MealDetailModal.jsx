@@ -1,5 +1,6 @@
+// src/components/MealDetailModal.jsx
+
 import React, { useState, useEffect } from 'react';
-import { Fade } from '@mui/material';
 import {
     Dialog,
     DialogContent,
@@ -7,7 +8,8 @@ import {
     IconButton,
     Typography,
     Box,
-    Button
+    Button,
+    Fade
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -18,8 +20,9 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
     const [fadeKey, setFadeKey] = useState(0);
 
     useEffect(() => {
-        setFadeKey(prev => prev + 1); // cada vez que cambia el meal, fuerza reinicio de Fade
+        setFadeKey((prev) => prev + 1);
     }, [meal]);
+
     return (
         <Dialog
             open={open}
@@ -27,35 +30,34 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
             maxWidth="sm"
             fullWidth
             TransitionComponent={Fade}
-            transitionDuration={300} // ajustable
+            transitionDuration={300}
         >
             <DialogTitle sx={{ m: 0, p: 2 }}>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                     <Typography variant="h6">{meal.nombre}</Typography>
-                    <IconButton onClick={onClose}><CloseIcon /></IconButton>
+                    <IconButton onClick={onClose}>
+                        <CloseIcon />
+                    </IconButton>
                 </Box>
             </DialogTitle>
             <DialogContent sx={{ textAlign: 'center' }}>
                 <Fade in timeout={300} key={fadeKey}>
-                    <Box
-                        sx={{
-                            transform: 'scale(0.95)',
-                            animation: 'zoomFadeIn 0.3s ease-out forwards'
-                        }}
-                    >
+                    <Box>
                         {meal.img && (
-                            <img
+                            <Box
+                                component="img"
                                 src={meal.img}
                                 alt={meal.nombre}
-                                style={{
+                                sx={{
                                     width: '100%',
-                                    maxHeight: '300px',
-                                    objectFit: 'cover',
-                                    borderRadius: '8px',
-                                    marginBottom: '16px'
+                                    height: 250,            // Altura fija
+                                    objectFit: 'cover',     // Para que se recorte y mantenga proporción
+                                    borderRadius: 2,
+                                    mb: 2
                                 }}
                             />
                         )}
+
                         <Typography variant="h6" color="primary" fontWeight="bold">
                             {typeof meal.precio === 'number'
                                 ? meal.precio.toLocaleString('es-AR', {
@@ -65,36 +67,60 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
                                 })
                                 : meal.precio}
                         </Typography>
+
                         {meal.descripcion && (
                             <Typography variant="body1" sx={{ mt: 2 }}>
                                 {meal.descripcion}
                             </Typography>
                         )}
+
                         {meal.variantes && meal.variantes.length > 0 && (
-                            <div className="meal-variantes">
-                                <h4>Opciones</h4>
-                                <ul className="mt-4 flex flex-wrap gap-2">
-                                    {meal.variantes.map((opcion, index) => (
-                                        <li
-                                            key={index}
-                                            className="inline-flex items-center rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-400"
+                            <Box mt={3}>
+                                <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                                    Opciones
+                                </Typography>
+                                <Box
+                                    component="ul"
+                                    sx={{
+                                        listStyle: 'none',
+                                        p: 0,
+                                        m: 0,
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        gap: 1
+                                    }}
+                                >
+                                    {meal.variantes.map((op, i) => (
+                                        <Box
+                                            component="li"
+                                            key={i}
+                                            sx={{
+                                                px: 2,
+                                                py: 0.5,
+                                                borderRadius: 16,
+                                                bgcolor: 'primary.main',
+                                                color: 'primary.contrastText',
+                                                fontSize: '0.875rem'
+                                            }}
                                         >
-                                            {opcion.cantidad} - ${opcion.precio.toLocaleString('es-AR')}
-                                        </li>
+                                            {op.cantidad} —{' '}
+                                            {op.precio.toLocaleString('es-AR', {
+                                                style: 'currency',
+                                                currency: 'ARS',
+                                                minimumFractionDigits: 0
+                                            })}
+                                        </Box>
                                     ))}
-                                </ul>
-                            </div>
+                                </Box>
+                            </Box>
                         )}
 
                         <Box display="flex" justifyContent="space-between" mt={4}>
                             <Button
                                 onClick={onPrev}
-                                startIcon={<ArrowBackIosNewIcon/>}
+                                startIcon={<ArrowBackIosNewIcon />}
                                 sx={{
-                                    transition: 'transform 0.2s ease',
-                                    '&:hover': {
-                                        transform: 'scale(1.1)',
-                                    },
+                                    textTransform: 'none'
                                 }}
                             >
                                 Anterior
@@ -103,10 +129,7 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
                                 onClick={onNext}
                                 endIcon={<ArrowForwardIosIcon />}
                                 sx={{
-                                    transition: 'transform 0.2s ease',
-                                    '&:hover': {
-                                        transform: 'scale(1.1)',
-                                    },
+                                    textTransform: 'none'
                                 }}
                             >
                                 Siguiente
@@ -115,7 +138,6 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
                     </Box>
                 </Fade>
             </DialogContent>
-
         </Dialog>
     );
 };

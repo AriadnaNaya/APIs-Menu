@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import {
     Typography,
@@ -16,6 +15,7 @@ import formatTitle from '../utils/formatTitle';
 import grupoCategorias from '../utils/grupoCategorias';
 import { useState } from 'react';
 import MealDetailModal from '../components/MealDetailModal';
+import Footer from '../components/Footer';
 const data= menuData;
 
 const Menu = ({ category: propCategory }) => {
@@ -151,6 +151,7 @@ const Menu = ({ category: propCategory }) => {
                     onNext={handleNext}
                 />
             )}
+            <Footer/>
         </div>
     );
 };

@@ -10,23 +10,24 @@
   box-sizing: border-box;
 }
 
+/* Puedes mantener estos estilos si se usan en elementos no-MUI */
 body {
   font-family: 'Nunito', sans-serif;
   background-color: #f0f6fc;
 }
 
-/* 📌 Título principal */
+/* Título principal (opcional si usas MUI Typography para h1) */
 h1 {
   font-family: 'Bonheur Royale', cursive;
   @apply text-4xl font-bold text-center my-6 text-green-800;
 }
 
-/* 📌 Navegación */
+/* Navegación */
 .navs {
   @apply flex justify-center items-center mb-10 hover:text-green-800 font-bold;
 }
 
-/* 📌 Contenedor de filtros */
+/* Botones de categorías */
 .main-category-container {
   display: flex;
   justify-content: center;
@@ -57,7 +58,7 @@ h1 {
   color: white;
 }
 
-/* 📌 Contenedor de categorías */
+/* Contenedor general */
 .category-container {
   display: flex;
   flex-direction: column;
@@ -66,10 +67,9 @@ h1 {
   padding: 10px;
 }
 
-/* 📌 Subcategorías con tamaño uniforme */
+/* Sección de subcategoría */
 .subcategory-section {
   width: 100%;
-  min-width: 300px;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
@@ -78,7 +78,6 @@ h1 {
   padding-bottom: 20px;
 }
 
-/* 📌 Subcategorías alineadas correctamente a la izquierda */
 .subcategory-title {
   font-size: 1.8rem;
   font-weight: bold;
@@ -91,63 +90,43 @@ h1 {
   text-transform: capitalize;
 }
 
-/* 📌 Contenedor de los elementos del menú en formato de lista */
+/* Grid de ítems */
 .meal-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* 🔹 Espacio entre ítems */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 8px;
 }
 
-/* 📌 Estilos para cada ítem del menú */
-.meal-card {
-  display: flex;
-  flex-direction: column;
-  padding: 10px 0;
-  border-bottom: 1px solid #ccc; /* 🔹 Línea sutil entre ítems */
-}
-
-/* 📌 Contenedor del título y precio */
-.meal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.3rem;
+.meal-variantes h4 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  color: #2d3e50;
-  padding-bottom: 3px;
 }
 
-/* 📌 Precio estilizado */
-.meal-price {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #007bff;
-  text-align: right;
+.meal-variantes ul {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
 }
 
-/* 📌 Descripción con estilo más discreto */
-.meal-description {
-  font-size: 1rem;
-  color: #5a5a5a;
-  line-height: 1.5;
-  margin-top: 3px;
+.meal-variantes li {
+  font-size: 0.95rem;
+  color: #444;
 }
 
-/* 🔹 Ocultar descripción si está vacía o dice "sin descripción" */
-.meal-description:empty,
-.meal-description:contains("sin descripción") {
-  display: none;
+ul.mt-2.space-y-1.text-xs.text-gray-600 {
+  margin-top: 12px;
+  padding-left: 16px;
+  font-size: 0.85rem;
+  color: #444;
+  list-style-type: disc;
 }
 
-/* 📌 RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .meal-container {
-    max-width: 900px;
-  }
-
   .subcategory-title {
     font-size: 1.7rem;
   }
@@ -155,30 +134,32 @@ h1 {
 
 @media (max-width: 768px) {
   .meal-container {
-    max-width: 700px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
   }
-
-  .meal-header {
-    font-size: 1.2rem;
-  }
-
-  .meal-price {
-    font-size: 1.1rem;
+  .subcategory-title {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .meal-container {
-    max-width: 100%;
+  .subcategory-title {
+    font-size: 1.3rem;
+    text-align: center;
   }
-
-  .meal-header {
-    flex-direction: column;
-    align-items: flex-start;
+  .main-category {
+    font-size: 0.9rem;
+    padding: 10px 16px;
   }
+}
 
-  .meal-price {
-    text-align: left;
-    margin-top: 5px;
+@keyframes zoomFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

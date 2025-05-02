@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+// src/pages/Menu.jsx
+import { useSearchParams } from 'react-router-dom';
 import {
     Typography,
     Container,
@@ -8,55 +9,57 @@ import {
     AccordionDetails
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Header from '../components/Header';
-import MenuList from '../components/MenuList';
-import menuData from '../data/menuData';
-import formatTitle from '../utils/formatTitle';
-import grupoCategorias from '../utils/grupoCategorias';
 import { useState } from 'react';
-import MealDetailModal from '../components/MealDetailModal';
-import Footer from '../components/Footer';
-const data= menuData;
 
-const Menu = ({ category: propCategory }) => {
-    // Usa la prop "category" si se pasa, o bien el parámetro de la URL
-    const params = useParams();
-    const category = propCategory || params.category;
-    // Si no hay categoría, se muestra el menú completo (vista "Home")
-    const showAll = !category;
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import MenuList from '../components/MenuList';
+import MealDetailModal from '../components/MealDetailModal';
+
+import menuData from '../data/menuData';
+import grupoCategorias from '../utils/grupoCategorias';
+import formatTitle from '../utils/formatTitle';
+
+const Menu = () => {
+    const [searchParams] = useSearchParams();
+    const categoryParam = searchParams.get('category'); // ej. 'sushi-rolls', 'comida', etc.
+
+    // Array plano para el modal
     const allMeals = Object.values(menuData).flat();
 
-
+    // Estado para el modal
     const [selectedIndex, setSelectedIndex] = useState(null);
-
     const handleOpen = (meal) => {
-        const index = allMeals.findIndex((m) => m.nombre === meal.nombre);
-        setSelectedIndex(index);
+        const idx = allMeals.findIndex((m) => m.nombre === meal.nombre);
+        setSelectedIndex(idx);
     };
-
     const handleClose = () => setSelectedIndex(null);
-
-    const handlePrev = () => {
+    const handlePrev = () =>
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : allMeals.length - 1));
-    };
+    const handleNext = () =>
+        setSelectedIndex((prev) =>
+            prev < allMeals.length - 1 ? prev + 1 : 0
+        );
 
-    const handleNext = () => {
-        setSelectedIndex((prev) => (prev < allMeals.length - 1 ? prev + 1 : 0));
-    };
+    // Determinar modo de render:
+    const showAll = !categoryParam;
+    const isGroup = categoryParam && grupoCategorias[categoryParam];
+    const isTipo = categoryParam && menuData[categoryParam];
 
     return (
         <div>
             <Header />
 
-            {/* Título principal */}
             <Typography variant="h3" sx={{ my: 3, textAlign: 'center' }}>
-                {showAll ? "Sushi Town Menu" : formatTitle(category)}
+                {showAll ? 'Sushi Town Menu' : formatTitle(categoryParam)}
             </Typography>
 
-            {/* Contenedor blanco */}
-            <Container maxWidth="lg" sx={{ backgroundColor: '#fff', p: 2, borderRadius: 2 }}>
-                {showAll ? (
-                    // Vista completa: recorre todos los grupos de categorías
+            <Container
+                maxWidth="lg"
+                sx={{ backgroundColor: '#fff', p: 2, borderRadius: 2 }}
+            >
+                {/* VISTA COMPLETA */}
+                {showAll && (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                         {Object.entries(grupoCategorias).map(([grupo, tipos]) => (
                             <Box key={grupo}>
@@ -92,7 +95,10 @@ const Menu = ({ category: propCategory }) => {
                                                 </Typography>
                                             </AccordionSummary>
                                             <AccordionDetails sx={{ px: 2, pt: 1, pb: 3 }}>
-                                                <MenuList meals={data[tipo]} onMealClick={handleOpen} />
+                                                <MenuList
+                                                    meals={menuData[tipo]}
+                                                    onMealClick={handleOpen}
+                                                />
                                             </AccordionDetails>
                                         </Accordion>
                                     ))}
@@ -100,58 +106,82 @@ const Menu = ({ category: propCategory }) => {
                             </Box>
                         ))}
                     </Box>
-                ) : (
-                    // Vista filtrada: solo se muestran las subcategorías del grupo seleccionado
+                )}
+
+                {/* VISTA FILTRADA POR GRUPO */}
+                {isGroup && (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                        {grupoCategorias[category] ? (
-                            grupoCategorias[category].map((tipo) => (
-                                <Accordion
-                                    key={tipo}
-                                    defaultExpanded
-                                    disableGutters
-                                    square
+                        <Typography variant="h4" sx={{ mb: 2 }}>
+                            {formatTitle(categoryParam)}
+                        </Typography>
+                        {grupoCategorias[categoryParam].map((tipo) => (
+                            <Accordion
+                                key={tipo}
+                                defaultExpanded
+                                disableGutters
+                                square
+                                sx={{
+                                    boxShadow: 'none',
+                                    borderBottom: '1px solid #333',
+                                    '&:before': { display: 'none' }
+                                }}
+                            >
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
                                     sx={{
-                                        boxShadow: 'none',
-                                        borderBottom: '1px solid #333',
-                                        '&:before': { display: 'none' }
+                                        minHeight: 48,
+                                        pb: 0,
+                                        '& .MuiAccordionSummary-content': {
+                                            margin: 0,
+                                            whiteSpace: 'normal'
+                                        }
                                     }}
                                 >
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        sx={{
-                                            minHeight: 48,
-                                            pb: 0,
-                                            '& .MuiAccordionSummary-content': {
-                                                margin: 0,
-                                                whiteSpace: 'normal'
-                                            }
-                                        }}
-                                    >
-                                        <Typography variant="h5">
-                                            {formatTitle(tipo)}
-                                        </Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails sx={{ px: 2, pt: 1, pb: 3 }}>
-                                        <MenuList meals={data[tipo]} onMealClick={handleOpen} />
-                                    </AccordionDetails>
-                                </Accordion>
-                            ))
-                        ) : (
-                            <Typography variant="h6">Categoría no encontrada</Typography>
-                        )}
+                                    <Typography variant="h5">
+                                        {formatTitle(tipo)}
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails sx={{ px: 2, pt: 1, pb: 3 }}>
+                                    <MenuList
+                                        meals={menuData[tipo]}
+                                        onMealClick={handleOpen}
+                                    />
+                                </AccordionDetails>
+                            </Accordion>
+                        ))}
                     </Box>
                 )}
+
+                {/* VISTA FILTRADA POR TIPO DIRECTO */}
+                {isTipo && !isGroup && (
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                        <Typography variant="h4" sx={{ mb: 2 }}>
+                            {formatTitle(categoryParam)}
+                        </Typography>
+                        <MenuList
+                            meals={menuData[categoryParam]}
+                            onMealClick={handleOpen}
+                        />
+                    </Box>
+                )}
+
+                {/* CATEGORÍA NO ENCONTRADA */}
+                {!showAll && !isGroup && !isTipo && (
+                    <Typography variant="h6">Categoría no encontrada</Typography>
+                )}
             </Container>
-            {selectedIndex !== null && allMeals[selectedIndex] && (
+
+            {selectedIndex !== null && (
                 <MealDetailModal
-                    open={true}
+                    open
                     onClose={handleClose}
                     meal={allMeals[selectedIndex]}
                     onPrev={handlePrev}
                     onNext={handleNext}
                 />
             )}
-            <Footer/>
+
+            <Footer />
         </div>
     );
 };

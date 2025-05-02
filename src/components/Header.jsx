@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
@@ -18,20 +19,15 @@ const Header = () => {
 	const isMobile = useMobile();
 
 	const menuItems = [
-		{ text: 'Inicio', to: '/' },
-		{ text: '🍣 Sushi & Rolls', to: '/menu/sushi-rolls' },
-		{ text: '🍽️ Comida', to: '/menu/comida' },
-		{ text: '🍷 Bebidas', to: '/menu/bebidas' },
-		{ text: '🍰 Postres', to: '/menu/postres' }
+		{ text: 'Inicio', to: '/menu' },
+		{ text: '🍣 Sushi & Rolls', to: '/menu?category=sushi-rolls' },
+		{ text: '🍽️ Comida', to: '/menu?category=comida' },
+		{ text: '🍷 Bebidas', to: '/menu?category=bebidas' },
+		{ text: '🍰 Postres', to: '/menu?category=postres' }
 	];
 
-	const handleDrawerOpen = () => {
-		setOpenDrawer(true);
-	};
-
-	const handleDrawerClose = () => {
-		setOpenDrawer(false);
-	};
+	const handleDrawerOpen = () => setOpenDrawer(true);
+	const handleDrawerClose = () => setOpenDrawer(false);
 
 	return (
 		<AppBar position="static" color="default" elevation={1}>
@@ -60,7 +56,13 @@ const Header = () => {
 				) : (
 					<>
 						{menuItems.map((item) => (
-							<Button key={item.text} component={NavLink} to={item.to} color="inherit" sx={{ mr: 2 }}>
+							<Button
+								key={item.text}
+								component={NavLink}
+								to={item.to}
+								color="inherit"
+								sx={{ mr: 2 }}
+							>
 								{item.text}
 							</Button>
 						))}

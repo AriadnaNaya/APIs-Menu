@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
@@ -21,10 +22,10 @@ const Header = () => {
 
 	const menuItems = [
 		{ text: 'Inicio', to: '/' },
-		{ text: '🍣 Sushi & Rolls', to: '/menu/sushi-rolls' },
-		{ text: '🍽️ Comida', to: '/menu/comida' },
-		{ text: '🍷 Bebidas', to: '/menu/bebidas' },
-		{ text: '🍰 Postres', to: '/menu/postres' }
+		{ text: '🍣 Sushi & Rolls', to: '/menu?category=sushi-rolls' },
+		{ text: '🍽️ Comida', to: '/menu?category=comida' },
+		{ text: '🍷 Bebidas', to: '/menu?category=bebidas' },
+		{ text: '🍰 Postres', to: '/menu?category=postres' }
 	];
 
 	const handleDrawerOpen = () => {
@@ -113,7 +114,6 @@ const Header = () => {
 					</Box>
 				)}
 			</Toolbar>
-
 		</AppBar>
 	);
 };

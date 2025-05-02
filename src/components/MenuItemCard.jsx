@@ -15,6 +15,7 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
     return (
         <Card
             sx={{
+                backgroundColor: '#1f2937',
                 width: 360,           // Ancho fijo para la card
                 height: 130,          // Alto fijo para todas las cards
                 display: 'flex',
@@ -66,7 +67,8 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
                             fontWeight: 'bold',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
-                            textOverflow: 'ellipsis'
+                            textOverflow: 'ellipsis',
+                            color: '#f9fafb'
                         }}
                     >
                         {meal.nombre}
@@ -74,7 +76,7 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
                     {meal.precio && (
                             <Typography
                                 variant="subtitle1"
-                                sx={{ fontWeight: 'bold', color: '#00c886' }}
+                                sx={{ fontWeight: 'bold', color: '#f9fafb' }}
                             >
                                 {typeof meal.precio === 'number'
                                     ? meal.precio.toLocaleString('es-AR', {
@@ -95,7 +97,8 @@ const MenuItemCard = ({ meal, isExpanded, onToggle }) => {
                             display: '-webkit-box',
                             WebkitLineClamp: 2,         // Limitar a 2 líneas la descripción
                             WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            color: '#f9fafb'
                         }}
                     >
                         {meal.descripcion}

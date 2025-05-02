@@ -12,9 +12,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import HeroSlider from '../components/HeroSlider';
 import MenuList from '../components/MenuList';
 import MealDetailModal from '../components/MealDetailModal';
+import Footer from '../components/Footer.jsx';
 
 import menuData from '../data/menuData';
 import grupoCategorias from '../utils/grupoCategorias';
@@ -22,12 +23,12 @@ import formatTitle from '../utils/formatTitle';
 
 const Menu = () => {
     const [searchParams] = useSearchParams();
-    const categoryParam = searchParams.get('category'); // ej. 'sushi-rolls', 'comida', etc.
+    const categoryParam = searchParams.get('category'); // ejemplo: 'sushi-rolls', 'comida', etc.
 
-    // Array plano para el modal
+    // Aplanamos todos los platos para navegación del modal
     const allMeals = Object.values(menuData).flat();
 
-    // Estado para el modal
+    // Modal state
     const [selectedIndex, setSelectedIndex] = useState(null);
     const handleOpen = (meal) => {
         const idx = allMeals.findIndex((m) => m.nombre === meal.nombre);
@@ -37,11 +38,9 @@ const Menu = () => {
     const handlePrev = () =>
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : allMeals.length - 1));
     const handleNext = () =>
-        setSelectedIndex((prev) =>
-            prev < allMeals.length - 1 ? prev + 1 : 0
-        );
+        setSelectedIndex((prev) => (prev < allMeals.length - 1 ? prev + 1 : 0));
 
-    // Determinar modo de render:
+    // Determinar modo de renderizado
     const showAll = !categoryParam;
     const isGroup = categoryParam && grupoCategorias[categoryParam];
     const isTipo = categoryParam && menuData[categoryParam];
@@ -49,15 +48,23 @@ const Menu = () => {
     return (
         <div>
             <Header />
+            <HeroSlider />
 
-            <Typography variant="h3" sx={{ my: 3, textAlign: 'center' }}>
-                {showAll ? 'Sushi Town Menu' : formatTitle(categoryParam)}
+            <Typography
+                variant="h3"
+                sx={{
+                    my: 3,
+                    textAlign: 'center',
+                    color: '#f9fafb',
+                    fontSize: { xs: '2.5rem', md: '4rem' },
+                    fontWeight: 'bold',
+                    textShadow: '0 2px 6px rgba(0,0,0,0.3)'
+                }}
+            >
+                {showAll ? 'Menu' : formatTitle(categoryParam)}
             </Typography>
 
-            <Container
-                maxWidth="lg"
-                sx={{ backgroundColor: '#fff', p: 2, borderRadius: 2 }}
-            >
+            <Container maxWidth="lg" sx={{ backgroundColor: '#fff', p: 2, borderRadius: 2 }}>
                 {/* VISTA COMPLETA */}
                 {showAll && (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -90,15 +97,10 @@ const Menu = () => {
                                                     }
                                                 }}
                                             >
-                                                <Typography variant="h5">
-                                                    {formatTitle(tipo)}
-                                                </Typography>
+                                                <Typography variant="h5">{formatTitle(tipo)}</Typography>
                                             </AccordionSummary>
                                             <AccordionDetails sx={{ px: 2, pt: 1, pb: 3 }}>
-                                                <MenuList
-                                                    meals={menuData[tipo]}
-                                                    onMealClick={handleOpen}
-                                                />
+                                                <MenuList meals={menuData[tipo]} onMealClick={handleOpen} />
                                             </AccordionDetails>
                                         </Accordion>
                                     ))}
@@ -137,15 +139,10 @@ const Menu = () => {
                                         }
                                     }}
                                 >
-                                    <Typography variant="h5">
-                                        {formatTitle(tipo)}
-                                    </Typography>
+                                    <Typography variant="h5">{formatTitle(tipo)}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails sx={{ px: 2, pt: 1, pb: 3 }}>
-                                    <MenuList
-                                        meals={menuData[tipo]}
-                                        onMealClick={handleOpen}
-                                    />
+                                    <MenuList meals={menuData[tipo]} onMealClick={handleOpen} />
                                 </AccordionDetails>
                             </Accordion>
                         ))}
@@ -158,10 +155,7 @@ const Menu = () => {
                         <Typography variant="h4" sx={{ mb: 2 }}>
                             {formatTitle(categoryParam)}
                         </Typography>
-                        <MenuList
-                            meals={menuData[categoryParam]}
-                            onMealClick={handleOpen}
-                        />
+                        <MenuList meals={menuData[categoryParam]} onMealClick={handleOpen} />
                     </Box>
                 )}
 

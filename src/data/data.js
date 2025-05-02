@@ -145,7 +145,7 @@ export const data = [
 	},
 	{
 		nombre: "Exprimido de naranja",
-		img: "/img/naranja.webp",
+		img: "/img/naranja.jpg",
 		descripcion: "Sin descripción",
 		precio: "$4,800",
 		tipo: "bebidasSinAlcohol",
@@ -169,7 +169,7 @@ export const data = [
 	},
 	{
 		nombre: "Café",
-		img: "/img/cafe.webp",
+		img: "/img/cafe.jpg",
 		descripcion: "Sin descripción",
 		precio: "$3,800",
 		tipo: "bebidasSinAlcohol",
@@ -345,7 +345,7 @@ export const data = [
 	},
 	{
 		nombre: "LANGOSTINOS CRISP",
-		img: "/img/langostinocrisp.webp",
+		img: "/img/langostinocrisp.jpg",
 		descripcion: "Langostinos rebozados en escamas de papas & honey mustard.",
 		precio: "$17,800",
 		tipo: "entradas",
@@ -377,7 +377,7 @@ export const data = [
 	},
 	{
 		nombre: "CEVICHE",
-		img: "/img/ceviche.webp",
+		img: "/img/ceviche.jpg",
 		descripcion: "De salmón rosado, pescado blanco del día y langostinos.",
 		precio: "$17,993",
 		tipo: "entradas",
@@ -393,7 +393,7 @@ export const data = [
 	},
 	{
 		nombre: "GEISHAS SAKE",
-		img: "/img/geishasake.webp",
+		img: "/img/geishasake.jpg",
 		descripcion: "Láminas de salmón rosado, philadelphia y palta.",
 		precio: "$13,891",
 		tipo: "geishas",
@@ -529,7 +529,7 @@ export const data = [
 	},
 	{
 		nombre: "NIGIRI AHUMADO",
-		img: "/img/nigiriahumado.webp",
+		img: "/img/nigiriahumado.jpg",
 		descripcion: "Lámina de salmón ahumado sobre arroz avinagrado.",
 		precio: "$12,739",
 		tipo: "nigiriSashimi",
@@ -697,7 +697,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Dulce Natural",
-		img: "/img/alamosdulcenatural.webp",
+		img: "/img/alamosdulcenatural.jpg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosBlancos",
@@ -705,7 +705,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Blanc de Blancs",
-		img: "/img/nicasiablanc.webp",
+		img: "/img/nicasiablanc.jpg",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosBlancos",
@@ -753,7 +753,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Nature",
-		img: "/img/alamosnature.webp",
+		img: "/img/alamosnature.jpg",
 		descripcion: "Sin descripción",
 		precio: "$25,553",
 		tipo: "vinosEspumantes",
@@ -761,7 +761,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos",
-		img: "/img/copavino.webp",
+		img: "/img/copavino.jpg",
 		descripcion: "Sin descripción",
 		precio: "$5,262",
 		tipo: "vinosPorCopas",
@@ -801,7 +801,7 @@ export const data = [
 	},
 	{
 		nombre: "Álamos Malbec Mac Atenuada",
-		img: "/img/alamosmaceracion.webp",
+		img: "/img/alamosmaceracion.jpg",
 		descripcion: "Sin descripción",
 		precio: "$16,800",
 		tipo: "vinosTintos",
@@ -809,7 +809,7 @@ export const data = [
 	},
 	{
 		nombre: "Nicasia Red Blend Malbec",
-		img: "/img/nicasiared.webp",
+		img: "/img/nicasiared.jpg",
 		descripcion: "Sin descripción",
 		precio: "$18,330",
 		tipo: "vinosTintos",
@@ -825,7 +825,7 @@ export const data = [
 	},
 	{
 		nombre: "El Enemigo Bonarda",
-		img: "/img/elenemigo.webp",
+		img: "/img/elenemigo.jpg",
 		descripcion: "Sin descripción",
 		precio: "$46,079",
 		tipo: "vinosTintos",
@@ -857,7 +857,7 @@ export const data = [
 	},
 	{
 		nombre: "Saint Felicien Cabernet Sauvignon",
-		img: "/img/saintfeliciencabernet.webp",
+		img: "/img/saintfeliciencabernet.jpg",
 		descripcion: "Sin descripción",
 		precio: "$23,131",
 		tipo: "vinosTintos",
@@ -897,7 +897,7 @@ export const data = [
 	},
 	{
 		nombre: "D.V. Catena Cabernet – Cabernet",
-		img: "/img/dvcatenacarbernet.webp",
+		img: "/img/dvcatenacarbernet.jpg",
 		descripcion: "Sin descripción",
 		precio: "$27,200",
 		tipo: "vinosTintos",
@@ -977,7 +977,7 @@ export const data = [
 	},
 	{
 		nombre: "SUMMER MANGO",
-		img: "/img/supermango.webp",
+		img: "/img/supermango.jpg",
 		descripcion: "Salmón rosado, queso, verdeo, tempura. Cubierto con mango flambeado.",
 		precio: "16.628",
 		tipo: "rolls",
@@ -1145,7 +1145,7 @@ export const data = [
 	},
 	{
 		nombre: "CROCANTE DE MANZANA",
-		img: "/img/applecrumble.webp",
+		img: "/img/applecrumble.jpg",
 		descripcion: "Tarta de manzana con crumble crust y nueces, servida con helado.",
 		precio: "9.716",
 		tipo: "postres",

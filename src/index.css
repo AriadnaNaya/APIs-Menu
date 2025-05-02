@@ -13,7 +13,7 @@
 /* Puedes mantener estos estilos si se usan en elementos no-MUI */
 body {
   font-family: 'Nunito', sans-serif;
-  background-color: #f0f6fc;
+  background-color: #111827;
 }
 
 /* Título principal (opcional si usas MUI Typography para h1) */
@@ -162,4 +162,17 @@ ul.mt-2.space-y-1.text-xs.text-gray-600 {
     opacity: 1;
     transform: scale(1);
   }
+}
+.hero-slide {
+  width: 100%;
+  height: 400px; /* o la altura que prefieras */
+  background-position: center;
+  background-size: cover; /* O "contain" si preferís ver toda la imagen sin recorte */
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: opacity 1s ease-in-out;
+  background-color: #111827;
 }

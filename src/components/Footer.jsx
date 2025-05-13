@@ -7,7 +7,7 @@ const Footer = () => {
         <Fade in timeout={800}>
             <Box
                 sx={{
-                    background: 'linear-gradient(to bottom, #121212, #1a1a1a)',
+                    backgroundColor: '#111827',
                     color: '#e0e0e0',
                     padding: '2rem 1rem',
                     borderTop: '1px solid rgba(0, 200, 134, 0.2)'

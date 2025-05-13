@@ -1,76 +1,196 @@
-<div id="top"></div>
-<div align="center">
-    <img src="./src/">
-</div>
-<h1  align="center" >Restaurant Menu using React.js</h1>
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-        <ul>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#built-with">Built With</a></li>
-            <li><a href="#getting-started">Getting Started</a></li>
-            <li><a href="#available-script">Available Script</a></li>
-            <li><a href="#dependencies">Dependencies</a></li>
-        </ul>
-    </li>      
-  </ol>
-</details>
+# Sushi Town Menu
 
+## Descripción 
 
-## About The Project
-It provides an overview of how to create a menu list using React.js.
+**Sushi Town Menu** es una aplicación web de una sola página (SPA) que muestra el menú de un restaurante de sushi de forma interactiva. Permite:
 
-**Features**
+* Navegar entre diferentes categorías (sushi & rolls, comida, bebidas, postres) usando query params (`?category=`).
+* Mostrar cada plato como una card con imagen, nombre y precio.
+* Filtrar el menú por categoría o subcategoría.
+* Ver detalles de cada plato en un modal con animaciones y navegación "Anterior/Siguiente".
+* Incorpora un slider hero en la parte superior para destacar ofertas o imágenes.
+
+Esta SPA está construida con **React**, **React Router**, **Material UI** y **Tailwind CSS**, y empacada con **Vite**.
+
+---
+
+## Estructura de carpetas y archivos
+
 ```
-A categorize navigation to see the menu list based on the category.
+project-root/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── Footer.jsx
+│   │   ├── HeroSlider.jsx
+│   │   ├── MenuList.jsx
+│   │   ├── MenuItemCard.jsx
+│   │   └── MealDetailModal.jsx
+│   ├── pages/
+│   │   └── Menu.jsx
+│   ├── data/
+│   │   ├── data.js
+│   │   └── menuData.js
+│   ├── utils/
+│   │   ├── formatTitle.js
+│   │   └── grupoCategorias.js
+│   ├── hooks/
+│   │   └── useMobile.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── package.json
+├── postcss.config.cjs
+├── tailwind.config.cjs
+└── vite.config.js
 ```
 
-## Overview
+---
 
-* [Repo Codes](https://github.com/ijayhub/menulist)
+## Tecnologías usadas
 
-* [Hosted Link](https://nigerian-meals.netlify.app/)
+* **React**: Biblioteca principal para construir la UI.
+* **React Router**: Manejo de rutas y parámetros de consulta (<BrowserRouter>, <Routes>, <Route>, useSearchParams).
+* **Material UI (MUI)**: Componentes listos para UI (AppBar, Toolbar, Accordion, Dialog, Buttons, etc.) y theming.
+* **Tailwind CSS**: Estilos utilitarios para casos globales y responsive.
+* **Vite**: Bundler ultrarrápido para desarrollo local y build.
+* **PostCSS**: Procesador de CSS para Tailwind.
 
+---
 
-* [Blog](https://ijaycent.hashnode.dev/creating-a-menu-using-reactjs)
+## Páginas
 
+### `Menu`
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+* Renderiza el componente `Menu.jsx`.
+* Lee `?category=` de la URL con `useSearchParams`.
+* Muestra el menú completo, un grupo de categorías o una lista filtrada según el parámetro:
 
-### Built With
+    * **showAll**: Si no hay `category`, muestra todas las categorías en acordeones.
+    * **isGroup**: Si `category` coincide con un grupo padre, muestra los acordeones de esa sección.
 
-* [React](https://reactjs.org/)
+---
 
-* [Tailwind css](https://tailwindcss.com/)
+## Componentes principales
 
-* [vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
+### `Header.jsx`
 
+* Barra de navegación superior.
+* En desktop: logo a la izquierda, links al centro, dirección a la derecha.
+* En móvil: ícono de hamburguesa que abre un `Drawer` con los mismos enlaces.
+* **Links** apuntan a `/menu?category=…` para filtrar por categoría.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+### `Footer.jsx`
 
-## Getting Started
-To get a local copy up and running follow these simple example steps:
+* Pie de página con:
 
-## Available Script
+    * Contacto (dirección, teléfono, horarios).
+    * Enlaces a redes sociales (Instagram, Facebook).
+    * Mapa embebido de Google Maps.
+    * Copyright dinámico.
 
-In the project directory, you can run:
+### `HeroSlider.jsx`
 
- ### `npm run dev`
+* Slider o carrusel de imágenes en la cabecera.
+* Destaca ofertas o imágenes representativas.
 
-Runs the app in the development mode.
+### `MenuList.jsx`
 
+* Recibe `meals` (array de platos) y `onMealClick`.
+* Renderiza un grid/responsive de `MenuItemCard`.
 
+### `MenuItemCard.jsx`
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+* Tarjeta de cada plato:
 
-### Dependencies
-[npm react-router-dom@6](https://reactrouter.com/docs/en/v6/getting-started/installation)
+    * Imagen recortada (`object-fit: cover`).
+    * Nombre y precio formateado en ARS.
+    * Descripción truncada a 2 líneas.
+    * Hover con escala y sombra.
+* `onClick` dispara `onToggle` para abrir el modal.
 
-[react-loader-spinner ](https://www.npmjs.com/package/react-loader-spinner)
+### `MealDetailModal.jsx`
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+* Modal centrado con detalles del plato:
 
+    * Imagen completa (`object-fit: contain`).
+    * Precio, descripción y lista de variantes (si existen).
+    * Botones "Anterior" y "Siguiente" con animación `Fade`.
+* Controla su propia animación refrescando `fadeKey` en cada cambio de plato.
+
+---
+
+## Módulos de datos y utilidades
+
+### `data.js`
+
+* Array plano con objetos de cada plato:
+
+  ```js
+  { nombre, img, descripcion, precio?, variantes?:[], tipo }
+  ```
+
+### `menuData.js`
+
+* Agrupa `data` por `tipo` con `reduce`:
+
+  ```js
+  { townKitchen: [...], sushiCombinado: [...], ... }
+  ```
+
+### `formatTitle.js`
+
+* Función para convertir claves (`sushi-rolls`, `townKitchen`) en títulos legibles.
+
+### `grupoCategorias.js`
+
+* Define qué sub-tipos pertenecen a cada grupo padre:
+
+  ```js
+  { 'sushi-rolls': ['rolls','sushiCombinado',...], comida: [...], ... }
+  ```
+
+### `useMobile.js`
+
+* Hook que usa `useTheme` y `useMediaQuery` de MUI para detectar pantallas pequeñas.
+
+---
+
+## Puntos de entrada y configuración
+
+* **`main.jsx`**: Monta React, `BrowserRouter` y `ThemeProvider`, e importa `index.css`.
+* **`App.jsx`**: Define rutas:
+
+  ```jsx
+  <Routes>
+    <Route path="/" element={<Menu />} />
+    <Route path="/menu" element={<Menu />} />
+  </Routes>
+  ```
+* **`index.html`**: HTML base con `div#root`.
+* **`index.css`**: Importa fuentes, configurar Tailwind base/utilities y estilos globales.
+* **`vite.config.js`**, **`postcss.config.cjs`**, **`tailwind.config.cjs`**: Configuración del bundler, PostCSS y Tailwind.
+
+---
+
+## Ejecución del proyecto
+
+1. Instalar dependencias:
+
+   ```bash
+   npm install
+   ```
+2. Ejecutar en modo desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+3. Para build de producción:
+
+   ```bash
+   npm run build
+   ```
+
+---

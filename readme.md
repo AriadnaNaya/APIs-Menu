@@ -1,196 +1,125 @@
-# Sushi Town Menu
+# Town Kitchen APIs (Fullstack)
 
-## Descripción 
-
-**Sushi Town Menu** es una aplicación web de una sola página (SPA) que muestra el menú de un restaurante de sushi de forma interactiva. Permite:
-
-* Navegar entre diferentes categorías (sushi & rolls, comida, bebidas, postres) usando query params (`?category=`).
-* Mostrar cada plato como una card con imagen, nombre y precio.
-* Filtrar el menú por categoría o subcategoría.
-* Ver detalles de cada plato en un modal con animaciones y navegación "Anterior/Siguiente".
-* Incorpora un slider hero en la parte superior para destacar ofertas o imágenes.
-
-Esta SPA está construida con **React**, **React Router**, **Material UI** y **Tailwind CSS**, y empacada con **Vite**.
+Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) de la aplicación "Town Kitchen Menu", orquestados con Docker Compose.
 
 ---
 
-## Estructura de carpetas y archivos
+## 📁 Estructura del proyecto
 
 ```
-project-root/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── Footer.jsx
-│   │   ├── HeroSlider.jsx
-│   │   ├── MenuList.jsx
-│   │   ├── MenuItemCard.jsx
-│   │   └── MealDetailModal.jsx
-│   ├── pages/
-│   │   └── Menu.jsx
-│   ├── data/
-│   │   ├── data.js
-│   │   └── menuData.js
-│   ├── utils/
-│   │   ├── formatTitle.js
-│   │   └── grupoCategorias.js
-│   ├── hooks/
-│   │   └── useMobile.js
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── package.json
-├── postcss.config.cjs
-├── tailwind.config.cjs
-└── vite.config.js
+APIs/                      # raíz del repositorio
+├── docker-compose.yml     # orquesta contenedores Mongo, backend y frontend
+│
+├── backend/               # servicio Node.js + Express
+│   ├── Dockerfile         # build e inicio del servidor
+│   ├── .env               # variables de entorno (no versionar credenciales)
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── server.js          # configuración de Express y Mongoose
+│   ├── models/            # esquemas de Mongoose
+│   └── routes/            # rutas REST (/api/items)
+│
+└── frontend/              # aplicación React con Vite
+    ├── Dockerfile         # build con Node y serve estáticos con Nginx
+    ├── package.json
+    ├── package-lock.json
+    ├── vite.config.js     # proxy de API para `/api/...`
+    ├── postcss.config.cjs
+    ├── tailwind.config.cjs
+    ├── index.html         # plantilla HTML
+    └── src/               # código fuente React
+        ├── main.jsx
+        ├── App.jsx
+        ├── theme.js
+        ├── index.css
+        ├── utils/
+        └── components/
 ```
 
 ---
 
-## Tecnologías usadas
+## 🚀 Requisitos previos
 
-* **React**: Biblioteca principal para construir la UI.
-* **React Router**: Manejo de rutas y parámetros de consulta (<BrowserRouter>, <Routes>, <Route>, useSearchParams).
-* **Material UI (MUI)**: Componentes listos para UI (AppBar, Toolbar, Accordion, Dialog, Buttons, etc.) y theming.
-* **Tailwind CSS**: Estilos utilitarios para casos globales y responsive.
-* **Vite**: Bundler ultrarrápido para desarrollo local y build.
-* **PostCSS**: Procesador de CSS para Tailwind.
+* **Docker** (>= 20.x) y **Docker Compose** (>= 1.29.x) instalados y en el `PATH`.
+* Puerto libre en tu máquina local:
 
----
+    * **27017** para MongoDB
+    * **5000** para el backend
+    * **3000** para el frontend
 
-## Páginas
-
-### `Menu`
-
-* Renderiza el componente `Menu.jsx`.
-* Lee `?category=` de la URL con `useSearchParams`.
-* Muestra el menú completo, un grupo de categorías o una lista filtrada según el parámetro:
-
-    * **showAll**: Si no hay `category`, muestra todas las categorías en acordeones.
-    * **isGroup**: Si `category` coincide con un grupo padre, muestra los acordeones de esa sección.
+> **Nota:** Si cambias estos puertos en el `docker-compose.yml`, ajusta los accesos en los siguientes pasos.
 
 ---
 
-## Componentes principales
+## ⚙️ Levantar la aplicación con Docker Compose
 
-### `Header.jsx`
-
-* Barra de navegación superior.
-* En desktop: logo a la izquierda, links al centro, dirección a la derecha.
-* En móvil: ícono de hamburguesa que abre un `Drawer` con los mismos enlaces.
-* **Links** apuntan a `/menu?category=…` para filtrar por categoría.
-
-### `Footer.jsx`
-
-* Pie de página con:
-
-    * Contacto (dirección, teléfono, horarios).
-    * Enlaces a redes sociales (Instagram, Facebook).
-    * Mapa embebido de Google Maps.
-    * Copyright dinámico.
-
-### `HeroSlider.jsx`
-
-* Slider o carrusel de imágenes en la cabecera.
-* Destaca ofertas o imágenes representativas.
-
-### `MenuList.jsx`
-
-* Recibe `meals` (array de platos) y `onMealClick`.
-* Renderiza un grid/responsive de `MenuItemCard`.
-
-### `MenuItemCard.jsx`
-
-* Tarjeta de cada plato:
-
-    * Imagen recortada (`object-fit: cover`).
-    * Nombre y precio formateado en ARS.
-    * Descripción truncada a 2 líneas.
-    * Hover con escala y sombra.
-* `onClick` dispara `onToggle` para abrir el modal.
-
-### `MealDetailModal.jsx`
-
-* Modal centrado con detalles del plato:
-
-    * Imagen completa (`object-fit: contain`).
-    * Precio, descripción y lista de variantes (si existen).
-    * Botones "Anterior" y "Siguiente" con animación `Fade`.
-* Controla su propia animación refrescando `fadeKey` en cada cambio de plato.
-
----
-
-## Módulos de datos y utilidades
-
-### `data.js`
-
-* Array plano con objetos de cada plato:
-
-  ```js
-  { nombre, img, descripcion, precio?, variantes?:[], tipo }
-  ```
-
-### `menuData.js`
-
-* Agrupa `data` por `tipo` con `reduce`:
-
-  ```js
-  { townKitchen: [...], sushiCombinado: [...], ... }
-  ```
-
-### `formatTitle.js`
-
-* Función para convertir claves (`sushi-rolls`, `townKitchen`) en títulos legibles.
-
-### `grupoCategorias.js`
-
-* Define qué sub-tipos pertenecen a cada grupo padre:
-
-  ```js
-  { 'sushi-rolls': ['rolls','sushiCombinado',...], comida: [...], ... }
-  ```
-
-### `useMobile.js`
-
-* Hook que usa `useTheme` y `useMediaQuery` de MUI para detectar pantallas pequeñas.
-
----
-
-## Puntos de entrada y configuración
-
-* **`main.jsx`**: Monta React, `BrowserRouter` y `ThemeProvider`, e importa `index.css`.
-* **`App.jsx`**: Define rutas:
-
-  ```jsx
-  <Routes>
-    <Route path="/" element={<Menu />} />
-    <Route path="/menu" element={<Menu />} />
-  </Routes>
-  ```
-* **`index.html`**: HTML base con `div#root`.
-* **`index.css`**: Importa fuentes, configurar Tailwind base/utilities y estilos globales.
-* **`vite.config.js`**, **`postcss.config.cjs`**, **`tailwind.config.cjs`**: Configuración del bundler, PostCSS y Tailwind.
-
----
-
-## Ejecución del proyecto
-
-1. Instalar dependencias:
+1. **Clona el repositorio** (si aún no lo tienes):
 
    ```bash
-   npm install
+   git clone https://github.com/tu-usuario/APIs-Menu.git
+   cd APIs-Menu/APIs
    ```
-2. Ejecutar en modo desarrollo:
+
+2. **Configura variables de entorno del backend**:
+
+    * Duplica `backend/.env.example` como `backend/.env` y ajusta si fuera necesario:
+
+      ```dotenv
+      PORT=5000
+      MONGO_URI=mongodb://mongo:27017/townkitchen
+      ```
+
+3. **Inicia todos los servicios**:
 
    ```bash
-   npm run dev
+   docker-compose up -d
    ```
-3. Para build de producción:
+
+    * Esto descargará/buildará las imágenes y levantará:
+
+        * **MongoDB** en `localhost:27017`
+        * **Backend** en `localhost:5000`
+        * **Frontend** (React + Nginx) en `localhost:3000`
+
+4. **Verifica los logs** (opcional):
 
    ```bash
-   npm run build
+   # Logs combinados:
+   docker-compose logs -f
+
+   # O logs de un servicio en particular:
+   docker-compose logs -f backend
    ```
+
+5. **Accede a la aplicación**:
+
+    * Navega a 👉 `http://localhost:3000` para ver el frontend.
+    * Haz peticiones REST a `http://localhost:5000/api/items` para probar el backend.
 
 ---
+
+## 🛠️ Parar y eliminar contenedores
+
+```bash
+# Detener sin borrar datos
+docker-compose down
+
+# Parar y eliminar volumen de MongoDB (pierdes datos)
+docker-compose down -v
+```
+
+---
+
+## 🔍 Troubleshooting
+
+* **Error de CORS**: el backend ya incluye `cors()`. Si persiste, revisa la URL de fetch en `src/components/Menu.jsx` (`/api/items`).
+* **Frontend 404**: asegúrate de que el build se creó con éxito y que Nginx copia la carpeta `dist/`.
+* **Mongo no arranca**: verifica permisos del volumen `mongo_data`.
+
+---
+
+## 📖 Más información
+
+* **Frontend**: documentación de Vite, React, MUI y Tailwind.
+* **Backend**: Express y Mongoose.
+* **Dockers**: consulta la configuración en `docker-compose.yml` y los Dockerfiles en cada carpeta.

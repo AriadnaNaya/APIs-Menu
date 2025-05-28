@@ -4,7 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import App from './App';
 import theme from './theme';
-import './index.css'; // o el archivo que estés usando (index-cards.css, etc.)
+import './index.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>

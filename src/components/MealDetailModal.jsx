@@ -20,7 +20,7 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
     const [fadeKey, setFadeKey] = useState(0);
 
     useEffect(() => {
-        setFadeKey(prev => prev + 1); // reinicia la animación al cambiar de meal
+        setFadeKey(prev => prev + 1);
     }, [meal]);
 
     return (
@@ -31,17 +31,24 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
             fullWidth
             TransitionComponent={Fade}
             transitionDuration={300}
+            PaperProps={{
+                sx: {
+                    bgcolor: '#111827',
+                    color: '#f9fafb',
+                    borderRadius: 3,
+                },
+            }}
         >
             <DialogTitle sx={{ m: 0, p: 2 }}>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography variant="h6">{meal.nombre}</Typography>
-                    <IconButton onClick={onClose}>
+                    <Typography variant="h6" sx={{ color: '#f9fafb' }}>{meal.nombre}</Typography>
+                    <IconButton onClick={onClose} sx={{ color: '#f9fafb' }}>
                         <CloseIcon />
                     </IconButton>
                 </Box>
             </DialogTitle>
 
-            <DialogContent sx={{ textAlign: 'center' }}>
+            <DialogContent sx={{ textAlign: 'center', bgcolor: 'inherit' }}>
                 <Fade in timeout={300} key={fadeKey}>
                     <Box>
                         {meal.img && (
@@ -51,15 +58,15 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
                                 style={{
                                     width: '100%',
                                     maxHeight: '300px',
-                                    objectFit: 'contain',       // muestra la imagen completa
+                                    objectFit: 'contain',
                                     borderRadius: '8px',
                                     marginBottom: '16px',
-                                    backgroundColor: '#fafafa'  // fondo neutral opcional
+                                    backgroundColor: '#1f2937'
                                 }}
                             />
                         )}
 
-                        <Typography variant="h6" color="primary" fontWeight="bold">
+                        <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 'bold' }}>
                             {typeof meal.precio === 'number'
                                 ? meal.precio.toLocaleString('es-AR', {
                                     style: 'currency',
@@ -70,14 +77,14 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
                         </Typography>
 
                         {meal.descripcion && (
-                            <Typography variant="body1" sx={{ mt: 2 }}>
+                            <Typography variant="body1" sx={{ mt: 2, color: '#e5e7eb' }}>
                                 {meal.descripcion}
                             </Typography>
                         )}
 
                         {meal.variantes && meal.variantes.length > 0 && (
                             <div className="meal-variantes">
-                                <Typography variant="h6" sx={{ mt: 2 }}>Opciones</Typography>
+                                <Typography variant="h6" sx={{ mt: 2, color: '#f9fafb' }}>Opciones</Typography>
                                 <Box
                                     component="ul"
                                     sx={{
@@ -115,7 +122,8 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
                                 startIcon={<ArrowBackIosNewIcon />}
                                 sx={{
                                     transition: 'transform 0.2s ease',
-                                    '&:hover': { transform: 'scale(1.1)' }
+                                    '&:hover': { transform: 'scale(1.1)' },
+                                    color: '#f9fafb'
                                 }}
                             >
                                 Anterior
@@ -125,7 +133,8 @@ const MealDetailModal = ({ open, onClose, meal, onPrev, onNext }) => {
                                 endIcon={<ArrowForwardIosIcon />}
                                 sx={{
                                     transition: 'transform 0.2s ease',
-                                    '&:hover': { transform: 'scale(1.1)' }
+                                    '&:hover': { transform: 'scale(1.1)' },
+                                    color: '#f9fafb'
                                 }}
                             >
                                 Siguiente

@@ -13,7 +13,6 @@ const Menu = () => {
     const [subCategory, setSubCategory] = useState('');
     const [loading, setLoading] = useState(true);
 
-    // Fetch dynamic data from backend
     useEffect(() => {
         fetch('/api/items')
             .then((res) => res.json())

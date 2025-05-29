@@ -5,8 +5,7 @@ import Footer         from './components/Footer';
 import Home           from './pages/Home';
 import Menu           from './pages/Menu';
 import About          from './pages/About';
-import Reservas       from './pages/Reservas';
-import Contact        from './pages/Contact';
+import ReservaForm    from './pages/ReservaForm.jsx';
 import Login          from './pages/Login';
 import Register       from './pages/Register';
 import ReviewForm     from './pages/ReviewForm';
@@ -19,8 +18,7 @@ export default function App() {
 				<Route path="/"         element={<Home />} />
 				<Route path="/menu"     element={<Menu />} />
 				<Route path="/about"    element={<About />} />
-				<Route path="/reservas" element={<Reservas />} />
-				<Route path="/contact"  element={<Contact />} />
+				<Route path="/reservas" element={<ReservaForm />} />
 				<Route path="/login"    element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/review"   element={<ReviewForm />} />

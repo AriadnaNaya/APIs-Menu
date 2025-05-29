@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-export default function ContactSection() {
+export default function ReservaSection() {
     return (
         <Container sx={{ py: 8, textAlign: 'center', bgcolor: 'grey.50' }}>
             <Typography variant="h4" gutterBottom>

@@ -11,14 +11,42 @@ export default function TestimonialSection() {
     useEffect(() => {
         fetch('/api/reviews')
             .then(r => r.json())
-            .then(setReviews)
+            .then(data => {
+                // Filtrar para que no haya reseñas de clientes repetidos (máx 10)
+                const unique = [];
+                const seen = new Set();
+                for (const t of data) {
+                    const id = t.client._id || t.client.id;
+                    if (!seen.has(id)) {
+                        seen.add(id);
+                        unique.push(t);
+                        if (unique.length >= 10) break;
+                    }
+                }
+                setReviews(unique);
+            })
             .catch(console.error);
     }, []);
 
     const settings = {
-        dots: true, infinite: true, speed: 500,
-        slidesToShow: 1, slidesToScroll: 1,
-        arrows: true, autoplay: true, autoplaySpeed: 5000
+        dots: false,
+        arrows: true,
+        infinite: reviews.length > 3,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        responsive: [
+            {
+                breakpoint: 960,
+                settings: { slidesToShow: 2 }
+            },
+            {
+                breakpoint: 600,
+                settings: { slidesToShow: 1 }
+            }
+        ]
     };
 
     return (
@@ -26,7 +54,52 @@ export default function TestimonialSection() {
             <Typography variant="h4" align="center" gutterBottom>
                 Lo que dicen nuestros clientes
             </Typography>
-            <Box sx={{ textAlign: 'center', mb: 4 }}>
+
+            <Box sx={{ mt: 4 }}>
+                <Slider {...settings}>
+                    {reviews.map((t, i) => (
+                        <Box key={i} sx={{ px: 2 }}>
+                            <Box
+                                sx={{
+                                    maxWidth: 360,
+                                    mx: 'auto',
+                                    textAlign: 'center',
+                                    p: 3,
+                                    border: '1px solid',
+                                    borderColor: 'grey.300',
+                                    borderRadius: 2,
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}
+                            >
+                                <Avatar
+                                    src={t.client.avatar}
+                                    sx={{ width: 64, height: 64, mx: 'auto', mb: 2 }}
+                                />
+                                <Typography variant="subtitle1" gutterBottom>
+                                    {t.client.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    paragraph
+                                    sx={{ flexGrow: 1 }}
+                                >
+                                    “{t.comment}”
+                                </Typography>
+                                <Typography variant="body2">
+                                    {Array.from({ length: t.rating })
+                                        .map(() => '⭐')
+                                        .join('')}
+                                </Typography>
+                            </Box>
+                        </Box>
+                    ))}
+                </Slider>
+            </Box>
+
+            <Box sx={{ textAlign: 'center', mt: 4 }}>
                 {token ? (
                     <Button component={Link} to="/review" variant="contained">
                         Déjanos tu opinión
@@ -36,39 +109,6 @@ export default function TestimonialSection() {
                         Inicia sesión para opinar
                     </Button>
                 )}
-            </Box>
-            <Box sx={{ mt: 4 }}>
-                <Slider {...settings}>
-                    {reviews.map((t,i) => (
-                        <Box key={i} sx={{ px: 2 }}>
-                            <Box
-                                sx={{
-                                    maxWidth: 600,
-                                    mx: 'auto',
-                                    textAlign: 'center',
-                                    p: 3,
-                                    border: '1px solid',
-                                    borderColor: 'grey.300',
-                                    borderRadius: 2
-                                }}
-                            >
-                                <Avatar
-                                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(t.client.name)}`}
-                                    sx={{ width: 64, height: 64, mx: 'auto', mb: 2 }}
-                                />
-                                <Typography variant="subtitle1" gutterBottom>
-                                    {t.client.name}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" paragraph>
-                                    “{t.comment}”
-                                </Typography>
-                                <Typography variant="body2">
-                                    {Array.from({ length: t.rating }).map((_, ix) => '⭐').join('')}
-                                </Typography>
-                            </Box>
-                        </Box>
-                    ))}
-                </Slider>
             </Box>
         </Container>
     );

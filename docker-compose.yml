@@ -1,12 +1,9 @@
-# APIs/docker‐compose.yml
 version: '3.8'
+
 services:
   mongo:
-    image: mongo:6.0
+    image: mongo:6
     container_name: townkitchen-mongo
-    restart: unless-stopped
-    ports:
-      - '27017:27017'
     volumes:
       - mongo_data:/data/db
 
@@ -15,22 +12,24 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: townkitchen-backend
-    restart: unless-stopped
     ports:
-      - '5000:5000'
+      - "5000:5000"
+    # Inyectamos variables de entorno si las necesitas
+    environment:
+      MONGO_URI: mongodb://mongo:27017/townkitchen
+      JWT_SECRET: mySuperSecretKey12345
     depends_on:
       - mongo
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/townkitchen
+    # Este es el cambio clave: primero seed.js y luego npm start
+    command: sh -c "node seed.js && npm start"
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: townkitchen-frontend
-    restart: unless-stopped
     ports:
-      - '3000:80'
+      - "3000:80"
     depends_on:
       - backend
 

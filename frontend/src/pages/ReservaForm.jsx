@@ -8,7 +8,7 @@ import {
     Alert
 } from '@mui/material';
 
-export default function Reservas() {
+export default function ReservaForm() {
     const [form, setForm] = useState({
         name: '',
         datetime: '',

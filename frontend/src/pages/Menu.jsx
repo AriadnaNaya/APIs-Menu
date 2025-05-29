@@ -1,66 +1,109 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import {
+    Container,
+    Typography,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MenuList from './MenuList';
-import useMobile from '../utils/useMobile';
+
+import HeroSlider      from '../components/HeroSlider';
+import MenuList        from '../components/MenuList';
+import MealDetailModal from '../components/MealDetailModal';
+import useMobile       from '../utils/useMobile';
+import formatTitle     from '../utils/formatTitle';
 import grupoCategorias from '../utils/grupoCategorias';
-import formatTitle from '../utils/formatTitle';
 
-const Menu = () => {
+export default function Menu() {
     const isMobile = useMobile();
-    const [menuItems, setMenuItems] = useState([]);
-    const [category, setCategory] = useState(Object.keys(grupoCategorias)[0]);
-    const [subCategory, setSubCategory] = useState('');
+    const { search } = useLocation();
+
+    // Derivar categoría principal de la URL
+    const mainCats = Object.keys(grupoCategorias);
+    const params   = new URLSearchParams(search);
+    const category = params.get('category') || mainCats[0];
+
+    // Datos planos del backend
+    const [items, setItems]     = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError]     = useState(null);
 
-    useEffect(() => {
-        fetch('/api/items')
-            .then((res) => res.json())
-            .then((data) => {
-                setMenuItems(data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.error('Error fetching menu items:', err);
-                setLoading(false);
-            });
-    }, []);
+    // Modal
+    const [selected, setSelected] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+    const openDetail  = item => { setSelected(item); setOpenModal(true); };
+    const closeDetail = ()   => setOpenModal(false);
 
-    if (loading) {
-        return <Typography variant="h6" align="center">Cargando menú...</Typography>;
-    }
-
-    // Lista de subcategorías para la categoría seleccionada
-    const catMap = grupoCategorias[category] || [];
-
-    // Agrupar items por subcategoría
-    const itemsBySub = catMap.reduce((acc, subCat) => {
-        acc[subCat] = menuItems.filter(item => item.subCategory === subCat);
+    // Prev/Next en modal
+    const subCats = grupoCategorias[category] || [];
+    const itemsBySub = subCats.reduce((acc, sub) => {
+        acc[sub] = items.filter(i => i.category === sub);
         return acc;
     }, {});
+    const flat = subCats.flatMap(sub => itemsBySub[sub] || []);
+
+    const handlePrev = () => {
+        if (!selected) return;
+        const idx  = flat.findIndex(i => i._id === selected._id);
+        setSelected(flat[(idx - 1 + flat.length) % flat.length]);
+    };
+    const handleNext = () => {
+        if (!selected) return;
+        const idx  = flat.findIndex(i => i._id === selected._id);
+        setSelected(flat[(idx + 1) % flat.length]);
+    };
+
+    // Fetch
+    useEffect(() => {
+        fetch('/api/items')
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then(data => setItems(data))
+            .catch(err => setError(err.message))
+            .finally(() => setLoading(false));
+    }, []);
+
+    if (loading) return <Typography align="center">Cargando menú…</Typography>;
+    if (error)   return <Typography color="error" align="center">{error}</Typography>;
 
     return (
-        <Container sx={{ my: 4 }}>
-            <Typography variant="h4" gutterBottom>
-                {formatTitle(category)}
-            </Typography>
+        <>
+            <HeroSlider />
 
-            {catMap.map(subCat => (
-                <Accordion
-                    key={subCat}
-                    expanded={subCategory === subCat}
-                    onChange={() => setSubCategory(prev => (prev === subCat ? '' : subCat))}
-                >
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>{formatTitle(subCat)}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <MenuList items={itemsBySub[subCat] || []} />
-                    </AccordionDetails>
-                </Accordion>
-            ))}
-        </Container>
+            <Container sx={{ my: 4 }}>
+                <Typography variant="h4" gutterBottom>
+                    {formatTitle(category)}
+                </Typography>
+
+                {subCats.map(sub => (
+                    <Accordion key={sub} defaultExpanded>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            {/* Título con mayor tamaño */}
+                            <Typography variant="h5">{formatTitle(sub)}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <MenuList
+                                items={itemsBySub[sub] || []}
+                                onItemClick={openDetail}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
+                ))}
+            </Container>
+
+            {selected && (
+                <MealDetailModal
+                    open={openModal}
+                    item={selected}
+                    onClose={closeDetail}
+                    onPrev={handlePrev}
+                    onNext={handleNext}
+                />
+            )}
+        </>
     );
-};
-
-export default Menu;
+}

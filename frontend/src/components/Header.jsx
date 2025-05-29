@@ -1,121 +1,125 @@
-// src/components/Header.jsx
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import {
-	AppBar,
-	Toolbar,
-	Button,
-	IconButton,
-	Drawer,
-	List,
-	ListItem,
-	ListItemText,
-	Box,
-	Typography
+	AppBar, Toolbar, IconButton, Typography,
+	Button, Drawer, List, ListItemButton,
+	ListItemText, Box, Avatar
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import useMobile from '../hooks/useMobile';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
-const Header = () => {
-	const [openDrawer, setOpenDrawer] = useState(false);
-	const isMobile = useMobile();
+const menuItems = [
+	{ text: 'Inicio', to: '/' },
+	{ text: '🍣 Sushi & Rolls', to: '/menu?category=sushi-rolls' },
+	{ text: '🍽️ Comida', to: '/menu?category=comida' },
+	{ text: '🍷 Bebidas', to: '/menu?category=bebidas' },
+	{ text: '🍰 Postres', to: '/menu?category=postres' }
+];
 
-	const menuItems = [
-		{ text: 'Inicio', to: '/' },
-		{ text: '🍣 Sushi & Rolls', to: '/menu?category=sushi-rolls' },
-		{ text: '🍽️ Comida', to: '/menu?category=comida' },
-		{ text: '🍷 Bebidas', to: '/menu?category=bebidas' },
-		{ text: '🍰 Postres', to: '/menu?category=postres' }
-	];
+export default function Header() {
+	const [open, setOpen] = useState(false);
+	const { pathname, search } = useLocation();
+	const navigate = useNavigate();
+	const { token, client, logout } = useContext(AuthContext);
+	const current = pathname + search;
 
-	const handleDrawerOpen = () => {
-		setOpenDrawer(true);
-	};
-
-	const handleDrawerClose = () => {
-		setOpenDrawer(false);
+	const handleLogout = () => {
+		logout();
+		navigate('/');
 	};
 
 	return (
-		<AppBar position="static" elevation={1} sx={{ backgroundColor: '#111827' }}>
-			<Toolbar
-				sx={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					flexWrap: 'wrap',
-					px: 3,
-				}}
-			>
-				{/* IZQUIERDA - LOGO o MENÚ HAMBURGUESA */}
-				<Box sx={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-					{isMobile ? (
-						<>
-							<IconButton color="inherit" edge="start" onClick={handleDrawerOpen}>
-								<MenuIcon />
-							</IconButton>
-							<Drawer anchor="left" open={openDrawer} onClose={handleDrawerClose}>
-								<List sx={{ width: 200 }}>
-									{menuItems.map((item) => (
-										<ListItem
-											button
-											component={NavLink}
-											to={item.to}
-											key={item.text}
-											onClick={handleDrawerClose}
-										>
-											<ListItemText primary={item.text} />
-										</ListItem>
-									))}
-								</List>
-							</Drawer>
-						</>
-					) : (
-						<img
-							src="/img/logo.jpg"
-							alt="Sushi Town"
-							style={{
-								height: 40,
-								backgroundColor: 'white',
-								padding: '6px',
-								borderRadius: '6px',
-							}}
-						/>
-					)}
-				</Box>
+		<>
+			<AppBar position="sticky">
+				<Toolbar>
+					<IconButton
+						edge="start" color="inherit"
+						onClick={() => setOpen(true)} sx={{ mr: 2 }}
+					>
+						<MenuIcon />
+					</IconButton>
+					<Typography variant="h6" sx={{ flexGrow: 1 }}>
+						Town Kitchen
+					</Typography>
 
-				{/* CENTRO - MENÚ */}
-				{!isMobile && (
-					<Box sx={{ flex: 2, display: 'flex', justifyContent: 'center', gap: 2 }}>
-						{menuItems.map((item) => (
+					<Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
+						{menuItems.map(item => (
 							<Button
-								key={item.text}
-								component={NavLink}
-								to={item.to}
+								key={item.to}
 								color="inherit"
-								sx={{
-									color: '#f5f5f5',
-									fontSize: '0.9rem',
-									'&:hover': { color: '#00c886' },
-								}}
+								component={Link}
+								to={item.to}
+								sx={{ textDecoration: current === item.to ? 'underline' : 'none' }}
 							>
 								{item.text}
 							</Button>
 						))}
-					</Box>
-				)}
 
-				{/* DERECHA - DIRECCIÓN */}
-				{!isMobile && (
-					<Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-						<Typography variant="body2" sx={{ color: '#f5f5f5', whiteSpace: 'nowrap' }}>
-							📍 Paraná 3097, Martínez, Bs. As.
-						</Typography>
+						{token ? (
+							<>
+								<Avatar
+									src={client.avatar}
+									alt={client.name}
+									sx={{ width: 32, height: 32, ml: 2, mr: 1 }}
+								/>
+								<Button color="inherit" disabled>
+									{client.name}
+								</Button>
+								<Button color="inherit" onClick={handleLogout}>
+									Logout
+								</Button>
+							</>
+						) : (
+							<>
+								<Button color="inherit" component={Link} to="/login">
+									Login
+								</Button>
+								<Button color="inherit" component={Link} to="/register">
+									Register
+								</Button>
+							</>
+						)}
 					</Box>
-				)}
-			</Toolbar>
-		</AppBar>
+				</Toolbar>
+			</AppBar>
+
+			<Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+				<Box sx={{ width: 250 }} onClick={() => setOpen(false)}>
+					<List>
+						{menuItems.map(item => (
+							<ListItemButton
+								key={item.to}
+								component={Link}
+								to={item.to}
+								selected={current === item.to}
+							>
+								<ListItemText primary={item.text} />
+							</ListItemButton>
+						))}
+
+						{token ? (
+							<>
+								<ListItemButton disabled>
+									<Avatar src={client.avatar} sx={{ mr: 1 }} />
+									<ListItemText primary={client.name} />
+								</ListItemButton>
+								<ListItemButton onClick={handleLogout}>
+									<ListItemText primary="Logout" />
+								</ListItemButton>
+							</>
+						) : (
+							<>
+								<ListItemButton component={Link} to="/login">
+									<ListItemText primary="Login" />
+								</ListItemButton>
+								<ListItemButton component={Link} to="/register">
+									<ListItemText primary="Register" />
+								</ListItemButton>
+							</>
+						)}
+					</List>
+				</Box>
+			</Drawer>
+		</>
 	);
-};
-
-export default Header;
+}

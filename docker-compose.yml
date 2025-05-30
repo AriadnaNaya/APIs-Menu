@@ -21,7 +21,7 @@ services:
     depends_on:
       - mongo
     # Este es el cambio clave: primero seed.js y luego npm start
-    command: sh -c "node seed.js && npm start"
+    command: sh -c "node seed-items.js && node seed.js && npm start"
 
   frontend:
     build:

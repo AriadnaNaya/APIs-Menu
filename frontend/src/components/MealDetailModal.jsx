@@ -25,22 +25,21 @@ export default function MealDetailModal({
 
     if (!item) return null;
 
-    // Campos del item
-    const name = item.name || '';
-    const description = item.description || '';
-    const image       = item.image ||  '';
-    const price       = item.price || null;
-    const variants    = item.variants || [];
+    const name        = item.nombre || item.name || '';
+    const description = item.descripcion || item.description || '';
+    const image       = item.img || item.image || item.imageUrl || '';
+    const price       = item.precio || item.price || null;
+    const variants    = item.variantes || item.variants || [];
 
     return (
         <Dialog
             open={open}
             onClose={onClose}
             fullScreen={fullScreen}
-            maxWidth="md"
+            maxWidth="sm"
             fullWidth
         >
-            <DialogTitle sx={{ m: 0, p: 2 }}>
+            <DialogTitle sx={{ m: 0, p: 2, textAlign: 'center' }}>
                 {name}
                 <IconButton
                     autoFocus
@@ -52,39 +51,28 @@ export default function MealDetailModal({
                 </IconButton>
             </DialogTitle>
 
-            <DialogContent dividers>
-                {/* Imagen cuadrada y centrada */}
+            <DialogContent dividers sx={{ p: 2 }}>
+                {/* Imagen cuadrada ligeramente más grande */}
                 {image && (
                     <Box
+                        component="img"
+                        src={image}
+                        alt={name}
                         sx={{
-                            width: '100%',
-                            // Contenedor cuadrado via padding-bottom
-                            height: 0,
-                            pb: '100%',
-                            position: 'relative',
+                            display: 'block',
+                            width: 250,
+                            height: 250,
+                            objectFit: 'cover',
+                            borderRadius: 1,
+                            mx: 'auto',
                             mb: 2
                         }}
-                    >
-                        <Box
-                            component="img"
-                            src={image}
-                            alt={name}
-                            sx={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                borderRadius: 1
-                            }}
-                        />
-                    </Box>
+                    />
                 )}
 
                 {/* Descripción */}
                 {description && (
-                    <Typography variant="body1" paragraph>
+                    <Typography variant="body2" paragraph>
                         {description}
                     </Typography>
                 )}
@@ -92,7 +80,7 @@ export default function MealDetailModal({
                 {/* Precio debajo de la descripción */}
                 {price != null && (
                     <Typography
-                        variant="h6"
+                        variant="subtitle1"
                         sx={{
                             fontWeight: 'bold',
                             textAlign: 'center',
@@ -103,7 +91,7 @@ export default function MealDetailModal({
                     </Typography>
                 )}
 
-                {/* Lista de variantes */}
+                {/* Variantes */}
                 {variants.length > 0 && (
                     <Box sx={{ mb: 2 }}>
                         {variants.map((v, i) => {
@@ -119,11 +107,11 @@ export default function MealDetailModal({
                 )}
 
                 {/* Botones Anterior / Siguiente */}
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-                    <Button variant="outlined" onClick={onPrev}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+                    <Button size="small" variant="outlined" onClick={onPrev}>
                         Anterior
                     </Button>
-                    <Button variant="outlined" onClick={onNext}>
+                    <Button size="small" variant="outlined" onClick={onNext}>
                         Siguiente
                     </Button>
                 </Box>

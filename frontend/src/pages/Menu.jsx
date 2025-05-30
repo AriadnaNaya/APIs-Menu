@@ -1,8 +1,11 @@
+// frontend/src/pages/Menu.jsx
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import {
     Container,
     Typography,
+    Box,
+    Button,
+    Stack,
     Accordion,
     AccordionSummary,
     AccordionDetails
@@ -16,50 +19,37 @@ import useMobile       from '../utils/useMobile';
 import formatTitle     from '../utils/formatTitle';
 import grupoCategorias from '../utils/grupoCategorias';
 
+const MAIN_OPTIONS = [
+    { label: 'Todas', value: 'all' },
+    { label: '🍣 Sushi & Rolls', value: 'sushi-rolls' },
+    { label: '🍽️ Comida',        value: 'comida' },
+    { label: '🍷 Bebidas',        value: 'bebidas' },
+    { label: '🍰 Postres',        value: 'postres' }
+];
+
 export default function Menu() {
     const isMobile = useMobile();
-    const { search } = useLocation();
 
-    // Derivar categoría principal de la URL
-    const mainCats = Object.keys(grupoCategorias);
-    const params   = new URLSearchParams(search);
-    const category = params.get('category') || mainCats[0];
+    // filtros
+    const [selectedMain, setSelectedMain] = useState('all');
+    const [selectedSub,  setSelectedSub]  = useState(null);
 
-    // Datos planos del backend
-    const [items, setItems]     = useState([]);
+    // datos
+    const [items,   setItems]   = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError]     = useState(null);
+    const [error,   setError]   = useState(null);
 
-    // Modal
-    const [selected, setSelected] = useState(null);
-    const [openModal, setOpenModal] = useState(false);
-    const openDetail  = item => { setSelected(item); setOpenModal(true); };
+    // modal
+    const [detailItem, setDetailItem] = useState(null);
+    const [openModal,  setOpenModal]  = useState(false);
+    const openDetail  = item => { setDetailItem(item); setOpenModal(true); };
     const closeDetail = ()   => setOpenModal(false);
 
-    // Prev/Next en modal
-    const subCats = grupoCategorias[category] || [];
-    const itemsBySub = subCats.reduce((acc, sub) => {
-        acc[sub] = items.filter(i => i.category === sub);
-        return acc;
-    }, {});
-    const flat = subCats.flatMap(sub => itemsBySub[sub] || []);
-
-    const handlePrev = () => {
-        if (!selected) return;
-        const idx  = flat.findIndex(i => i._id === selected._id);
-        setSelected(flat[(idx - 1 + flat.length) % flat.length]);
-    };
-    const handleNext = () => {
-        if (!selected) return;
-        const idx  = flat.findIndex(i => i._id === selected._id);
-        setSelected(flat[(idx + 1) % flat.length]);
-    };
-
-    // Fetch
+    // fetch inicial
     useEffect(() => {
         fetch('/api/items')
             .then(res => {
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                if (!res.ok) throw new Error(`Error ${res.status}`);
                 return res.json();
             })
             .then(data => setItems(data))
@@ -67,38 +57,110 @@ export default function Menu() {
             .finally(() => setLoading(false));
     }, []);
 
-    if (loading) return <Typography align="center">Cargando menú…</Typography>;
-    if (error)   return <Typography color="error" align="center">{error}</Typography>;
+    if (loading) return <Typography align="center" sx={{ mt: 4 }}>Cargando menú…</Typography>;
+    if (error)   return <Typography color="error" align="center" sx={{ mt: 4 }}>{error}</Typography>;
+
+    // calcular subcategorías aplicables
+    const allSubs = Object.values(grupoCategorias).flat();
+    const subCats = selectedMain === 'all'
+        ? allSubs
+        : grupoCategorias[selectedMain] || [];
+
+    // si hay subfiltro
+    const visibleSubs = selectedSub ? [selectedSub] : subCats;
+
+    // agrupar items
+    const itemsBySub = visibleSubs.reduce((acc, sub) => {
+        acc[sub] = items.filter(i => i.category === sub);
+        return acc;
+    }, {});
+
+    // para prev/next en modal
+    const flatList = visibleSubs.flatMap(sub => itemsBySub[sub] || []);
+    const handlePrev = () => {
+        if (!detailItem) return;
+        const idx = flatList.findIndex(i => i._id === detailItem._id);
+        setDetailItem(flatList[(idx - 1 + flatList.length) % flatList.length]);
+    };
+    const handleNext = () => {
+        if (!detailItem) return;
+        const idx = flatList.findIndex(i => i._id === detailItem._id);
+        setDetailItem(flatList[(idx + 1) % flatList.length]);
+    };
 
     return (
         <>
             <HeroSlider />
 
-            <Container sx={{ my: 4 }}>
-                <Typography variant="h4" gutterBottom>
-                    {formatTitle(category)}
+            <Container maxWidth="lg" sx={{ my: 4 }}>
+                <Typography variant="h4" align="center" gutterBottom>
+                    Explorar carta
                 </Typography>
 
-                {subCats.map(sub => (
+                {/* filtros principales */}
+                <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{ mb: 2, flexWrap: 'wrap', justifyContent: 'center' }}
+                >
+                    {MAIN_OPTIONS.map(opt => (
+                        <Button
+                            key={opt.value}
+                            variant={selectedMain === opt.value ? 'contained' : 'outlined'}
+                            color="primary"
+                            onClick={() => {
+                                // toggle mismo botón
+                                const nextMain = selectedMain === opt.value ? 'all' : opt.value;
+                                setSelectedMain(nextMain);
+                                setSelectedSub(null);
+                            }}
+                        >
+                            {opt.label}
+                        </Button>
+                    ))}
+                </Stack>
+
+                {/* filtros secundarios */}
+                {selectedMain !== 'all' && (
+                    <Stack
+                        direction="row"
+                        spacing={1}
+                        sx={{ mb: 3, flexWrap: 'wrap', justifyContent: 'center' }}
+                    >
+                        {subCats.map(sub => (
+                            <Button
+                                key={sub}
+                                variant={selectedSub === sub ? 'contained' : 'outlined'}
+                                color="secondary"
+                                size={isMobile ? 'small' : 'medium'}
+                                onClick={() => {
+                                    setSelectedSub(selectedSub === sub ? null : sub);
+                                }}
+                            >
+                                {formatTitle(sub)}
+                            </Button>
+                        ))}
+                    </Stack>
+                )}
+
+                {/* acordeones por subcategoría */}
+                {visibleSubs.map(sub => (
                     <Accordion key={sub} defaultExpanded>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            {/* Título con mayor tamaño */}
-                            <Typography variant="h5">{formatTitle(sub)}</Typography>
+                            <Typography variant="h6">{formatTitle(sub)}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MenuList
-                                items={itemsBySub[sub] || []}
-                                onItemClick={openDetail}
-                            />
+                            <MenuList items={itemsBySub[sub] || []} onItemClick={openDetail} />
                         </AccordionDetails>
                     </Accordion>
                 ))}
             </Container>
 
-            {selected && (
+            {/* detalle modal */}
+            {detailItem && (
                 <MealDetailModal
                     open={openModal}
-                    item={selected}
+                    item={detailItem}
                     onClose={closeDetail}
                     onPrev={handlePrev}
                     onNext={handleNext}

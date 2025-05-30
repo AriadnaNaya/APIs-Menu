@@ -1,17 +1,16 @@
-// APIs/frontend/src/components/MenuList.jsx
+// frontend/src/components/MenuList.jsx
 import React from 'react';
+import { Grid } from '@mui/material';
 import MenuItemCard from './MenuItemCard';
 
-export default function MenuList({ items = [], onItemClick }) {
-    return (
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {items.map(item => (
-                <MenuItemCard
-                    key={item._id}
-                    item={item}
-                    onClick={() => onItemClick(item)}
-                />
-            ))}
-        </div>
-    );
-}
+const MenuList = ({ items, onItemClick }) => (
+    <Grid container spacing={2}>
+        {items.map(item => (
+            <Grid item key={item._id || item.id} xs={12} sm={6} md={4} lg={3}>
+                <MenuItemCard item={item} onClick={() => onItemClick(item)} />
+            </Grid>
+        ))}
+    </Grid>
+);
+
+export default MenuList;

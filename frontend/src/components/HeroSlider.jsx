@@ -1,69 +1,109 @@
-import React, { useEffect, useState } from 'react';
+// frontend/src/components/HeroSlider.jsx
+import React from 'react';
+import Slider from 'react-slick';
 import { Box, Typography } from '@mui/material';
 
-const images = [
-    '/img/hero11.jpg',
-    '/img/hero2.jpg',
-    '/img/hero3.jpg'
-];
+export default function HeroSlider() {
+    const settings = {
+        dots: true,
+        arrows: false,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        speed: 800,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight: false,
+    };
 
-const HeroSlider = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % images.length);
-        }, 30000); // cambia cada 30 segundos
-        return () => clearInterval(interval);
-    }, []);
+    // Ejemplo de slides; ajusta las imágenes y textos según tu contenido real
+    const slides = [
+        {
+            title: 'Sushi Town',
+            subtitle: 'Explora nuestra carta',
+            image: 'https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+        },
+        {
+            title: 'Delicias de Mar',
+            subtitle: 'Frescura y sabor',
+            image: 'https://images.unsplash.com/photo-1547592166-3f2bdcef15c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+        },
+        {
+            title: 'Ambiente Único',
+            subtitle: 'Disfruta con nosotros',
+            image: 'https://images.unsplash.com/photo-1541542689-2c9e50e74ea4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+        }
+    ];
 
     return (
         <Box
+            component="section"
             sx={{
+                width: '100vw',
                 position: 'relative',
-                width: '100%',
-                height: { xs: '865px', md: '865px' },
+                left: '50%',
+                right: '50%',
+                marginLeft: '-50vw',
+                marginRight: '-50vw',
                 overflow: 'hidden',
-                mb: 4,
-                backgroundColor: '#111827', // fallback en caso de que no cargue la imagen
+                '& .slick-slider, & .slick-list, & .slick-track': {
+                    display: 'flex'
+                }
             }}
         >
-            {/* Fondo absoluto con la imagen */}
-            <Box
-                sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundImage: `url(${images[currentIndex]})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center 40%',
-                    backgroundRepeat: 'no-repeat',
-                    filter: 'brightness(0.5)',
-                    zIndex: 0,
-                    transition: 'background-image 1s ease-in-out',
-                }}
-            />
+            <Slider {...settings}>
+                {slides.map((slide, idx) => (
+                    <Box
+                        key={idx}
+                        sx={{
+                            position: 'relative',
+                            height: { xs: '40vh', md: '60vh' },
+                            backgroundImage: `url("${slide.image}")`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        {/* Overlay */}
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                inset: 0,
+                                bgcolor: 'rgba(0,0,0,0.4)'
+                            }}
+                        />
 
-            {/* Título encima */}
-            <Typography
-                variant="h2"
-                sx={{
-                    position: 'relative',
-                    zIndex: 1,
-                    color: '#111827',
-                    textAlign: 'center',
-                    fontFamily: "'Bonheur Royale', cursive",
-                    fontSize: { xs: '5rem', md: '9rem' },
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                }}
-            >
-                Sushi Town
-            </Typography>
+                        {/* Texto */}
+                        <Box
+                            sx={{
+                                position: 'relative',
+                                zIndex: 1,
+                                textAlign: 'center',
+                                color: '#fff',
+                                px: 2
+                            }}
+                        >
+                            <Typography
+                                variant="h3"
+                                component="h2"
+                                gutterBottom
+                                sx={{ fontWeight: 'bold', fontSize: { xs: '1.8rem', md: '3rem' } }}
+                            >
+                                {slide.title}
+                            </Typography>
+                            <Typography
+                                variant="h6"
+                                sx={{ fontSize: { xs: '1rem', md: '1.25rem' } }}
+                            >
+                                {slide.subtitle}
+                            </Typography>
+                        </Box>
+                    </Box>
+                ))}
+            </Slider>
         </Box>
     );
-};
-
-export default HeroSlider;
+}

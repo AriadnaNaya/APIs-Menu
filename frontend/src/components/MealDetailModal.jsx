@@ -1,42 +1,49 @@
-// APIs/frontend/src/components/MealDetailModal.jsx
+// frontend/src/components/MealDetailModal.jsx
 import React from 'react';
 import {
     Dialog,
     DialogTitle,
     DialogContent,
-    DialogActions,
     IconButton,
+    Button,
     Typography,
-    Chip
+    Box,
+    useMediaQuery,
+    useTheme
 } from '@mui/material';
-import {
-    ArrowBackIos as BackIcon,
-    ArrowForwardIos as NextIcon,
-    Close as CloseIcon
-} from '@mui/icons-material';
-import useMobile from '../utils/useMobile';
-import formatTitle from '../utils/formatTitle';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function MealDetailModal({
                                             open,
-                                            item = {},
+                                            item,
                                             onClose,
                                             onPrev,
                                             onNext
                                         }) {
-    const isMobile = useMobile();
-    const {
-        name = '',
-        description = '',
-        image = '',
-        variants = []
-    } = item;
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+    if (!item) return null;
+
+    // Campos del item
+    const name = item.name || '';
+    const description = item.description || '';
+    const image       = item.image ||  '';
+    const price       = item.price || null;
+    const variants    = item.variants || [];
 
     return (
-        <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-            <DialogTitle>
-                {formatTitle(name)}
+        <Dialog
+            open={open}
+            onClose={onClose}
+            fullScreen={fullScreen}
+            maxWidth="md"
+            fullWidth
+        >
+            <DialogTitle sx={{ m: 0, p: 2 }}>
+                {name}
                 <IconButton
+                    autoFocus
                     aria-label="close"
                     onClick={onClose}
                     sx={{ position: 'absolute', right: 8, top: 8 }}
@@ -45,42 +52,82 @@ export default function MealDetailModal({
                 </IconButton>
             </DialogTitle>
 
-            <DialogContent>
+            <DialogContent dividers>
+                {/* Imagen cuadrada y centrada */}
                 {image && (
-                    <img
-                        src={image}
-                        alt={name}
-                        style={{
+                    <Box
+                        sx={{
                             width: '100%',
-                            maxHeight: isMobile ? 200 : 400,
-                            objectFit: 'cover',
-                            borderRadius: 8,
-                            marginBottom: 16
+                            // Contenedor cuadrado via padding-bottom
+                            height: 0,
+                            pb: '100%',
+                            position: 'relative',
+                            mb: 2
                         }}
-                    />
+                    >
+                        <Box
+                            component="img"
+                            src={image}
+                            alt={name}
+                            sx={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                borderRadius: 1
+                            }}
+                        />
+                    </Box>
                 )}
-                <Typography paragraph>{description}</Typography>
-                {variants.length > 0 && (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                        {variants.map((v, i) => (
-                            <Chip
-                                key={i}
-                                label={`${formatTitle(v.name)} – $${v.price.toLocaleString()}`}
-                                variant="outlined"
-                            />
-                        ))}
-                    </div>
-                )}
-            </DialogContent>
 
-            <DialogActions sx={{ justifyContent: 'space-between', px: 2 }}>
-                <IconButton onClick={onPrev}>
-                    <BackIcon />
-                </IconButton>
-                <IconButton onClick={onNext}>
-                    <NextIcon />
-                </IconButton>
-            </DialogActions>
+                {/* Descripción */}
+                {description && (
+                    <Typography variant="body1" paragraph>
+                        {description}
+                    </Typography>
+                )}
+
+                {/* Precio debajo de la descripción */}
+                {price != null && (
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                            mb: 2
+                        }}
+                    >
+                        ${price}
+                    </Typography>
+                )}
+
+                {/* Lista de variantes */}
+                {variants.length > 0 && (
+                    <Box sx={{ mb: 2 }}>
+                        {variants.map((v, i) => {
+                            const qty = v.cantidad || v.quantity || '';
+                            const pr  = v.precio   || v.price    || '';
+                            return (
+                                <Typography key={i} variant="body2">
+                                    – {qty}: ${pr}
+                                </Typography>
+                            );
+                        })}
+                    </Box>
+                )}
+
+                {/* Botones Anterior / Siguiente */}
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                    <Button variant="outlined" onClick={onPrev}>
+                        Anterior
+                    </Button>
+                    <Button variant="outlined" onClick={onNext}>
+                        Siguiente
+                    </Button>
+                </Box>
+            </DialogContent>
         </Dialog>
     );
 }

@@ -1,52 +1,42 @@
-import { createTheme } from '@mui/material/styles';
+// frontend/src/theme.js
 
-const theme = createTheme({
+/**
+ * Devuelve el objeto de diseño según el modo (light/dark).
+ */
+export const getDesignTokens = (mode) => ({
     palette: {
-        primary: {
-            main: '#00c886', // Color principal para bordes, botones, etc.
-            contrastText: '#fff'
-        },
-        secondary: {
-            main: '#007bff'
-        },
-        background: {
-            default: '#f0f6fc' // Color de fondo general
-        }
-    },
-    typography: {
-        fontFamily: "'Nunito', sans-serif",
-        h1: {
-            fontFamily: "'Bonheur Royale', cursive",
-            fontWeight: 700,
-            fontSize: '2.5rem'
-        },
-        h3: {
-            fontFamily: "'Bonheur Royale', cursive",
-            fontWeight: 700,
-            fontSize: '2rem'
-        },
-        h4: {
-            fontFamily: "'Nunito', sans-serif",
-            fontWeight: 700
-        }
-    },
-    components: {
-        MuiAppBar: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: '#fff',
-                    color: '#333'
+        mode,
+        ...(mode === 'light'
+            ? {
+                // Modo claro
+                primary: {
+                    main: '#1976d2'
+                },
+                background: {
+                    default: '#f5f5f5',
+                    paper: '#ffffff'
+                },
+                text: {
+                    primary: '#000000',
+                    secondary: '#555555'
                 }
             }
-        },
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    textTransform: 'none' // Evita mayúsculas por defecto
+            : {
+                // Modo oscuro
+                primary: {
+                    main: '#90caf9'
+                },
+                background: {
+                    default: '#121212',
+                    paper: '#1e1e1e'
+                },
+                text: {
+                    primary: '#ffffff',
+                    secondary: '#aaaaaa'
                 }
-            }
-        }
+            })
     }
 });
 
-export default theme;
+// Export por defecto también, por compatibilidad con import default
+export default getDesignTokens;

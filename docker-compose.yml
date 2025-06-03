@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: townkitchen-mongo
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: townkitchen-backend
+    ports:
+      - "5000:5000"
+    # Inyectamos variables de entorno si las necesitas
+    environment:
+      MONGO_URI: mongodb://mongo:27017/townkitchen
+      JWT_SECRET: mySuperSecretKey12345
+    depends_on:
+      - mongo
+    # Este es el cambio clave: primero seed.js y luego npm start
+    command: sh -c "node seed-items.js && node seed.js && npm start"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: townkitchen-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

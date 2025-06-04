@@ -47,6 +47,13 @@ async function seed() {
             contact: 'edward@example.com',
             password: 'password5',
             avatar: 'https://randomuser.me/api/portraits/men/23.jpg'
+        },
+        {
+            name: 'Admin',
+            contact: 'admin@example.com',
+            password: 'admin',
+            avatar: 'https://randomuser.me/api/portraits/men/23.jpg',
+            role:'admin'
         }
     ];
 

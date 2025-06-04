@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import { Navigate, Link } from 'react-router-dom';
 import { Box, Typography, Button, Stack } from '@mui/material';
 

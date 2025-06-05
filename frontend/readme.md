@@ -1,196 +1,345 @@
-# Sushi Town Menu
+# Town Kitchen - Frontend
 
-## Descripción 
+Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Town Kitchen. Incluye gestión de menú, reservas, reseñas y sistema de autenticación.
 
-**Sushi Town Menu** es una aplicación web de una sola página (SPA) que muestra el menú de un restaurante de sushi de forma interactiva. Permite:
+## 🚀 Tecnologías
 
-* Navegar entre diferentes categorías (sushi & rolls, comida, bebidas, postres) usando query params (`?category=`).
-* Mostrar cada plato como una card con imagen, nombre y precio.
-* Filtrar el menú por categoría o subcategoría.
-* Ver detalles de cada plato en un modal con animaciones y navegación "Anterior/Siguiente".
-* Incorpora un slider hero en la parte superior para destacar ofertas o imágenes.
+- **React 18** - Biblioteca de JavaScript para interfaces de usuario
+- **Vite** - Herramienta de build rápida para desarrollo frontend
+- **Material-UI (MUI)** - Biblioteca de componentes React
+- **Tailwind CSS** - Framework de CSS utility-first
+- **React Router DOM** - Enrutamiento para aplicaciones React
+- **React Slick** - Componente de carrusel/slider
+- **Emotion** - Librería de CSS-in-JS
 
-Esta SPA está construida con **React**, **React Router**, **Material UI** y **Tailwind CSS**, y empacada con **Vite**.
-
----
-
-## Estructura de carpetas y archivos
+## 📁 Estructura del proyecto
 
 ```
-project-root/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── Footer.jsx
-│   │   ├── HeroSlider.jsx
-│   │   ├── MenuList.jsx
-│   │   ├── MenuItemCard.jsx
-│   │   └── MealDetailModal.jsx
-│   ├── pages/
-│   │   └── Menu.jsx
-│   ├── data/
-│   │   ├── data.js
-│   │   └── menuData.js
-│   ├── utils/
-│   │   ├── formatTitle.js
-│   │   └── grupoCategorias.js
-│   ├── hooks/
-│   │   └── useMobile.js
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── package.json
-├── postcss.config.cjs
-├── tailwind.config.cjs
-└── vite.config.js
+frontend/
+├── public/                 # Archivos estáticos
+│   ├── images/            # Imágenes del proyecto
+│   └── favicon.ico
+├── src/                   # Código fuente
+│   ├── components/        # Componentes reutilizables
+│   │   ├── home/         # Componentes específicos del home
+│   │   ├── Header.jsx    # Barra de navegación
+│   │   ├── Footer.jsx    # Pie de página
+│   │   ├── HeroSlider.jsx # Slider principal
+│   │   ├── MenuList.jsx  # Lista de elementos del menú
+│   │   ├── MenuItemCard.jsx # Tarjeta individual de plato
+│   │   ├── MealDetailModal.jsx # Modal de detalles del plato
+│   │   └── BackToTop.jsx # Botón de volver arriba
+│   ├── pages/            # Páginas principales
+│   │   ├── Home.jsx      # Página principal
+│   │   ├── Menu.jsx      # Página del menú
+│   │   ├── Login.jsx     # Página de inicio de sesión
+│   │   ├── Register.jsx  # Página de registro
+│   │   ├── Profile.jsx   # Perfil de usuario
+│   │   ├── Reserva.jsx   # Página de reservas
+│   │   ├── MyReservations.jsx # Mis reservas
+│   │   ├── ReviewForm.jsx # Formulario de reseñas
+│   │   ├── MyReviews.jsx # Mis reseñas
+│   │   ├── AdminPanel.jsx # Panel de administración
+│   │   └── About.jsx     # Página acerca de
+│   ├── context/          # Contextos de React
+│   │   └── AuthContext.jsx # Contexto de autenticación
+│   ├── utils/            # Utilidades y helpers
+│   ├── App.jsx           # Componente principal
+│   ├── main.jsx          # Punto de entrada
+│   ├── theme.js          # Configuración de tema MUI
+│   └── index.css         # Estilos globales
+├── index.html            # Plantilla HTML principal
+├── vite.config.js        # Configuración de Vite
+├── tailwind.config.cjs   # Configuración de Tailwind
+├── postcss.config.cjs    # Configuración de PostCSS
+├── package.json          # Dependencias y scripts
+├── nginx.conf            # Configuración de Nginx para Docker
+└── Dockerfile            # Configuración de Docker
 ```
 
----
+## 🎨 Características
 
-## Tecnologías usadas
+### 🏠 Página Principal
+- Hero slider con imágenes del restaurante
+- Navegación intuitiva
+- Diseño responsive
 
-* **React**: Biblioteca principal para construir la UI.
-* **React Router**: Manejo de rutas y parámetros de consulta (<BrowserRouter>, <Routes>, <Route>, useSearchParams).
-* **Material UI (MUI)**: Componentes listos para UI (AppBar, Toolbar, Accordion, Dialog, Buttons, etc.) y theming.
-* **Tailwind CSS**: Estilos utilitarios para casos globales y responsive.
-* **Vite**: Bundler ultrarrápido para desarrollo local y build.
-* **PostCSS**: Procesador de CSS para Tailwind.
+### 🍽️ Sistema de Menú
+- Visualización de platos agrupados por categorías
+- Filtrado por nombre, categoría y precio
+- Modal con detalles completos de cada plato
+- Imágenes optimizadas y diseño atractivo
 
----
+### 👤 Sistema de Usuarios
+- Registro e inicio de sesión
+- Perfil de usuario editable
+- Autenticación con JWT
+- Roles de usuario (user/admin)
 
-## Páginas
+### 📅 Sistema de Reservas
+- Crear nuevas reservas
+- Ver mis reservas
+- Cancelar reservas propias
+- Validación de fechas y horarios
 
-### `Menu`
+### ⭐ Sistema de Reseñas
+- Crear reseñas con calificación de 1-5 estrellas
+- Ver todas las reseñas del restaurante
+- Gestionar mis reseñas
 
-* Renderiza el componente `Menu.jsx`.
-* Lee `?category=` de la URL con `useSearchParams`.
-* Muestra el menú completo, un grupo de categorías o una lista filtrada según el parámetro:
+### 🔧 Panel de Administración
+- Gestión del menú (CRUD completo)
+- Vista de todas las reservas
+- Herramientas administrativas
 
-    * **showAll**: Si no hay `category`, muestra todas las categorías en acordeones.
-    * **isGroup**: Si `category` coincide con un grupo padre, muestra los acordeones de esa sección.
+## 🛠️ Instalación y desarrollo
 
----
+### Requisitos previos
+- **Node.js** (v16 o superior)
+- **npm** o **yarn**
 
-## Componentes principales
+### Instalación
 
-### `Header.jsx`
+1. **Clonar el repositorio:**
+   ```bash
+   git clone <repository-url>
+   cd frontend
+   ```
 
-* Barra de navegación superior.
-* En desktop: logo a la izquierda, links al centro, dirección a la derecha.
-* En móvil: ícono de hamburguesa que abre un `Drawer` con los mismos enlaces.
-* **Links** apuntan a `/menu?category=…` para filtrar por categoría.
-
-### `Footer.jsx`
-
-* Pie de página con:
-
-    * Contacto (dirección, teléfono, horarios).
-    * Enlaces a redes sociales (Instagram, Facebook).
-    * Mapa embebido de Google Maps.
-    * Copyright dinámico.
-
-### `HeroSlider.jsx`
-
-* Slider o carrusel de imágenes en la cabecera.
-* Destaca ofertas o imágenes representativas.
-
-### `MenuList.jsx`
-
-* Recibe `meals` (array de platos) y `onMealClick`.
-* Renderiza un grid/responsive de `MenuItemCard`.
-
-### `MenuItemCard.jsx`
-
-* Tarjeta de cada plato:
-
-    * Imagen recortada (`object-fit: cover`).
-    * Nombre y precio formateado en ARS.
-    * Descripción truncada a 2 líneas.
-    * Hover con escala y sombra.
-* `onClick` dispara `onToggle` para abrir el modal.
-
-### `MealDetailModal.jsx`
-
-* Modal centrado con detalles del plato:
-
-    * Imagen completa (`object-fit: contain`).
-    * Precio, descripción y lista de variantes (si existen).
-    * Botones "Anterior" y "Siguiente" con animación `Fade`.
-* Controla su propia animación refrescando `fadeKey` en cada cambio de plato.
-
----
-
-## Módulos de datos y utilidades
-
-### `data.js`
-
-* Array plano con objetos de cada plato:
-
-  ```js
-  { nombre, img, descripcion, precio?, variantes?:[], tipo }
-  ```
-
-### `menuData.js`
-
-* Agrupa `data` por `tipo` con `reduce`:
-
-  ```js
-  { townKitchen: [...], sushiCombinado: [...], ... }
-  ```
-
-### `formatTitle.js`
-
-* Función para convertir claves (`sushi-rolls`, `townKitchen`) en títulos legibles.
-
-### `grupoCategorias.js`
-
-* Define qué sub-tipos pertenecen a cada grupo padre:
-
-  ```js
-  { 'sushi-rolls': ['rolls','sushiCombinado',...], comida: [...], ... }
-  ```
-
-### `useMobile.js`
-
-* Hook que usa `useTheme` y `useMediaQuery` de MUI para detectar pantallas pequeñas.
-
----
-
-## Puntos de entrada y configuración
-
-* **`main.jsx`**: Monta React, `BrowserRouter` y `ThemeProvider`, e importa `index.css`.
-* **`App.jsx`**: Define rutas:
-
-  ```jsx
-  <Routes>
-    <Route path="/" element={<Menu />} />
-    <Route path="/menu" element={<Menu />} />
-  </Routes>
-  ```
-* **`index.html`**: HTML base con `div#root`.
-* **`index.css`**: Importa fuentes, configurar Tailwind base/utilities y estilos globales.
-* **`vite.config.js`**, **`postcss.config.cjs`**, **`tailwind.config.cjs`**: Configuración del bundler, PostCSS y Tailwind.
-
----
-
-## Ejecución del proyecto
-
-1. Instalar dependencias:
-
+2. **Instalar dependencias:**
    ```bash
    npm install
+   # o
+   yarn install
    ```
-2. Ejecutar en modo desarrollo:
 
+3. **Configurar variables de entorno:**
+   El frontend se conecta al backend a través del proxy configurado en `vite.config.js`. Por defecto apunta a `http://localhost:5000`.
+
+4. **Ejecutar en modo desarrollo:**
    ```bash
    npm run dev
+   # o
+   yarn dev
    ```
-3. Para build de producción:
 
+   La aplicación estará disponible en `http://localhost:3000`
+
+### Scripts disponibles
+
+```bash
+npm run dev        # Servidor de desarrollo con hot reload
+npm run build      # Build de producción
+npm run preview    # Preview del build de producción
+```
+
+## 🔧 Configuración
+
+### Proxy de API
+El archivo `vite.config.js` incluye configuración de proxy para las llamadas a la API:
+
+```javascript
+server: {
+  proxy: {
+    '/api': {
+      target: 'http://localhost:5000',
+      changeOrigin: true
+    }
+  }
+}
+```
+
+### Tema personalizado
+El archivo `theme.js` contiene la configuración del tema de Material-UI con colores personalizados para el restaurante.
+
+### Tailwind CSS
+Configurado para trabajar junto con Material-UI, proporcionando utilidades adicionales de CSS.
+
+## 🚀 Deployment
+
+### Con Docker
+
+```bash
+# Build de la imagen
+docker build -t townkitchen-frontend .
+
+# Ejecutar contenedor
+docker run -p 3000:80 townkitchen-frontend
+```
+
+### Deployment manual
+
+1. **Build de producción:**
    ```bash
    npm run build
    ```
 
----
+2. **Servir archivos estáticos:**
+   Los archivos generados en `dist/` pueden servirse con cualquier servidor web estático (Nginx, Apache, etc.)
+
+## 🎨 Componentes principales
+
+### Header.jsx
+- Barra de navegación responsiva
+- Menú hamburguesa para móviles
+- Links de autenticación dinámicos
+- Logo y branding del restaurante
+
+### HeroSlider.jsx
+- Carrusel de imágenes principal
+- Transiciones suaves
+- Navegación por puntos
+- Autoplay configurable
+
+### MenuItemCard.jsx
+- Tarjeta de producto individual
+- Imagen, nombre, descripción y precio
+- Botón de ver detalles
+- Diseño responsive
+
+### MealDetailModal.jsx
+- Modal con información completa del plato
+- Galería de imágenes
+- Variantes disponibles
+- Información nutricional
+
+## 🔒 Autenticación
+
+### Contexto de autenticación
+- Estado global del usuario
+- Funciones de login/logout
+- Protección de rutas
+- Persistencia en localStorage
+
+### Rutas protegidas
+Algunas páginas requieren autenticación:
+- Perfil de usuario
+- Crear reservas
+- Panel de administración
+- Mis reseñas y reservas
+
+## 📱 Responsive Design
+
+La aplicación está optimizada para:
+- **Desktop** (1200px+)
+- **Tablet** (768px - 1199px)
+- **Mobile** (320px - 767px)
+
+Utiliza breakpoints de Tailwind y Material-UI para garantizar una experiencia óptima en todos los dispositivos.
+
+## 🎯 Funcionalidades por página
+
+### Home (`/`)
+- Hero slider con imágenes destacadas
+- Navegación a secciones principales
+- Información básica del restaurante
+
+### Menu (`/menu`)
+- Lista completa de platos
+- Filtros por categoría y precio
+- Búsqueda por nombre
+- Vista agrupada por categorías
+
+### Login/Register (`/login`, `/register`)
+- Formularios de autenticación
+- Validación de campos
+- Manejo de errores
+- Redirección automática
+
+### Profile (`/profile`)
+- Información del usuario
+- Edición de datos personales
+- Cambio de contraseña
+- Avatar personalizable
+
+### Reservations (`/reservations`, `/my-reservations`)
+- Formulario de nueva reserva
+- Calendario de fechas disponibles
+- Lista de reservas propias
+- Cancelación de reservas
+
+### Reviews (`/reviews`, `/my-reviews`)
+- Formulario de nueva reseña
+- Sistema de calificación con estrellas
+- Lista de reseñas propias
+- Vista de todas las reseñas
+
+### Admin Panel (`/admin`)
+- CRUD completo del menú
+- Gestión de categorías
+- Vista de reservas
+- Herramientas administrativas
+
+## 🔧 Personalización
+
+### Colores y tema
+Modificar `src/theme.js` para cambiar la paleta de colores:
+
+```javascript
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#8B4513', // Marrón principal
+    },
+    secondary: {
+      main: '#D2691E', // Naranja
+    }
+  }
+});
+```
+
+### Estilos globales
+Editar `src/index.css` para modificar estilos base y variables CSS.
+
+### Configuración de Tailwind
+Modificar `tailwind.config.cjs` para agregar colores, fuentes o utilidades personalizadas.
+
+## 🐛 Troubleshooting
+
+### Error de conexión con el backend
+```
+Failed to fetch API data
+```
+**Solución**: Verificar que el backend esté ejecutándose en `http://localhost:5000` y que el proxy esté configurado correctamente.
+
+### Problemas con imágenes
+```
+Image not loading
+```
+**Solución**: Verificar que las imágenes estén en la carpeta `public/images/` y que las rutas sean correctas.
+
+### Error de autenticación
+```
+Token expired or invalid
+```
+**Solución**: Hacer logout y login nuevamente para obtener un nuevo token JWT.
+
+### Problemas de build
+```
+Build failed with Vite
+```
+**Solución**: Limpiar `node_modules` y reinstalar dependencias:
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+## 📚 Recursos adicionales
+
+- [React Documentation](https://reactjs.org/docs)
+- [Vite Documentation](https://vitejs.dev/guide/)
+- [Material-UI Documentation](https://mui.com/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [React Router Documentation](https://reactrouter.com/)
+
+## 🤝 Contribución
+
+1. Fork del proyecto
+2. Crear rama para feature (`git checkout -b feature/AmazingFeature`)
+3. Commit de cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.

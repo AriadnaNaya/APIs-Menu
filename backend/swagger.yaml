@@ -1,0 +1,968 @@
+openapi: 3.0.3
+info:
+  title: Town Kitchen API
+  description: API REST para la aplicación Town Kitchen Menu - Sistema de gestión de restaurante con menú digital, reservas y reseñas
+  version: 1.0.0
+  contact:
+    name: Town Kitchen Team
+    email: contact@townkitchen.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:5000
+    description: Servidor de desarrollo
+  - url: https://api.townkitchen.com
+    description: Servidor de producción
+
+tags:
+  - name: Authentication
+    description: Endpoints para autenticación y gestión de usuarios
+  - name: Menu
+    description: Gestión del menú del restaurante
+  - name: Reservations
+    description: Sistema de reservas de mesas
+  - name: Reviews
+    description: Sistema de reseñas y calificaciones
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtenido del endpoint de login
+
+  schemas:
+    Client:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID único del cliente
+        name:
+          type: string
+          description: Nombre completo del cliente
+        contact:
+          type: string
+          description: Email o teléfono de contacto
+        avatar:
+          type: string
+          description: URL del avatar del usuario
+        role:
+          type: string
+          enum: [user, admin]
+          description: Rol del usuario en el sistema
+      example:
+        id: "64a7b8c9d1e2f3456789"
+        name: "Juan Pérez"
+        contact: "juan@email.com"
+        avatar: "https://ui-avatars.com/api/?name=Juan+Pérez"
+        role: "user"
+
+    MenuItem:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID único del elemento del menú
+        name:
+          type: string
+          description: Nombre del plato
+        description:
+          type: string
+          description: Descripción del plato
+        price:
+          type: number
+          description: Precio del plato
+        image:
+          type: string
+          description: URL de la imagen del plato
+        category:
+          type: string
+          description: Categoría específica del plato
+        mainCategory:
+          type: string
+          description: Categoría principal del plato
+        variants:
+          type: array
+          items:
+            type: string
+          description: Variantes disponibles del plato
+        isDeleted:
+          type: boolean
+          description: Indicador de eliminación lógica
+        deletedBy:
+          type: string
+          description: ID del usuario que eliminó el elemento
+        deletedAt:
+          type: string
+          format: date-time
+          description: Fecha de eliminación
+      example:
+        _id: "64a7b8c9d1e2f3456789"
+        name: "Pizza Margherita"
+        description: "Pizza tradicional con tomate, mozzarella y albahaca"
+        price: 18.99
+        image: "https://example.com/images/pizza-margherita.jpg"
+        category: "Pizzas"
+        mainCategory: "Comidas"
+        variants: ["Pequeña", "Mediana", "Grande"]
+        isDeleted: false
+
+    Reservation:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID único de la reserva
+        client:
+          $ref: '#/components/schemas/Client'
+        datetime:
+          type: string
+          format: date-time
+          description: Fecha y hora de la reserva
+        people:
+          type: integer
+          minimum: 1
+          maximum: 20
+          description: Número de personas
+        state:
+          type: string
+          enum: [pending, confirmed, canceled]
+          description: Estado de la reserva
+      example:
+        _id: "64a7b8c9d1e2f3456789"
+        datetime: "2024-12-25T20:00:00Z"
+        people: 4
+        state: "pending"
+
+    Review:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID único de la reseña
+        client:
+          $ref: '#/components/schemas/Client'
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          description: Calificación de 1 a 5 estrellas
+        comment:
+          type: string
+          description: Comentario de la reseña
+        date:
+          type: string
+          format: date-time
+          description: Fecha de la reseña
+      example:
+        _id: "64a7b8c9d1e2f3456789"
+        rating: 5
+        comment: "Excelente comida y servicio"
+        date: "2024-12-20T15:30:00Z"
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT token para autenticación
+        client:
+          $ref: '#/components/schemas/Client'
+      example:
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        client:
+          id: "64a7b8c9d1e2f3456789"
+          name: "Juan Pérez"
+          contact: "juan@email.com"
+          avatar: "https://ui-avatars.com/api/?name=Juan+Pérez"
+          role: "user"
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Mensaje de error
+      example:
+        error: "Credenciales inválidas"
+
+paths:
+  # AUTHENTICATION ENDPOINTS
+  /api/auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: Registrar nuevo usuario
+      description: Crea una nueva cuenta de usuario en el sistema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - contact
+                - password
+              properties:
+                name:
+                  type: string
+                  description: Nombre completo del usuario
+                contact:
+                  type: string
+                  description: Email o teléfono de contacto (debe ser único)
+                password:
+                  type: string
+                  minimum: 6
+                  description: Contraseña del usuario
+                avatar:
+                  type: string
+                  description: URL del avatar (opcional)
+              example:
+                name: "Juan Pérez"
+                contact: "juan@email.com"
+                password: "123456"
+      responses:
+        '200':
+          description: Usuario registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Error de validación o usuario ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Iniciar sesión
+      description: Autenticar usuario y obtener token JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - contact
+                - password
+              properties:
+                contact:
+                  type: string
+                  description: Email o teléfono de contacto
+                password:
+                  type: string
+                  description: Contraseña del usuario
+              example:
+                contact: "juan@email.com"
+                password: "123456"
+      responses:
+        '200':
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Credenciales inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/me:
+    get:
+      tags:
+        - Authentication
+      summary: Obtener perfil del usuario actual
+      description: Retorna la información del usuario autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Perfil del usuario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client:
+                    $ref: '#/components/schemas/Client'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      tags:
+        - Authentication
+      summary: Actualizar perfil del usuario
+      description: Actualiza la información del usuario autenticado
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nuevo nombre del usuario
+                contact:
+                  type: string
+                  description: Nuevo contacto del usuario
+                password:
+                  type: string
+                  description: Nueva contraseña
+              example:
+                name: "Juan Carlos Pérez"
+                contact: "juancarlos@email.com"
+      responses:
+        '200':
+          description: Perfil actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client:
+                    $ref: '#/components/schemas/Client'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # MENU ENDPOINTS
+  /api/items:
+    get:
+      tags:
+        - Menu
+      summary: Obtener elementos del menú
+      description: Retorna lista de elementos del menú con filtros opcionales
+      parameters:
+        - name: name
+          in: query
+          description: Filtrar por nombre (búsqueda parcial)
+          schema:
+            type: string
+        - name: category
+          in: query
+          description: Filtrar por categoría específica
+          schema:
+            type: string
+        - name: mainCategory
+          in: query
+          description: Filtrar por categoría principal
+          schema:
+            type: string
+        - name: priceMin
+          in: query
+          description: Precio mínimo
+          schema:
+            type: number
+        - name: priceMax
+          in: query
+          description: Precio máximo
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Lista de elementos del menú
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuItem'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Menu
+      summary: Crear nuevo elemento del menú
+      description: Crea un nuevo plato en el menú (solo administradores)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - price
+                - category
+                - mainCategory
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                image:
+                  type: string
+                category:
+                  type: string
+                mainCategory:
+                  type: string
+                variants:
+                  type: array
+                  items:
+                    type: string
+              example:
+                name: "Pasta Carbonara"
+                description: "Pasta con salsa cremosa, panceta y parmesano"
+                price: 22.50
+                image: "https://example.com/pasta-carbonara.jpg"
+                category: "Pastas"
+                mainCategory: "Comidas"
+                variants: ["Porción normal", "Porción grande"]
+      responses:
+        '201':
+          description: Elemento creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Permisos insuficientes (requiere rol admin)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/items/grouped:
+    get:
+      tags:
+        - Menu
+      summary: Obtener menú agrupado por categorías
+      description: Retorna el menú organizado por categorías principales
+      responses:
+        '200':
+          description: Menú agrupado por categorías
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MenuItem'
+              example:
+                "Comidas":
+                  - _id: "64a7b8c9d1e2f3456789"
+                    name: "Pizza Margherita"
+                    description: "Pizza tradicional"
+                    price: 18.99
+                "Bebidas":
+                  - _id: "64a7b8c9d1e2f3456790"
+                    name: "Coca Cola"
+                    description: "Refresco de cola"
+                    price: 3.50
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/items/bulk:
+    post:
+      tags:
+        - Menu
+      summary: Crear múltiples elementos del menú
+      description: Crea múltiples platos en una sola operación
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - price
+                  - category
+                  - mainCategory
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: number
+                  image:
+                    type: string
+                  category:
+                    type: string
+                  mainCategory:
+                    type: string
+                  variants:
+                    type: array
+                    items:
+                      type: string
+      responses:
+        '201':
+          description: Elementos creados exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  insertedCount:
+                    type: integer
+                  insertedIds:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/items/{id}:
+    get:
+      tags:
+        - Menu
+      summary: Obtener elemento específico del menú
+      description: Retorna un elemento específico del menú por su ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del elemento del menú
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Elemento del menú encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+        '404':
+          description: Elemento no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      tags:
+        - Menu
+      summary: Actualizar elemento del menú
+      description: Actualiza un elemento existente del menú (solo administradores)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del elemento del menú
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                image:
+                  type: string
+                category:
+                  type: string
+                mainCategory:
+                  type: string
+                variants:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Elemento actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Permisos insuficientes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Elemento no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      tags:
+        - Menu
+      summary: Eliminar elemento del menú
+      description: Elimina lógicamente un elemento del menú (solo administradores)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del elemento del menú
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Elemento eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Plato eliminado lógicamente"
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Permisos insuficientes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Elemento no encontrado o ya eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # RESERVATIONS ENDPOINTS
+  /api/reservations:
+    get:
+      tags:
+        - Reservations
+      summary: Obtener todas las reservas
+      description: Retorna lista de todas las reservas del sistema
+      responses:
+        '200':
+          description: Lista de reservas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Reservations
+      summary: Crear nueva reserva
+      description: Crea una nueva reserva de mesa (requiere autenticación)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - datetime
+                - people
+              properties:
+                datetime:
+                  type: string
+                  format: date-time
+                  description: Fecha y hora de la reserva
+                people:
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                  description: Número de personas
+              example:
+                datetime: "2024-12-25T20:00:00Z"
+                people: 4
+      responses:
+        '201':
+          description: Reserva creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/reservations/me:
+    get:
+      tags:
+        - Reservations
+      summary: Obtener mis reservas
+      description: Retorna las reservas del usuario autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de reservas del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/reservations/{id}/cancel:
+    patch:
+      tags:
+        - Reservations
+      summary: Cancelar reserva
+      description: Cancela una reserva propia del usuario autenticado
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la reserva
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reserva cancelada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Reserva no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # REVIEWS ENDPOINTS
+  /api/reviews:
+    get:
+      tags:
+        - Reviews
+      summary: Obtener todas las reseñas
+      description: Retorna lista de todas las reseñas del sistema
+      responses:
+        '200':
+          description: Lista de reseñas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Reviews
+      summary: Crear nueva reseña
+      description: Crea una nueva reseña del restaurante (requiere autenticación)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - rating
+                - comment
+              properties:
+                rating:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                  description: Calificación de 1 a 5 estrellas
+                comment:
+                  type: string
+                  description: Comentario de la reseña
+              example:
+                rating: 5
+                comment: "Excelente comida y servicio, muy recomendado"
+      responses:
+        '201':
+          description: Reseña creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/reviews/me:
+    get:
+      tags:
+        - Reviews
+      summary: Obtener mis reseñas
+      description: Retorna las reseñas del usuario autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de reseñas del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 

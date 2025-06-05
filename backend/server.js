@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 
 import menuRouter         from './routes/menu.js';
 import authRouter         from './routes/auth.js';
@@ -22,6 +24,9 @@ mongoose
     })
     .then(() => console.log('MongoDB conectado'))
     .catch(err => console.error('Error MongoDB:', err));
+
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/auth',         authRouter);
 app.use('/api/items',        menuRouter);

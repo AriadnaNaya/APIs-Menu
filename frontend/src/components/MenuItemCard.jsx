@@ -12,7 +12,18 @@ export default function MenuItemCard({ item, onClick }) {
     const { name, description, price, image } = item;
 
     return (
-        <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.03)' } }}>
+        <Card sx={{
+            borderRadius: 3,
+            boxShadow: '0 2px 12px 0 rgba(0,0,0,0.07)',
+            transition: 'transform 0.18s, box-shadow 0.18s',
+            '&:hover': {
+                transform: 'scale(1.035)',
+                boxShadow: '0 6px 24px 0 rgba(0,0,0,0.13)'
+            },
+            bgcolor: 'background.paper',
+            height: '100%',
+            display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
+        }}>
             <CardActionArea onClick={onClick}>
                 {image && (
                     <CardMedia
@@ -21,8 +32,10 @@ export default function MenuItemCard({ item, onClick }) {
                         alt={name}
                         sx={{
                             width: '100%',
-                            height: 160,
-                            objectFit: 'cover'
+                            height: 180,
+                            objectFit: 'cover',
+                            borderTopLeftRadius: 12,
+                            borderTopRightRadius: 12
                         }}
                     />
                 )}

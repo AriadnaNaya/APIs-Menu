@@ -1,6 +1,6 @@
 // frontend/src/App.jsx
 import React, { useState, useMemo, createContext, useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Box, Toolbar, CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme, useTheme } from '@mui/material/styles';
 
@@ -22,12 +22,25 @@ import Profile        from './pages/Profile';
 import MyReservations from './pages/MyReservations';
 import MyReviews      from './pages/MyReviews';
 import { ColorModeContext } from './context/ColorModeContext';
+import { AuthContext } from './context/AuthContext';
+import AdminPlatos from './pages/AdminPlatos';
+import AdminUsuarios from './pages/AdminUsuarios';
 
 // Context para exponer el toggle a todos los componentes
 export default function App() {
-	// Ya no manejo modo ni contexto aquí
 	const theme = useTheme();
 	const colorMode = useContext(ColorModeContext);
+	const { client } = useContext(AuthContext) || {};
+	const location = useLocation();
+
+	// Si es admin y no está en /admin o rutas de admin, redirige a /admin
+	if (client?.role === 'admin' && !location.pathname.startsWith('/admin')) {
+		return <Navigate to="/admin" replace />;
+	}
+	// Si NO es admin y quiere acceder a rutas de admin, redirige a home
+	if (client?.role !== 'admin' && location.pathname.startsWith('/admin')) {
+		return <Navigate to="/" replace />;
+	}
 
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -48,6 +61,8 @@ export default function App() {
 					<Route path="/mis-reservas" element={<MyReservations />} />
 					<Route path="/mis-resenas"  element={<MyReviews />} />
 					<Route path="/admin"        element={<AdminPanel />} />
+					<Route path="/admin/platos"   element={<AdminPlatos />} />
+					<Route path="/admin/usuarios" element={<AdminUsuarios />} />
 				</Routes>
 			</Box>
 

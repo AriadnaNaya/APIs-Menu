@@ -33,19 +33,30 @@ const AdminPanel = () => {
             <Stack spacing={3} mt={4}>
                 <Button
                     variant="contained"
+                    color="primary"
                     component={Link}
                     to="/admin/platos"
                     sx={{
-                        backgroundColor: 'red',
-                        color: 'white',
-                        fontSize: '18px',
-                        padding: '12px 24px',
-                        zIndex: 9999
+                        fontSize: { xs: '1rem', md: '1.15rem' },
+                        py: 2,
+                        borderRadius: 2,
+                        boxShadow: 1
                     }}
                 >
                     Administración de platos
                 </Button>
-                <Button variant="contained" color="secondary" component={Link} to="/admin/usuarios">
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    component={Link}
+                    to="/admin/usuarios"
+                    sx={{
+                        fontSize: { xs: '1rem', md: '1.15rem' },
+                        py: 2,
+                        borderRadius: 2,
+                        boxShadow: 1
+                    }}
+                >
                     Administración de usuarios
                 </Button>
             </Stack>

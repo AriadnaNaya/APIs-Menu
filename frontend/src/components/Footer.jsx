@@ -9,9 +9,12 @@ const Footer = () => {
         <Fade in timeout={800}>
             <Box
                 sx={{
-                    backgroundColor: theme.palette.background.paper,
+                    background: theme.palette.mode === 'dark'
+                        ? 'linear-gradient(90deg, #181c24 60%, #232936 100%)'
+                        : 'linear-gradient(90deg, #f6f8fa 60%, #fff 100%)',
                     color: theme.palette.text.primary,
-                    padding: '3rem 1rem',
+                    py: { xs: 4, md: 6 },
+                    px: { xs: 1, md: 4 },
                     borderTop: `1px solid ${theme.palette.divider}`
                 }}
             >

@@ -4,6 +4,7 @@ import jwt     from 'jsonwebtoken';
 import Client  from '../models/Client.js';
 import { authMiddleware } from '../middleware/auth.js';
 import { JWT_SECRET }     from '../server.js';
+import { adminOnly } from '../middleware/adminOnly.js';
 
 const router = express.Router();
 
@@ -83,6 +84,46 @@ router.put('/me', authMiddleware, async (req, res) => {
     } catch (err) {
         console.error(`[${new Date().toISOString()}] 400 /api/auth/me ERROR:`, err);
         res.status(400).json({ error: err.message });
+    }
+});
+
+// Listar todos los clientes (solo admin)
+router.get('/clients', authMiddleware, adminOnly, async (req, res) => {
+    try {
+        const clients = await Client.find({}, '-password');
+        res.json(clients);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Editar cliente (solo admin)
+router.put('/clients/:id', authMiddleware, adminOnly, async (req, res) => {
+    try {
+        const { name, contact, avatar, role } = req.body;
+        const client = await Client.findById(req.params.id);
+        if (!client) return res.status(404).json({ error: 'Cliente no encontrado' });
+        if (name) client.name = name;
+        if (contact) client.contact = contact;
+        if (avatar) client.avatar = avatar;
+        if (role) client.role = role;
+        await client.save();
+        const updated = client.toObject();
+        delete updated.password;
+        res.json(updated);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+// Eliminar cliente (solo admin)
+router.delete('/clients/:id', authMiddleware, adminOnly, async (req, res) => {
+    try {
+        const client = await Client.findByIdAndDelete(req.params.id);
+        if (!client) return res.status(404).json({ error: 'Cliente no encontrado' });
+        res.json({ message: 'Cliente eliminado' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 });
 

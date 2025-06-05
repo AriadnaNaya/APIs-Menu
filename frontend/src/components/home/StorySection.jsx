@@ -19,11 +19,14 @@ export default function StorySection() {
                 backgroundImage: `url("https://images.unsplash.com/photo-1541542689-2c9e50e74ea4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                borderRadius: { xs: 0, md: 4 },
+                overflow: 'hidden',
                 '&::before': {
                     content: '""',
                     position: 'absolute',
                     inset: 0,
-                    bgcolor: isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)',
+                    bgcolor: isDark ? 'rgba(24,28,36,0.7)' : 'rgba(255,255,255,0.7)',
+                    backdropFilter: 'blur(2px)'
                 },
                 display: 'flex',
                 alignItems: 'center'

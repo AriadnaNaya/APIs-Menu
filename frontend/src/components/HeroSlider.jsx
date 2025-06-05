@@ -46,6 +46,8 @@ export default function HeroSlider() {
                 marginLeft: '-50vw',
                 marginRight: '-50vw',
                 overflow: 'hidden',
+                borderRadius: 0,
+                boxShadow: '0 2px 12px 0 rgba(0,0,0,0.07)',
                 '& .slick-slider, & .slick-list, & .slick-track': {
                     display: 'flex'
                 }
@@ -57,14 +59,17 @@ export default function HeroSlider() {
                         key={idx}
                         sx={{
                             position: 'relative',
-                            height: { xs: '40vh', md: '60vh' },
+                            height: { xs: '38vh', md: '56vh' },
+                            minHeight: 220,
+                            maxHeight: 420,
                             backgroundImage: `url("${slide.image}")`,
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            width: '100%'
                         }}
                     >
                         {/* Overlay */}

@@ -70,11 +70,13 @@ export default function TestimonialSection() {
                                         textAlign: 'center',
                                         p: 3,
                                         bgcolor: 'background.paper',
-                                        borderRadius: 2,
+                                        borderRadius: 3,
+                                        boxShadow: 2,
                                         display: 'flex',
                                         flexDirection: 'column',
                                         height: '100%',
-                                        color: 'text.primary'
+                                        color: 'text.primary',
+                                        minHeight: 220
                                     }}
                                 >
                                     <Avatar

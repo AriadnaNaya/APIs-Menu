@@ -13,7 +13,14 @@ export default function About() {
                 component="img"
                 src="/img/restaurant.jpg"
                 alt="Nuestro restaurante"
-                sx={{ width: '100%', maxHeight: 400, objectFit: 'cover', borderRadius: 2, my: 4 }}
+                sx={{
+                    width: '100%',
+                    maxHeight: { xs: 220, sm: 320, md: 400 },
+                    objectFit: 'cover',
+                    borderRadius: 3,
+                    my: 4,
+                    boxShadow: 2
+                }}
             />
             <Typography paragraph>
                 Nuestro equipo está comprometido con la calidad, la innovación y, sobre todo, con brindar una experiencia inolvidable.

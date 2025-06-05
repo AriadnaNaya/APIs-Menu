@@ -95,8 +95,14 @@ export default function Header() {
 
 	return (
 		<>
-			<AppBar component="nav" color="inherit" elevation={1}>
-				<Toolbar>
+			<AppBar component="nav" color="transparent" elevation={0} position="sticky" sx={{
+				backdropFilter: 'blur(8px)',
+				background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.85)' : 'rgba(255,255,255,0.85)',
+				borderBottom: `1px solid ${theme.palette.divider}`,
+				boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)',
+				zIndex: 1201
+			}}>
+				<Toolbar sx={{ minHeight: { xs: 56, sm: 64 }, px: { xs: 1, sm: 3 } }}>
 					{/* Icono hamburguesa en móvil */}
 					<IconButton
 						edge="start"
@@ -110,7 +116,7 @@ export default function Header() {
 					{/* Logo */}
 					<Typography
 						component={Link}
-						to="/"
+						to={client?.role === 'admin' ? "/admin" : "/"}
 						variant="h6"
 						sx={{
 							flexGrow: 1,
@@ -124,72 +130,103 @@ export default function Header() {
 
 					{/* Navegación en escritorio */}
 					<Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-						{client?.role === 'admin' && (
-							<Button
-								component={Link}
-								to="/admin"
-								color="inherit"
-								sx={{ textTransform: 'none', mr: 2 }}
-							>
-								Panel de Control
-							</Button>
-						)}
-						<Button
-							component={Link}
-							to="/menu"
-							color="inherit"
-							sx={{ textTransform: 'none', mr: 2 }}
-						>
-							Explorar carta
-						</Button>
-
-						{/* Botón toggle modo */}
-						<IconButton
-							color="inherit"
-							onClick={colorMode.toggleColorMode}
-							sx={{ mr: 2 }}
-						>
-							{theme.palette.mode === 'dark'
-								? <LightModeIcon />
-								: <DarkModeIcon />
-							}
-						</IconButton>
-
-						{token ? (
+						{client?.role === 'admin' ? (
 							<>
-								<IconButton onClick={handleAvatarClick} sx={{ p: 0, mr: 1 }}>
-									<Avatar src={client.avatar} alt={client.name} />
-								</IconButton>
-								<Menu
-									anchorEl={anchorEl}
-									open={openMenu}
-									onClose={handleMenuClose}
+								<Button
+									component={Link}
+									to="/admin"
+									color="inherit"
+									sx={{ textTransform: 'none', mr: 2 }}
 								>
-									<MenuItem onClick={handleProfile}>Mi Perfil</MenuItem>
-									<MenuItem onClick={handleMyReservations}>Mis Reservas</MenuItem>
-									<MenuItem onClick={handleMyReviews}>Mis Reseñas</MenuItem>
-									<MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
-								</Menu>
+									Panel de Control
+								</Button>
+								<Button
+									component={Link}
+									to="/admin/platos"
+									color="inherit"
+									sx={{ textTransform: 'none', mr: 2 }}
+								>
+									Platos
+								</Button>
+								<Button
+									component={Link}
+									to="/admin/usuarios"
+									color="inherit"
+									sx={{ textTransform: 'none', mr: 2 }}
+								>
+									Usuarios
+								</Button>
+								<Button
+									onClick={handleLogout}
+									color="inherit"
+									sx={{ textTransform: 'none', mr: 2 }}
+								>
+									Cerrar Sesión
+								</Button>
 							</>
 						) : (
 							<>
-								<Button
-									component={Link}
-									to="/login"
-									color="inherit"
-									sx={{ textTransform: 'none', mr: 1 }}
-								>
-									Login
-								</Button>
-								<Button
-									component={Link}
-									to="/register"
-									variant="contained"
-									color="primary"
-									sx={{ textTransform: 'none' }}
-								>
-									Register
-								</Button>
+								{client?.role === 'admin' ? null : (
+									<>
+										{client?.role === 'admin' ? null : (
+											<Button
+												component={Link}
+												to="/menu"
+												color="inherit"
+												sx={{ textTransform: 'none', mr: 2 }}
+											>
+												Explorar carta
+											</Button>
+										)}
+										<IconButton
+											color="inherit"
+											onClick={colorMode.toggleColorMode}
+											sx={{ mr: 2 }}
+										>
+											{theme.palette.mode === 'dark'
+												? <LightModeIcon />
+												: <DarkModeIcon />
+											}
+										</IconButton>
+										{token ? (
+											<>
+												<IconButton onClick={handleAvatarClick} sx={{ p: 0, mr: 1 }}>
+													<Avatar src={client.avatar} alt={client.name} />
+												</IconButton>
+												<Menu
+													anchorEl={anchorEl}
+													open={openMenu}
+													onClose={handleMenuClose}
+												>
+													<MenuItem onClick={handleProfile}>Mi Perfil</MenuItem>
+													<MenuItem onClick={handleMyReservations}>Mis Reservas</MenuItem>
+													<MenuItem onClick={handleMyReviews}>Mis Reseñas</MenuItem>
+													<MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
+												</Menu>
+											</>
+										) : (
+											<>
+												<Button
+													component={Link}
+													to="/login"
+													color="inherit"
+													sx={{ textTransform: 'none', mr: 1 }}
+												>
+													Login
+												</Button>
+												<Button
+													component={Link}
+													to="/register"
+													variant="contained"
+													color="primary"
+													sx={{ textTransform: 'none' }}
+												>
+													Register
+												</Button>
+											</>
+										)}
+									</>
+								)}
 							</>
 						)}
 					</Box>

@@ -60,12 +60,13 @@ export default function MealDetailModal({
                         alt={name}
                         sx={{
                             display: 'block',
-                            width: 250,
-                            height: 250,
+                            width: { xs: 180, sm: 250 },
+                            height: { xs: 180, sm: 250 },
                             objectFit: 'cover',
-                            borderRadius: 1,
+                            borderRadius: 3,
                             mx: 'auto',
-                            mb: 2
+                            mb: 2,
+                            boxShadow: 2
                         }}
                     />
                 )}

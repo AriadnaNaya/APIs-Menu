@@ -92,7 +92,7 @@ export default function Menu() {
         <>
             <HeroSlider />
 
-            <Container maxWidth="lg" sx={{ my: 4 }}>
+            <Container maxWidth="lg" sx={{ my: 4, px: { xs: 0, sm: 2 } }}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Explorar carta
                 </Typography>
@@ -145,7 +145,7 @@ export default function Menu() {
 
                 {/* acordeones por subcategoría */}
                 {visibleSubs.map(sub => (
-                    <Accordion key={sub} defaultExpanded>
+                    <Accordion key={sub} defaultExpanded sx={{ borderRadius: 2, boxShadow: 1, mb: 2, overflow: 'hidden' }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography variant="h6">{formatTitle(sub)}</Typography>
                         </AccordionSummary>

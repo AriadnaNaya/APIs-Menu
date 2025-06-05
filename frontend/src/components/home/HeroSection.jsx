@@ -23,11 +23,14 @@ export default function HeroSection() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 /* Overlay semitransparente */
+                borderRadius: { xs: 0, md: 4 },
+                overflow: 'hidden',
                 '&::before': {
                     content: '""',
                     position: 'absolute',
                     inset: 0,
-                    bgcolor: 'rgba(0,0,0,0.4)'
+                    bgcolor: 'rgba(0,0,0,0.45)',
+                    backdropFilter: 'blur(2px)'
                 },
                 /* Centrado de contenido */
                 display: 'flex',

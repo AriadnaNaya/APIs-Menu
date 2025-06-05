@@ -4,6 +4,20 @@ Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) d
 
 ---
 
+## 📢 Cambios y funcionalidades destacadas (2024)
+
+- **Modo claro/oscuro** con diseño moderno y responsivo en todo el frontend.
+- **Gestión completa de admin**:
+  - CRUD de platos (menú) y variantes.
+  - CRUD de usuarios/clientes (solo admin).
+  - Panel de control exclusivo para admin.
+- **Carrusel superior** (HeroSlider) mejorado, rectangular y con imágenes proporcionadas.
+- **Imágenes y cards** siempre bien proporcionadas y con estilos modernos.
+- **Documentación interactiva Swagger** accesible en `/api-docs` (backend).
+- **Limpieza de code smells** y mejoras de responsividad en todas las vistas.
+
+---
+
 ## 📁 Estructura del proyecto
 
 ```
@@ -120,6 +134,24 @@ docker-compose down -v
 
 ## 📖 Más información
 
-* **Frontend**: documentación de Vite, React, MUI y Tailwind.
-* **Backend**: Express y Mongoose.
-* **Dockers**: consulta la configuración en `docker-compose.yml` y los Dockerfiles en cada carpeta.
+- **Frontend**: documentación de Vite, React, MUI y Tailwind. 
+  - Modo claro/oscuro, cards modernas, gestión admin, responsive real.
+- **Backend**: Express y Mongoose.
+  - Endpoints RESTful, gestión de usuarios y menú, documentación Swagger en `/api-docs`.
+- **Dockers**: consulta la configuración en `docker-compose.yml` y los Dockerfiles en cada carpeta.
+
+---
+
+## 📝 Funcionalidades principales
+
+- **Usuarios**: registro, login, perfil, reservas, reseñas.
+- **Admin**: panel exclusivo, gestión de platos y usuarios, acceso restringido.
+- **Menú**: visualización, filtrado, detalles y variantes.
+- **Reservas**: crear, ver, cancelar (usuario y admin).
+- **Reseñas**: crear, ver, gestionar propias.
+- **Visual**: dark/light mode, imágenes proporcionadas, diseño moderno y responsivo.
+- **Swagger**: documentación interactiva en `/api-docs`.
+
+---
+
+Para detalles específicos de frontend y backend, revisa los README en cada carpeta.

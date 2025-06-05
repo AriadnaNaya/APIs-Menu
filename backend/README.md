@@ -2,6 +2,14 @@
 
 API REST desarrollada con Node.js, Express y MongoDB para la aplicación Town Kitchen Menu.
 
+## 🆕 Novedades y mejoras (2024)
+
+- **Endpoints de gestión de usuarios/clientes** para admin:
+  - Listar, editar, eliminar y agregar usuarios/clientes (`/api/auth/clients`)
+- **Endpoint POST /api/auth/clients**: permite al admin crear nuevos usuarios/clientes.
+- **Documentación Swagger** accesible en `/api-docs` (explora y prueba la API desde el navegador).
+- **Mejoras de seguridad y control de acceso** para rutas de admin.
+
 ## 🚀 Tecnologías
 
 - **Node.js** (v18+)
@@ -191,6 +199,22 @@ Authorization: Bearer <token>
 | POST | `/` | Crear nueva reseña | Sí |
 | GET | `/me` | Mis reseñas | Sí |
 
+### Usuarios/Clientes (`/api/auth/clients`)
+
+| Método | Endpoint | Descripción | Auth |
+|--------|----------|-------------|------|
+| GET    | `/clients`      | Listar todos los usuarios/clientes | Admin |
+| POST   | `/clients`      | Crear nuevo usuario/cliente        | Admin |
+| PUT    | `/clients/:id`  | Editar usuario/cliente             | Admin |
+| DELETE | `/clients/:id`  | Eliminar usuario/cliente           | Admin |
+
+> **Nota:** Solo el admin puede acceder a estos endpoints. El endpoint POST permite crear usuarios con nombre, contacto, avatar, rol y contraseña.
+
+### Documentación interactiva
+
+- Accede a la documentación Swagger en: `http://localhost:5000/api-docs`
+- Puedes probar todos los endpoints y ver los esquemas de datos.
+
 ## 📝 Ejemplos de uso
 
 ### Registro de usuario
@@ -281,4 +305,12 @@ npm run seed       # Poblar base de datos
 - [Swagger/OpenAPI Documentation](./swagger.yaml) - Documentación interactiva de la API
 - [Express.js Documentation](https://expressjs.com/)
 - [Mongoose Documentation](https://mongoosejs.com/)
-- [JWT.io](https://jwt.io/) - Información sobre JSON Web Tokens 
+- [JWT.io](https://jwt.io/) - Información sobre JSON Web Tokens
+
+## 📝 Notas de uso
+
+- El **admin** puede gestionar usuarios/clientes y platos desde el frontend y la API.
+- La documentación Swagger está siempre disponible en `/api-docs`.
+- Todos los endpoints de admin requieren autenticación y rol adecuado.
+
+Para detalles de frontend y despliegue, revisa los README correspondientes. 

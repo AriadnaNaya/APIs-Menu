@@ -1,6 +1,18 @@
 # Town Kitchen - Frontend
 
-Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Town Kitchen. Incluye gestión de menú, reservas, reseñas y sistema de autenticación.
+Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Town Kitchen. Incluye gestión de menú, reseñas y sistema de autenticación.
+
+## 🆕 Novedades y mejoras (2024)
+
+- **Modo claro/oscuro** con paleta moderna y coherente.
+- **Cards y modales** con imágenes siempre proporcionadas y diseño atractivo.
+- **Carrusel superior** rectangular, sin bordes redondeados y con imágenes bien proporcionadas.
+- **Gestión admin**:
+  - CRUD de platos (menú) y variantes.
+  - CRUD de usuarios/clientes (agregar, editar, eliminar).
+  - Panel de control exclusivo para admin.
+- **Responsividad real** en todas las vistas y componentes.
+- **Limpieza de code smells** y mejoras de legibilidad.
 
 ## 🚀 Tecnologías
 
@@ -76,12 +88,6 @@ frontend/
 - Autenticación con JWT
 - Roles de usuario (user/admin)
 
-### 📅 Sistema de Reservas
-- Crear nuevas reservas
-- Ver mis reservas
-- Cancelar reservas propias
-- Validación de fechas y horarios
-
 ### ⭐ Sistema de Reseñas
 - Crear reseñas con calificación de 1-5 estrellas
 - Ver todas las reseñas del restaurante
@@ -89,6 +95,7 @@ frontend/
 
 ### 🔧 Panel de Administración
 - Gestión del menú (CRUD completo)
+- Gestión de usuarios/clientes (CRUD completo, incluyendo agregar usuario)
 - Vista de todas las reservas
 - Herramientas administrativas
 
@@ -252,12 +259,6 @@ Utiliza breakpoints de Tailwind y Material-UI para garantizar una experiencia ó
 - Cambio de contraseña
 - Avatar personalizable
 
-### Reservations (`/reservations`, `/my-reservations`)
-- Formulario de nueva reserva
-- Calendario de fechas disponibles
-- Lista de reservas propias
-- Cancelación de reservas
-
 ### Reviews (`/reviews`, `/my-reviews`)
 - Formulario de nueva reseña
 - Sistema de calificación con estrellas
@@ -267,6 +268,7 @@ Utiliza breakpoints de Tailwind y Material-UI para garantizar una experiencia ó
 ### Admin Panel (`/admin`)
 - CRUD completo del menú
 - Gestión de categorías
+- CRUD de usuarios/clientes (agregar, editar, eliminar)
 - Vista de reservas
 - Herramientas administrativas
 
@@ -343,3 +345,12 @@ npm install
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## 📝 Notas de uso
+
+- El **admin** puede agregar, editar y eliminar tanto platos como usuarios/clientes desde el panel de administración.
+- El **carrusel superior** (HeroSlider) es rectangular y las imágenes siempre se ven bien.
+- El **modo claro/oscuro** se puede alternar desde el header y afecta toda la app.
+- Todas las imágenes y cards mantienen proporciones y diseño moderno.
+
+Para detalles de endpoints y backend, revisa el README correspondiente.

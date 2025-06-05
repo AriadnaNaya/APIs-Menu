@@ -18,7 +18,8 @@
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.6.1",
     "react-slick": "^0.30.3",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "luxon": "^3.4.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

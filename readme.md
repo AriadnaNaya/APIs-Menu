@@ -147,7 +147,6 @@ docker-compose down -v
 - **Usuarios**: registro, login, perfil, reservas, reseñas.
 - **Admin**: panel exclusivo, gestión de platos y usuarios, acceso restringido.
 - **Menú**: visualización, filtrado, detalles y variantes.
-- **Reservas**: crear, ver, cancelar (usuario y admin).
 - **Reseñas**: crear, ver, gestionar propias.
 - **Visual**: dark/light mode, imágenes proporcionadas, diseño moderno y responsivo.
 - **Swagger**: documentación interactiva en `/api-docs`.

@@ -7,7 +7,6 @@ import YAML from 'yamljs';
 import menuRouter         from './routes/menu.js';
 import authRouter         from './routes/auth.js';
 import reviewsRouter      from './routes/reviews.js';
-import reservationsRouter from './routes/reservations.js';
 
 const app = express();
 app.use(cors());
@@ -31,7 +30,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/auth',         authRouter);
 app.use('/api/items',        menuRouter);
 app.use('/api/reviews',      reviewsRouter);
-app.use('/api/reservations', reservationsRouter);
 
 const PORT = 5000;
 app.listen(PORT, () => {

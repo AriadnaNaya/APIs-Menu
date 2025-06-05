@@ -38,7 +38,6 @@ export default function Header() {
 	const handleMenuClose    = () => setAnchorEl(null);
 
 	const handleProfile        = () => { navigate('/profile');       handleMenuClose(); };
-	const handleMyReservations = () => { navigate('/mis-reservas');  handleMenuClose(); };
 	const handleMyReviews      = () => { navigate('/mis-resenas');   handleMenuClose(); };
 	const handleLogout         = () => { logout(); navigate('/');     handleMenuClose(); };
 
@@ -59,9 +58,6 @@ export default function Header() {
 					<>
 						<ListItemButton onClick={handleProfile}>
 							<ListItemText primary="Mi Perfil" />
-						</ListItemButton>
-						<ListItemButton onClick={handleMyReservations}>
-							<ListItemText primary="Mis Reservas" />
 						</ListItemButton>
 						<ListItemButton onClick={handleMyReviews}>
 							<ListItemText primary="Mis Reseñas" />
@@ -199,7 +195,6 @@ export default function Header() {
 													onClose={handleMenuClose}
 												>
 													<MenuItem onClick={handleProfile}>Mi Perfil</MenuItem>
-													<MenuItem onClick={handleMyReservations}>Mis Reservas</MenuItem>
 													<MenuItem onClick={handleMyReviews}>Mis Reseñas</MenuItem>
 													<MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
 												</Menu>

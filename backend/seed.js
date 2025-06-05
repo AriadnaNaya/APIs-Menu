@@ -2,7 +2,6 @@
 import mongoose from 'mongoose';
 import Client from './models/Client.js';
 import Review from './models/Review.js';
-import Reservation from './models/Reservation.js'
 
 async function seed() {
     const MONGO_URI = 'mongodb://mongo:27017/townkitchen';
@@ -14,7 +13,6 @@ async function seed() {
 
     await Review.deleteMany({});
     await Client.deleteMany({});
-    await Reservation.deleteMany({});
     console.log('🧹 Colecciones Client y Review vaciadas');
 
     const clientsData = [

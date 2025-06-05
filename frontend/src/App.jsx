@@ -14,18 +14,15 @@ import AdminPanel 	  from './pages/AdminPanel';
 import Home           from './pages/Home';
 import Menu           from './pages/Menu';
 import About          from './pages/About';
-import Reserva        from './pages/Reserva';
 import Login          from './pages/Login';
 import Register       from './pages/Register';
 import ReviewForm     from './pages/ReviewForm';
 import Profile        from './pages/Profile';
-import MyReservations from './pages/MyReservations';
 import MyReviews      from './pages/MyReviews';
 import { ColorModeContext } from './context/ColorModeContext';
 import { AuthContext } from './context/AuthContext';
 import AdminPlatos from './pages/AdminPlatos';
 import AdminUsuarios from './pages/AdminUsuarios';
-import AdminSlots from './pages/AdminSlots';
 
 // Context para exponer el toggle a todos los componentes
 export default function App() {
@@ -54,17 +51,14 @@ export default function App() {
 					<Route path="/"             element={<Home />} />
 					<Route path="/menu"         element={<Menu />} />
 					<Route path="/about"        element={<About />} />
-					<Route path="/reserva"      element={<Reserva />} />
 					<Route path="/login"        element={<Login />} />
 					<Route path="/register"     element={<Register />} />
 					<Route path="/review"       element={<ReviewForm />} />
 					<Route path="/profile"      element={<Profile />} />
-					<Route path="/mis-reservas" element={<MyReservations />} />
 					<Route path="/mis-resenas"  element={<MyReviews />} />
 					<Route path="/admin"        element={<AdminPanel />} />
 					<Route path="/admin/platos"   element={<AdminPlatos />} />
 					<Route path="/admin/usuarios" element={<AdminUsuarios />} />
-					<Route path="/admin/slots"    element={<AdminSlots />} />
 				</Routes>
 			</Box>
 

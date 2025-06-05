@@ -1,8 +1,11 @@
 // frontend/src/components/home/StorySection.jsx
 import React from 'react';
 import { Container, Typography, Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 export default function StorySection() {
+    const theme = useTheme();
+    const isDark = theme.palette.mode === 'dark';
     return (
         <Box
             sx={{
@@ -20,7 +23,7 @@ export default function StorySection() {
                     content: '""',
                     position: 'absolute',
                     inset: 0,
-                    bgcolor: 'rgba(0,0,0,0.5)'
+                    bgcolor: isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)',
                 },
                 display: 'flex',
                 alignItems: 'center'

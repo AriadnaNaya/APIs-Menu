@@ -1,16 +1,18 @@
 import React from 'react';
 import { Box, Typography, Grid, Link, Fade } from '@mui/material';
 import { Instagram, Facebook } from '@mui/icons-material';
+import { useTheme } from '@mui/material/styles';
 
 const Footer = () => {
+    const theme = useTheme();
     return (
         <Fade in timeout={800}>
             <Box
                 sx={{
-                    backgroundColor: '#0d1117', // fondo más oscuro, más uniforme con el resto del sitio
-                    color: 'rgba(255,255,255,0.85)', // texto blanco sutil
+                    backgroundColor: theme.palette.background.paper,
+                    color: theme.palette.text.primary,
                     padding: '3rem 1rem',
-                    borderTop: '1px solid rgba(0, 200, 134, 0.3)'
+                    borderTop: `1px solid ${theme.palette.divider}`
                 }}
             >
                 <Grid container spacing={4} justifyContent="space-between">
@@ -73,8 +75,8 @@ const Footer = () => {
                     </Grid>
                 </Grid>
 
-                <Box textAlign="center" mt={4} pt={2} borderTop="1px solid rgba(255,255,255,0.1)">
-                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.4)' }}>
+                <Box textAlign="center" mt={4} pt={2} borderTop={`1px solid ${theme.palette.divider}`}>
+                    <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
                         © {new Date().getFullYear()} SUSHI TOWN, ALL RIGHTS RESERVED.
                     </Typography>
                 </Box>

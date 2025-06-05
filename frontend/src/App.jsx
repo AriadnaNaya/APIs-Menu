@@ -25,6 +25,7 @@ import { ColorModeContext } from './context/ColorModeContext';
 import { AuthContext } from './context/AuthContext';
 import AdminPlatos from './pages/AdminPlatos';
 import AdminUsuarios from './pages/AdminUsuarios';
+import AdminSlots from './pages/AdminSlots';
 
 // Context para exponer el toggle a todos los componentes
 export default function App() {
@@ -63,6 +64,7 @@ export default function App() {
 					<Route path="/admin"        element={<AdminPanel />} />
 					<Route path="/admin/platos"   element={<AdminPlatos />} />
 					<Route path="/admin/usuarios" element={<AdminUsuarios />} />
+					<Route path="/admin/slots"    element={<AdminSlots />} />
 				</Routes>
 			</Box>
 

@@ -21,7 +21,7 @@ export default function HeroSlider() {
         {
             title: 'Sushi Town',
             subtitle: 'Explora nuestra carta',
-            image: 'https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+            image: '/img/heroNuevo1.png'
         },
         {
             title: 'Delicias de Mar',

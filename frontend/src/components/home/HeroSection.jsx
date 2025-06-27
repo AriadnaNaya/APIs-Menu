@@ -51,7 +51,7 @@ export default function HeroSection() {
                         fontSize: { xs: '2rem', md: '3rem' }
                     }}
                 >
-                    Bienvenido a Town Kitchen
+                    Bienvenido a Sushi Town
                 </Typography>
                 <Typography variant="h6" gutterBottom>
                     Descubre el sabor auténtico de la fusión japonés-urbana

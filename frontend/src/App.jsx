@@ -32,9 +32,12 @@ export default function App() {
 	const location = useLocation();
 
 	// Si es admin y no está en /admin o rutas de admin, redirige a /admin
+	/*
 	if (client?.role === 'admin' && !location.pathname.startsWith('/admin')) {
 		return <Navigate to="/admin" replace />;
 	}
+	*/
+
 	// Si NO es admin y quiere acceder a rutas de admin, redirige a home
 	if (client?.role !== 'admin' && location.pathname.startsWith('/admin')) {
 		return <Navigate to="/" replace />;

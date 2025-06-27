@@ -112,7 +112,7 @@ export default function Header() {
 					{/* Logo */}
 					<Typography
 						component={Link}
-						to={client?.role === 'admin' ? "/admin" : "/"}
+						to="/menu"
 						variant="h6"
 						sx={{
 							flexGrow: 1,

@@ -92,18 +92,13 @@ export default function MealDetailModal({
                     </Typography>
                 )}
 
-                {/* Variantes */}
                 {variants.length > 0 && (
                     <Box sx={{ mb: 2 }}>
-                        {variants.map((v, i) => {
-                            const qty = v.cantidad || v.quantity || '';
-                            const pr  = v.precio   || v.price    || '';
-                            return (
-                                <Typography key={i} variant="body2">
-                                    – {qty}: ${pr}
-                                </Typography>
-                            );
-                        })}
+                        {variants.map((v, i) => (
+                            <Typography key={i} variant="body2">
+                                {v.name}: ${v.price}
+                            </Typography>
+                        ))}
                     </Box>
                 )}
 

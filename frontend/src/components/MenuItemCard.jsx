@@ -10,6 +10,7 @@ import {
 
 export default function MenuItemCard({ item, onClick }) {
     const { name, description, price, image } = item;
+    const variants = item.variantes || item.variants || [];
 
     return (
         <Card sx={{
@@ -48,9 +49,17 @@ export default function MenuItemCard({ item, onClick }) {
                             {description}
                         </Typography>
                     )}
-                    <Typography variant="body2" color="text.primary">
-                        ${price.toLocaleString()}
-                    </Typography>
+                    {variants.length > 0 ? (
+                        <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                            ${Math.min(...variants.map(v => v.precio || v.price))} - ${Math.max(...variants.map(v => v.precio || v.price))}
+                        </Typography>
+                    ) : (
+                        price != null && (
+                            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                                ${price}
+                            </Typography>
+                        )
+                    )}
                 </CardContent>
             </CardActionArea>
         </Card>

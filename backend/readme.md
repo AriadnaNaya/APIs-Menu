@@ -1,6 +1,6 @@
-# Town Kitchen - Backend API
+# Sushi Town - Backend API
 
-API REST desarrollada con Node.js, Express y MongoDB para la aplicación Town Kitchen Menu.
+API REST desarrollada con Node.js, Express y MongoDB para la aplicación Sushi Town Menu.
 
 ## 🚀 Tecnologías
 
@@ -19,12 +19,10 @@ backend/
 ├── models/                 # Modelos de Mongoose
 │   ├── Client.js          # Modelo de usuarios/clientes
 │   ├── MenuItem.js        # Modelo de elementos del menú
-│   ├── Reservation.js     # Modelo de reservaciones
 │   └── Review.js          # Modelo de reseñas
 ├── routes/                # Rutas de la API
 │   ├── auth.js           # Autenticación (login, register, profile)
 │   ├── menu.js           # Gestión del menú
-│   ├── reservations.js   # Sistema de reservaciones
 │   └── reviews.js        # Sistema de reseñas
 ├── middleware/           # Middlewares personalizados
 │   ├── auth.js          # Verificación de JWT
@@ -72,20 +70,13 @@ docker-compose up --build
   image: String,         // URL de la imagen
   category: String,      // Categoría específica
   mainCategory: String,  // Categoría principal
-  variants: [String],    // Variantes del plato
+  variants: [{           // Variantes del plato
+    name: String,        // Nombre de la variante
+    price: Number        // Precio de la variante
+  }],
   isDeleted: Boolean,    // Eliminación lógica
   deletedBy: ObjectId,   // Usuario que eliminó
   deletedAt: Date        // Fecha de eliminación
-}
-```
-
-#### Reservation (Reservación)
-```javascript
-{
-  client: ObjectId,      // Referencia al cliente
-  datetime: Date,        // Fecha y hora de la reserva
-  people: Number,        // Número de personas
-  state: String         // 'pending' | 'confirmed' | 'canceled'
 }
 ```
 
@@ -109,8 +100,8 @@ Authorization: Bearer <token>
 ```
 
 ### Roles de usuario:
-- **user**: Usuario regular (puede hacer reservas, reseñas, ver menú)
-- **admin**: Administrador (puede gestionar el menú, ver todas las reservas)
+- **user**: Usuario regular (reseñas, ver menú)
+- **admin**: Administrador (puede gestionar el menú, los usuarios y las reseñas)
 
 ## 🛣️ Endpoints de la API
 
@@ -135,14 +126,6 @@ Authorization: Bearer <token>
 | PUT | `/:id` | Actualizar elemento | Admin |
 | DELETE | `/:id` | Eliminar elemento (lógico) | Admin |
 
-### Reservaciones (`/api/reservations`)
-
-| Método | Endpoint | Descripción | Auth |
-|--------|----------|-------------|------|
-| GET | `/` | Listar todas las reservas | No |
-| POST | `/` | Crear nueva reserva | Sí |
-| GET | `/me` | Mis reservas | Sí |
-| PATCH | `/:id/cancel` | Cancelar reserva | Sí |
 
 ### Reseñas (`/api/reviews`)
 
@@ -186,16 +169,6 @@ curl -X POST http://localhost:5000/api/auth/register \
 curl http://localhost:5000/api/items/grouped
 ```
 
-### Crear reserva (requiere autenticación)
-```bash
-curl -X POST http://localhost:5000/api/reservations \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <token>" \
-  -d '{
-    "datetime": "2024-12-25T20:00:00Z",
-    "people": 4
-  }'
-```
 
 ### Filtrar menú por precio
 ```bash

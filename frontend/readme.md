@@ -1,6 +1,6 @@
-# Town Kitchen - Frontend
+# Sushi Town - Frontend
 
-Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Town Kitchen. Incluye gestión de menú, reseñas y sistema de autenticación.
+Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Sushi Town. Incluye gestión de menú, reseñas y sistema de autenticación.
 
 ## 🆕 Novedades y mejoras 
 
@@ -47,8 +47,7 @@ frontend/
 │   │   ├── Login.jsx     # Página de inicio de sesión
 │   │   ├── Register.jsx  # Página de registro
 │   │   ├── Profile.jsx   # Perfil de usuario
-│   │   ├── Reserva.jsx   # Página de reservas
-│   │   ├── MyReservations.jsx # Mis reservas
+
 │   │   ├── ReviewForm.jsx # Formulario de reseñas
 │   │   ├── MyReviews.jsx # Mis reseñas
 │   │   ├── AdminPanel.jsx # Panel de administración
@@ -96,7 +95,7 @@ frontend/
 ### 🔧 Panel de Administración
 - Gestión del menú (CRUD completo)
 - Gestión de usuarios/clientes (CRUD completo, incluyendo agregar usuario)
-- Vista de todas las reservas
+
 - Herramientas administrativas
 
 ## 🛠️ Instalación y desarrollo
@@ -156,9 +155,9 @@ Configurado para trabajar junto con Material-UI, proporcionando utilidades adici
 ### Rutas protegidas
 Algunas páginas requieren autenticación:
 - Perfil de usuario
-- Crear reservas
+
 - Panel de administración
-- Mis reseñas y reservas
+- Mis reseñas
 
 ## 📱 Responsive Design
 
@@ -204,7 +203,7 @@ Utiliza breakpoints de Tailwind y Material-UI para garantizar una experiencia ó
 - CRUD completo del menú
 - Gestión de categorías
 - CRUD de usuarios/clientes (agregar, editar, eliminar)
-- Vista de reservas
+
 - Herramientas administrativas
 
 ## 🔧 Personalización
@@ -239,11 +238,6 @@ Failed to fetch API data
 ```
 **Solución**: Verificar que el backend esté ejecutándose en `http://localhost:5000` y que el proxy esté configurado correctamente.
 
-### Problemas con imágenes
-```
-Image not loading
-```
-**Solución**: Verificar que las imágenes estén en la carpeta `public/images/` y que las rutas sean correctas.
 
 ### Error de autenticación
 ```

@@ -4,9 +4,7 @@ Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) d
 
 ---
 
-## 📢 Cambios y funcionalidades destacadas 
-
-- **✅ Carrusel de imágenes arreglado**: Se corrigieron las imágenes rotas del HeroSlider utilizando recursos locales en lugar de URLs externas.
+## 📢 Cambios y funcionalidades destacadas
 - **🎨 Modo claro/oscuro** con diseño moderno y responsivo en todo el frontend.
 - **👨‍💼 Gestión completa de admin**:
   - CRUD de platos (menú) y variantes con eliminación lógica.

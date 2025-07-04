@@ -79,16 +79,6 @@ docker-compose up --build
 }
 ```
 
-#### Reservation (Reservación)
-```javascript
-{
-  client: ObjectId,      // Referencia al cliente
-  datetime: Date,        // Fecha y hora de la reserva
-  people: Number,        // Número de personas
-  state: String         // 'pending' | 'confirmed' | 'canceled'
-}
-```
-
 #### Review (Reseña)
 ```javascript
 {

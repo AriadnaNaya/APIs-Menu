@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
+
+/* Estilos de Slick Carousel */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+/* Estilos personalizados para HeroSlider */
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 2px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.slick-dots li button:hover,
+.slick-dots li.slick-active button {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.2);
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: white;
+}
+
+/* Asegurar que las imágenes se carguen correctamente */
+.hero-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Nunito', sans-serif;
+  background-color: unset;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+
+html {
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+
+h1 {
+  font-family: 'Bonheur Royale', cursive;
+  @apply text-4xl font-bold text-center my-6 text-green-800;
+}
+
+/* Navegación */
+.navs {
+  @apply flex justify-center items-center mb-10 hover:text-green-800 font-bold;
+}
+
+/* Botones de categorías */
+.main-category-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.main-category {
+  background-color: #f8f9fa;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.main-category.active {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.main-category:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Contenedor general */
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Sección de subcategoría */
+.subcategory-section {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+}
+
+.subcategory-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2d3e50;
+  text-align: left;
+  width: 100%;
+  border-bottom: 3px solid #2d3e50;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+/* Grid de ítems */
+.meal-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 8px 20px;
+}
+
+.meal-variantes h4 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.meal-variantes ul {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.meal-variantes li {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+ul.mt-2.space-y-1.text-xs.text-gray-600 {
+  margin-top: 12px;
+  padding-left: 16px;
+  font-size: 0.85rem;
+  color: #444;
+  list-style-type: disc;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1240px) {
+  .main-category-container,
+  .category-container,
+  .subcategory-section,
+  .meal-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .subcategory-title {
+    font-size: 1.7rem;
+  }
+  
+  .main-category-container,
+  .category-container,
+  .subcategory-section,
+  .meal-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .meal-container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    padding: 8px 15px;
+  }
+  .subcategory-title {
+    font-size: 1.5rem;
+  }
+  
+  .main-category-container,
+  .category-container,
+  .subcategory-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .subcategory-title {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  .main-category {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+  .meal-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 8px 10px;
+  }
+  
+  .main-category-container,
+  .category-container,
+  .subcategory-section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@keyframes zoomFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-slide {
+  width: 100%;
+  height: 400px; /* o la altura que prefieras */
+  background-position: center;
+  background-size: cover; /* O "contain" si preferís ver toda la imagen sin recorte */
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: opacity 1s ease-in-out;
+  background-color: #111827;
+}

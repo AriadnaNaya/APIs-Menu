@@ -206,29 +206,6 @@ Utiliza breakpoints de Tailwind y Material-UI para garantizar una experiencia ó
 
 - Herramientas administrativas
 
-## 🔧 Personalización
-
-### Colores y tema
-Modificar `src/theme.js` para cambiar la paleta de colores:
-
-```javascript
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#8B4513', // Marrón principal
-    },
-    secondary: {
-      main: '#D2691E', // Naranja
-    }
-  }
-});
-```
-
-### Estilos globales
-Editar `src/index.css` para modificar estilos base y variables CSS.
-
-### Configuración de Tailwind
-Modificar `tailwind.config.cjs` para agregar colores, fuentes o utilidades personalizadas.
 
 ## 🐛 Troubleshooting
 

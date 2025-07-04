@@ -13,7 +13,8 @@ import {
 	Drawer,
 	List,
 	ListItemButton,
-	ListItemText
+	ListItemText,
+	Container
 } from '@mui/material';
 import MenuIcon      from '@mui/icons-material/Menu';
 import DarkModeIcon  from '@mui/icons-material/DarkMode';
@@ -98,134 +99,136 @@ export default function Header() {
 				boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)',
 				zIndex: 1201
 			}}>
-				<Toolbar sx={{ minHeight: { xs: 56, sm: 64 }, px: { xs: 1, sm: 3 } }}>
-					{/* Icono hamburguesa en móvil */}
-					<IconButton
-						edge="start"
-						color="inherit"
-						onClick={handleDrawerToggle}
-						sx={{ mr: 2, display: { sm: 'none' } }}
-					>
-						<MenuIcon />
-					</IconButton>
+				<Container maxWidth="lg" sx={{ px: 0 }}>
+					<Toolbar sx={{ minHeight: { xs: 56, sm: 64 }, px: { xs: 1, sm: 3 } }}>
+						{/* Icono hamburguesa en móvil */}
+						<IconButton
+							edge="start"
+							color="inherit"
+							onClick={handleDrawerToggle}
+							sx={{ mr: 2, display: { sm: 'none' } }}
+						>
+							<MenuIcon />
+						</IconButton>
 
-					{/* Logo */}
-					<Typography
-						component={Link}
-						to="/"
-						variant="h6"
-						sx={{
-							flexGrow: 1,
-							textDecoration: 'none',
-							color: 'inherit',
-							fontWeight: 'bold'
-						}}
-					>
-						Sushi Town
-					</Typography>
+						{/* Logo */}
+						<Typography
+							component={Link}
+							to="/"
+							variant="h6"
+							sx={{
+								flexGrow: 1,
+								textDecoration: 'none',
+								color: 'inherit',
+								fontWeight: 'bold'
+							}}
+						>
+							Sushi Town
+						</Typography>
 
-					{/* Navegación en escritorio */}
-					<Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-						{client?.role === 'admin' ? (
-							<>
-								<Button
-									component={Link}
-									to="/admin"
-									color="inherit"
-									sx={{ textTransform: 'none', mr: 2 }}
-								>
-									Panel de Control
-								</Button>
-								<Button
-									component={Link}
-									to="/admin/platos"
-									color="inherit"
-									sx={{ textTransform: 'none', mr: 2 }}
-								>
-									Platos
-								</Button>
-								<Button
-									component={Link}
-									to="/admin/usuarios"
-									color="inherit"
-									sx={{ textTransform: 'none', mr: 2 }}
-								>
-									Usuarios
-								</Button>
-								<Button
-									onClick={handleLogout}
-									color="inherit"
-									sx={{ textTransform: 'none', mr: 2 }}
-								>
-									Cerrar Sesión
-								</Button>
-							</>
-						) : (
-							<>
-								{client?.role === 'admin' ? null : (
-									<>
-										{client?.role === 'admin' ? null : (
-											<Button
-												component={Link}
-												to="/menu"
-												color="inherit"
-												sx={{ textTransform: 'none', mr: 2 }}
-											>
-												Explorar carta
-											</Button>
-										)}
-										<IconButton
-											color="inherit"
-											onClick={colorMode.toggleColorMode}
-											sx={{ mr: 2 }}
-										>
-											{theme.palette.mode === 'dark'
-												? <LightModeIcon />
-												: <DarkModeIcon />
-											}
-										</IconButton>
-										{token ? (
-											<>
-												<IconButton onClick={handleAvatarClick} sx={{ p: 0, mr: 1 }}>
-													<Avatar src={client.avatar} alt={client.name} />
-												</IconButton>
-												<Menu
-													anchorEl={anchorEl}
-													open={openMenu}
-													onClose={handleMenuClose}
-												>
-													<MenuItem onClick={handleProfile}>Mi Perfil</MenuItem>
-													<MenuItem onClick={handleMyReviews}>Mis Reseñas</MenuItem>
-													<MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
-												</Menu>
-											</>
-										) : (
-											<>
+						{/* Navegación en escritorio */}
+						<Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
+							{client?.role === 'admin' ? (
+								<>
+									<Button
+										component={Link}
+										to="/admin"
+										color="inherit"
+										sx={{ textTransform: 'none', mr: 2 }}
+									>
+										Panel de Control
+									</Button>
+									<Button
+										component={Link}
+										to="/admin/platos"
+										color="inherit"
+										sx={{ textTransform: 'none', mr: 2 }}
+									>
+										Platos
+									</Button>
+									<Button
+										component={Link}
+										to="/admin/usuarios"
+										color="inherit"
+										sx={{ textTransform: 'none', mr: 2 }}
+									>
+										Usuarios
+									</Button>
+									<Button
+										onClick={handleLogout}
+										color="inherit"
+										sx={{ textTransform: 'none', mr: 2 }}
+									>
+										Cerrar Sesión
+									</Button>
+								</>
+							) : (
+								<>
+									{client?.role === 'admin' ? null : (
+										<>
+											{client?.role === 'admin' ? null : (
 												<Button
 													component={Link}
-													to="/login"
+													to="/menu"
 													color="inherit"
-													sx={{ textTransform: 'none', mr: 1 }}
+													sx={{ textTransform: 'none', mr: 2 }}
 												>
-													Login
+													Explorar carta
 												</Button>
-												<Button
-													component={Link}
-													to="/register"
-													variant="contained"
-													color="primary"
-													sx={{ textTransform: 'none' }}
-												>
-													Register
-												</Button>
-											</>
-										)}
-									</>
-								)}
-							</>
-						)}
-					</Box>
-				</Toolbar>
+											)}
+											<IconButton
+												color="inherit"
+												onClick={colorMode.toggleColorMode}
+												sx={{ mr: 2 }}
+											>
+												{theme.palette.mode === 'dark'
+													? <LightModeIcon />
+													: <DarkModeIcon />
+												}
+											</IconButton>
+											{token ? (
+												<>
+													<IconButton onClick={handleAvatarClick} sx={{ p: 0, mr: 1 }}>
+														<Avatar src={client.avatar} alt={client.name} />
+													</IconButton>
+													<Menu
+														anchorEl={anchorEl}
+														open={openMenu}
+														onClose={handleMenuClose}
+													>
+														<MenuItem onClick={handleProfile}>Mi Perfil</MenuItem>
+														<MenuItem onClick={handleMyReviews}>Mis Reseñas</MenuItem>
+														<MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
+													</Menu>
+												</>
+											) : (
+												<>
+													<Button
+														component={Link}
+														to="/login"
+														color="inherit"
+														sx={{ textTransform: 'none', mr: 1 }}
+													>
+														Login
+													</Button>
+													<Button
+														component={Link}
+														to="/register"
+														variant="contained"
+														color="primary"
+														sx={{ textTransform: 'none' }}
+													>
+														Register
+													</Button>
+												</>
+											)}
+										</>
+									)}
+								</>
+							)}
+						</Box>
+					</Toolbar>
+				</Container>
 			</AppBar>
 
 			{/* Drawer móvil */}

@@ -1,7 +1,7 @@
 // frontend/src/App.jsx
 import React, { useState, useMemo, createContext, useContext } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { Box, Toolbar, CssBaseline, ThemeProvider } from '@mui/material';
+import { Box, Toolbar, CssBaseline, ThemeProvider, Container } from '@mui/material';
 import { createTheme, useTheme } from '@mui/material/styles';
 
 import getDesignTokens from './theme';
@@ -43,6 +43,14 @@ export default function App() {
 		return <Navigate to="/" replace />;
 	}
 
+	// Páginas que no necesitan contenedor con ancho máximo (hero sections que van full width)
+	const fullWidthPages = ['/', '/menu'];
+	const isFullWidthPage = fullWidthPages.includes(location.pathname);
+
+	// Páginas de admin que necesitan su propio manejo de padding
+	const adminPages = ['/admin', '/admin/platos', '/admin/usuarios'];
+	const isAdminPage = adminPages.includes(location.pathname);
+
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 			<Header />
@@ -51,10 +59,15 @@ export default function App() {
 			{!['/', '/menu'].includes(location.pathname) && <Toolbar />}
 
 			<Box component="main" sx={{ 
-				flexGrow: 1, 
-				px: ['/admin', '/admin/platos', '/admin/usuarios'].includes(location.pathname) 
+				flexGrow: 1,
+				width: '100%',
+				maxWidth: isFullWidthPage ? '100%' : '1200px', // Limitar ancho máximo
+				margin: '0 auto', // Centrar el contenido
+				px: isAdminPage 
 					? 0  // No padding for admin pages (they handle their own)
-					: { xs: 2, sm: 3, md: 4 }  // Normal padding for other pages
+					: isFullWidthPage 
+						? 0  // No padding for full width pages
+						: { xs: 2, sm: 3, md: 4 }  // Normal padding for other pages
 			}}>
 				<Routes>
 					<Route path="/"             element={<Home />} />

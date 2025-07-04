@@ -151,30 +151,6 @@ Authorization: Bearer <token>
 - Accede a la documentación Swagger en: `http://localhost:5000/api-docs`
 - Puedes probar todos los endpoints y ver los esquemas de datos.
 
-## 📝 Ejemplos de uso
-
-### Registro de usuario
-```bash
-curl -X POST http://localhost:5000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Juan Pérez",
-    "contact": "juan@email.com",
-    "password": "123456"
-  }'
-```
-
-### Obtener menú agrupado
-```bash
-curl http://localhost:5000/api/items/grouped
-```
-
-
-### Filtrar menú por precio
-```bash
-curl "http://localhost:5000/api/items?priceMin=10&priceMax=25"
-```
-
 ## 🔍 Funcionalidades
 
 ### Filtros de menú

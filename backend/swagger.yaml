@@ -86,7 +86,17 @@ components:
         variants:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              name:
+                type: string
+                description: Nombre de la variante
+              price:
+                type: number
+                description: Precio de la variante
+            required:
+              - name
+              - price
           description: Variantes disponibles del plato
         isDeleted:
           type: boolean
@@ -106,7 +116,7 @@ components:
         image: "https://example.com/images/pizza-margherita.jpg"
         category: "Pizzas"
         mainCategory: "Comidas"
-        variants: ["Pequeña", "Mediana", "Grande"]
+        variants: [{"name": "Pequeña", "price": 16.99}, {"name": "Mediana", "price": 18.99}, {"name": "Grande", "price": 22.99}]
         isDeleted: false
 
     Review:
@@ -571,7 +581,17 @@ paths:
                 variants:
                   type: array
                   items:
-                    type: string
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: Nombre de la variante
+                      price:
+                        type: number
+                        description: Precio de la variante
+                    required:
+                      - name
+                      - price
               example:
                 name: "Pasta Carbonara"
                 description: "Pasta con salsa cremosa, panceta y parmesano"
@@ -579,7 +599,7 @@ paths:
                 image: "https://example.com/pasta-carbonara.jpg"
                 category: "Pastas"
                 mainCategory: "Comidas"
-                variants: ["Porción normal", "Porción grande"]
+                variants: [{"name": "Porción normal", "price": 22.50}, {"name": "Porción grande", "price": 26.50}]
       responses:
         '201':
           description: Elemento creado exitosamente
@@ -678,7 +698,17 @@ paths:
                   variants:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Nombre de la variante
+                        price:
+                          type: number
+                          description: Precio de la variante
+                      required:
+                        - name
+                        - price
       responses:
         '201':
           description: Elementos creados exitosamente
@@ -772,7 +802,17 @@ paths:
                   variants:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Nombre de la variante
+                        price:
+                          type: number
+                          description: Precio de la variante
+                      required:
+                        - name
+                        - price
               example:
                 - name: "Pizza Margherita"
                   description: "Pizza tradicional italiana"
@@ -891,7 +931,17 @@ paths:
                 variants:
                   type: array
                   items:
-                    type: string
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: Nombre de la variante
+                      price:
+                        type: number
+                        description: Precio de la variante
+                    required:
+                      - name
+                      - price
       responses:
         '200':
           description: Elemento actualizado exitosamente

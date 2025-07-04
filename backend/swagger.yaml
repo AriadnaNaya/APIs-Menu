@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
-  title: Town Kitchen API
-  description: API REST para la aplicación Town Kitchen Menu - Sistema de gestión de restaurante con menú digital, reservas y reseñas
+  title: Sushi Town API
+  description: API REST para la aplicación Sushi Town Menu - Sistema de gestión de restaurante con menú digital, reservas y reseñas
   version: 1.0.0
   contact:
-    name: Town Kitchen Team
+    name: Sushi Town Team
     email: contact@townkitchen.com
   license:
     name: MIT

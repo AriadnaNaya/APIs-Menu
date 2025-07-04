@@ -1,6 +1,6 @@
-# Town Kitchen - Backend API
+# Sushi Town - Backend API
 
-API REST desarrollada con Node.js, Express y MongoDB para la aplicación Town Kitchen Menu.
+API REST desarrollada con Node.js, Express y MongoDB para la aplicación Sushi Town Menu.
 
 ## 🚀 Tecnologías
 

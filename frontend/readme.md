@@ -1,6 +1,6 @@
-# Town Kitchen - Frontend
+# Sushi Town - Frontend
 
-Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Town Kitchen. Incluye gestión de menú, reseñas y sistema de autenticación.
+Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Sushi Town. Incluye gestión de menú, reseñas y sistema de autenticación.
 
 ## 🆕 Novedades y mejoras 
 

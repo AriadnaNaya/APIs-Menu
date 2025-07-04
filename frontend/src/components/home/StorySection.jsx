@@ -43,7 +43,7 @@ export default function StorySection() {
                     Hace más de una década, dos amigos soñaron con un rincón donde la
                     tradición del sushi se encontrara con la energía de la ciudad.
                     Tras meses de pruebas, recetas olvidadas y risas compartidas,
-                    abrieron las puertas de Town Kitchen. Hoy, cada bocado rinde
+                    abrieron las puertas de Sushi Town. Hoy, cada bocado rinde
                     homenaje a aquel sueño: ingredientes frescos, un servicio
                     cercano y un espacio donde cada comida se convierte en una
                     celebración de amistad y sabor.

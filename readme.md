@@ -6,48 +6,83 @@ Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) d
 
 ## 📢 Cambios y funcionalidades destacadas (2024)
 
-- **Modo claro/oscuro** con diseño moderno y responsivo en todo el frontend.
-- **Gestión completa de admin**:
-  - CRUD de platos (menú) y variantes.
+- **✅ Carrusel de imágenes arreglado**: Se corrigieron las imágenes rotas del HeroSlider utilizando recursos locales en lugar de URLs externas.
+- **🎨 Modo claro/oscuro** con diseño moderno y responsivo en todo el frontend.
+- **👨‍💼 Gestión completa de admin**:
+  - CRUD de platos (menú) y variantes con eliminación lógica.
   - CRUD de usuarios/clientes (solo admin).
-  - Panel de control exclusivo para admin.
-- **Carrusel superior** (HeroSlider) mejorado, rectangular y con imágenes proporcionadas.
-- **Imágenes y cards** siempre bien proporcionadas y con estilos modernos.
-- **Documentación interactiva Swagger** accesible en `/api-docs` (backend).
-- **Limpieza de code smells** y mejoras de responsividad en todas las vistas.
+  - Panel de control exclusivo para administradores.
+- **🖼️ Carrusel superior** (HeroSlider) con imágenes locales optimizadas y bien proporcionadas.
+- **📱 Diseño responsive** con imágenes y cards siempre bien proporcionadas.
+- **📚 Documentación interactiva Swagger** accesible en `/api-docs` (backend).
+- **🔧 Eliminación lógica** de elementos del menú para mantener históricos.
+- **⭐ Sistema de reseñas** completo con gestión de comentarios y calificaciones.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+### Backend
+- **Node.js** con **Express.js** (v4.18.2)
+- **MongoDB** con **Mongoose** (v6.8.0) 
+- **JWT** para autenticación (jsonwebtoken v9.0.0)
+- **bcrypt** para encriptación de contraseñas (v5.1.0)
+- **Swagger UI** para documentación de API (v4.6.3)
+- **CORS** habilitado para requests cross-origin
+
+### Frontend
+- **React 18** con **Vite** como bundler
+- **Material-UI (MUI)** v5.15.0 para componentes
+- **Tailwind CSS** v3.2.4 para estilos
+- **React Router DOM** v6.6.1 para navegación
+- **React Slick** para carruseles y sliders
+- **Luxon** para manejo de fechas
+
+### Infraestructura
+- **Docker** y **Docker Compose** para orquestación
+- **Nginx** como servidor web para el frontend en producción
 
 ---
 
 ## 📁 Estructura del proyecto
 
 ```
-APIs/                      # raíz del repositorio
+APIs-Menu/                 # raíz del repositorio
 ├── docker-compose.yml     # orquesta contenedores Mongo, backend y frontend
 │
 ├── backend/               # servicio Node.js + Express
 │   ├── Dockerfile         # build e inicio del servidor
-│   ├── .env               # variables de entorno (no versionar credenciales)
-│   ├── package.json
-│   ├── package-lock.json
+│   ├── package.json       # dependencias y scripts
 │   ├── server.js          # configuración de Express y Mongoose
+│   ├── swagger.yaml       # documentación OpenAPI 3.0
 │   ├── models/            # esquemas de Mongoose
-│   └── routes/            # rutas REST (/api/items)
+│   │   ├── Client.js      # modelo de usuarios/clientes
+│   │   ├── MenuItem.js    # modelo de elementos del menú
+│   │   └── Review.js      # modelo de reseñas
+│   ├── routes/            # rutas REST de la API
+│   │   ├── auth.js        # autenticación y gestión de usuarios
+│   │   ├── menu.js        # gestión del menú
+│   │   └── reviews.js     # sistema de reseñas
+│   ├── middleware/        # middlewares de autenticación
+│   │   ├── auth.js        # verificación de JWT
+│   │   └── adminOnly.js   # restricción a administradores
+│   ├── utils/             # utilidades y helpers
+│   └── data/              # datos de seed y ejemplos
 │
 └── frontend/              # aplicación React con Vite
-    ├── Dockerfile         # build con Node y serve estáticos con Nginx
-    ├── package.json
-    ├── package-lock.json
+    ├── Dockerfile         # build con Node y serve con Nginx
+    ├── package.json       # dependencias frontend
     ├── vite.config.js     # proxy de API para `/api/...`
-    ├── postcss.config.cjs
-    ├── tailwind.config.cjs
+    ├── tailwind.config.cjs # configuración de Tailwind
     ├── index.html         # plantilla HTML
     └── src/               # código fuente React
-        ├── main.jsx
-        ├── App.jsx
-        ├── theme.js
-        ├── index.css
-        ├── utils/
-        └── components/
+        ├── main.jsx       # punto de entrada
+        ├── App.jsx        # componente principal
+        ├── theme.js       # tema de Material-UI
+        ├── components/    # componentes reutilizables
+        ├── pages/         # páginas de la aplicación
+        ├── context/       # contextos de React
+        └── utils/         # utilidades frontend
 ```
 
 ---
@@ -55,8 +90,7 @@ APIs/                      # raíz del repositorio
 ## 🚀 Requisitos previos
 
 * **Docker** (>= 20.x) y **Docker Compose** (>= 1.29.x) instalados y en el `PATH`.
-* Puerto libre en tu máquina local:
-
+* Puertos libres en tu máquina local:
     * **27017** para MongoDB
     * **5000** para el backend
     * **3000** para el frontend
@@ -71,16 +105,17 @@ APIs/                      # raíz del repositorio
 
    ```bash
    git clone https://github.com/tu-usuario/APIs-Menu.git
-   cd APIs-Menu/APIs
+   cd APIs-Menu
    ```
 
 2. **Configura variables de entorno del backend**:
 
-    * Duplica `backend/.env.example` como `backend/.env` y ajusta si fuera necesario:
+    * Crea `backend/.env` con las siguientes variables:
 
       ```dotenv
       PORT=5000
       MONGO_URI=mongodb://mongo:27017/townkitchen
+      JWT_SECRET=tu_jwt_secret_key_aqui
       ```
 
 3. **Inicia todos los servicios**:
@@ -90,7 +125,6 @@ APIs/                      # raíz del repositorio
    ```
 
     * Esto descargará/buildará las imágenes y levantará:
-
         * **MongoDB** en `localhost:27017`
         * **Backend** en `localhost:5000`
         * **Frontend** (React + Nginx) en `localhost:3000`
@@ -103,12 +137,61 @@ APIs/                      # raíz del repositorio
 
    # O logs de un servicio en particular:
    docker-compose logs -f backend
+   docker-compose logs -f frontend
    ```
 
 5. **Accede a la aplicación**:
 
-    * Navega a 👉 `http://localhost:3000` para ver el frontend.
-    * Haz peticiones REST a `http://localhost:5000/api/items` para probar el backend.
+    * **Frontend**: 👉 `http://localhost:3000`
+    * **API Backend**: `http://localhost:5000/api`
+    * **Documentación Swagger**: `http://localhost:5000/api-docs`
+
+---
+
+## 🔧 Desarrollo local (sin Docker)
+
+### Backend
+```bash
+cd backend
+npm install
+cp .env.example .env  # y configura las variables
+npm start
+```
+
+### Frontend  
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## 📚 API Endpoints principales
+
+### Autenticación
+- `POST /api/auth/register` - Registro de usuario
+- `POST /api/auth/login` - Inicio de sesión
+- `GET /api/auth/me` - Perfil del usuario actual
+- `PUT /api/auth/me` - Actualizar perfil
+
+### Gestión de usuarios (Solo Admin)
+- `GET /api/auth/clients` - Listar todos los usuarios
+- `PUT /api/auth/clients/:id` - Editar usuario
+- `DELETE /api/auth/clients/:id` - Eliminar usuario
+
+### Menú
+- `GET /api/items` - Obtener elementos del menú (con filtros)
+- `GET /api/items/grouped` - Obtener menú agrupado por categorías
+- `GET /api/items/:id` - Obtener elemento específico
+- `POST /api/items` - Crear nuevo elemento (Solo Admin)
+- `PUT /api/items/:id` - Actualizar elemento (Solo Admin)
+- `DELETE /api/items/:id` - Eliminación lógica (Solo Admin)
+
+### Reseñas
+- `GET /api/reviews` - Obtener todas las reseñas
+- `POST /api/reviews` - Crear nueva reseña
+- `GET /api/reviews/me` - Obtener mis reseñas
 
 ---
 
@@ -120,37 +203,59 @@ docker-compose down
 
 # Parar y eliminar volumen de MongoDB (pierdes datos)
 docker-compose down -v
+
+# Reconstruir las imágenes
+docker-compose up --build -d
 ```
 
 ---
 
 ## 🔍 Troubleshooting
 
-* **Error de CORS**: el backend ya incluye `cors()`. Si persiste, revisa la URL de fetch en `src/components/Menu.jsx` (`/api/items`).
+* **Error de CORS**: el backend ya incluye `cors()`. Si persiste, revisa la URL de fetch en el frontend.
 * **Frontend 404**: asegúrate de que el build se creó con éxito y que Nginx copia la carpeta `dist/`.
 * **Mongo no arranca**: verifica permisos del volumen `mongo_data`.
-
----
-
-## 📖 Más información
-
-- **Frontend**: documentación de Vite, React, MUI y Tailwind. 
-  - Modo claro/oscuro, cards modernas, gestión admin, responsive real.
-- **Backend**: Express y Mongoose.
-  - Endpoints RESTful, gestión de usuarios y menú, documentación Swagger en `/api-docs`.
-- **Dockers**: consulta la configuración en `docker-compose.yml` y los Dockerfiles en cada carpeta.
+* **PowerShell && error**: En Windows PowerShell, usa `;` en lugar de `&&`:
+  ```powershell
+  cd frontend; npm run dev
+  ```
+* **Imágenes rotas en carrusel**: Las imágenes ahora son locales (`/img/heroNuevo1.png`, etc.)
 
 ---
 
 ## 📝 Funcionalidades principales
 
-- **Usuarios**: registro, login, perfil, reservas, reseñas.
-- **Admin**: panel exclusivo, gestión de platos y usuarios, acceso restringido.
-- **Menú**: visualización, filtrado, detalles y variantes.
-- **Reseñas**: crear, ver, gestionar propias.
-- **Visual**: dark/light mode, imágenes proporcionadas, diseño moderno y responsivo.
-- **Swagger**: documentación interactiva en `/api-docs`.
+### 👤 Para usuarios
+- **Registro y autenticación** con JWT
+- **Navegación del menú** con filtros por categoría y precio
+- **Visualización detallada** de platos con variantes
+- **Sistema de reseñas** para calificar la experiencia
+- **Perfil personal** con gestión de datos
+
+### 👨‍💼 Para administradores
+- **Panel de control exclusivo** con gestión completa
+- **CRUD de platos** con eliminación lógica para mantener históricos
+- **Gestión de usuarios** (crear, editar, eliminar)
+- **Control de variantes** de platos
+- **Monitoreo de reseñas** del sistema
+
+### 🎨 Características técnicas
+- **Modo claro/oscuro** persistente
+- **Diseño responsive** para todos los dispositivos
+- **Carrusel de imágenes** optimizado con recursos locales
+- **Documentación interactiva** con Swagger UI
+- **Eliminación lógica** para mantener integridad de datos
+- **Autenticación segura** con JWT y bcrypt
 
 ---
 
-Para detalles específicos de frontend y backend, revisa los README en cada carpeta.
+## 📖 Más información
+
+- **Documentación completa de API**: Visita `http://localhost:5000/api-docs` una vez que la aplicación esté ejecutándose
+- **Frontend**: Construido con React 18, Material-UI y Tailwind CSS
+- **Backend**: Express.js con MongoDB y documentación OpenAPI 3.0
+- **Deployment**: Configurado para Docker con nginx en producción
+
+---
+
+Para detalles específicos de implementación, revisa los archivos de configuración en cada carpeta y la documentación Swagger interactiva.

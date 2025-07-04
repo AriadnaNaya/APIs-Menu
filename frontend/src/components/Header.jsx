@@ -112,7 +112,7 @@ export default function Header() {
 					{/* Logo */}
 					<Typography
 						component={Link}
-						to="/menu"
+						to="/"
 						variant="h6"
 						sx={{
 							flexGrow: 1,

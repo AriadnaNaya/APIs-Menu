@@ -20,18 +20,18 @@ export default function HeroSlider() {
     const slides = [
         {
             title: 'Sushi Town',
-            subtitle: 'Explora nuestra carta',
+            subtitle: '',
             image: '/img/heroNuevo1.png'
         },
         {
             title: 'Delicias de Mar',
             subtitle: 'Frescura y sabor',
-            image: 'https://images.unsplash.com/photo-1547592166-3f2bdcef15c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+            image: '/img/hero1.jpg'
         },
         {
             title: 'Ambiente Único',
             subtitle: 'Disfruta con nosotros',
-            image: 'https://images.unsplash.com/photo-1541542689-2c9e50e74ea4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+            image: '/img/hero2.jpg'
         }
     ];
 
@@ -84,8 +84,13 @@ export default function HeroSlider() {
                         {/* Texto */}
                         <Box
                             sx={{
-                                position: 'relative',
+                                position: 'absolute',
+                                inset: 0,
                                 zIndex: 1,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
                                 textAlign: 'center',
                                 color: '#fff',
                                 px: 2
@@ -94,17 +99,19 @@ export default function HeroSlider() {
                             <Typography
                                 variant="h3"
                                 component="h2"
-                                gutterBottom
-                                sx={{ fontWeight: 'bold', fontSize: { xs: '1.8rem', md: '3rem' } }}
+                                gutterBottom={!!slide.subtitle}
+                                sx={{ fontWeight: 'bold', fontSize: { xs: '1.8rem', md: '3rem' }, mb: slide.subtitle ? 1 : 0 }}
                             >
                                 {slide.title}
                             </Typography>
-                            <Typography
-                                variant="h6"
-                                sx={{ fontSize: { xs: '1rem', md: '1.25rem' } }}
-                            >
-                                {slide.subtitle}
-                            </Typography>
+                            {slide.subtitle && (
+                                <Typography
+                                    variant="h6"
+                                    sx={{ fontSize: { xs: '1rem', md: '1.25rem' } }}
+                                >
+                                    {slide.subtitle}
+                                </Typography>
+                            )}
                         </Box>
                     </Box>
                 ))}

@@ -16,20 +16,23 @@ export default function HeroSection() {
                 marginLeft: '-50vw',
                 marginRight: '-50vw',
                 /* Altura responsive */
-                height: { xs: '60vh', md: '80vh' },
+                height: { xs: '38vh', md: '56vh' },
+                minHeight: 220,
+                maxHeight: 420,
                 /* Imagen de fondo */
-                backgroundImage: `url("https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80")`,
+                backgroundImage: `url("/img/heroNuevo1.png")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 /* Overlay semitransparente */
-                borderRadius: { xs: 0, md: 4 },
+                borderRadius: 0,
                 overflow: 'hidden',
+                boxShadow: '0 2px 12px 0 rgba(0,0,0,0.07)',
                 '&::before': {
                     content: '""',
                     position: 'absolute',
                     inset: 0,
-                    bgcolor: 'rgba(0,0,0,0.45)',
+                    bgcolor: 'rgba(0,0,0,0.4)',
                     backdropFilter: 'blur(2px)'
                 },
                 /* Centrado de contenido */

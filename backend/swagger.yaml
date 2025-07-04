@@ -50,14 +50,14 @@ components:
           description: URL del avatar del usuario
         role:
           type: string
-          enum: [user, admin]
+          enum: [client, admin]
           description: Rol del usuario en el sistema
       example:
         id: "64a7b8c9d1e2f3456789"
         name: "Juan Pérez"
         contact: "juan@email.com"
         avatar: "https://ui-avatars.com/api/?name=Juan+Pérez"
-        role: "user"
+        role: "client"
 
     MenuItem:
       type: object
@@ -109,6 +109,38 @@ components:
         variants: ["Pequeña", "Mediana", "Grande"]
         isDeleted: false
 
+    Review:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID único de la reseña
+        client:
+          $ref: '#/components/schemas/Client'
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          description: Calificación de 1 a 5 estrellas
+        comment:
+          type: string
+          description: Comentario de la reseña
+        date:
+          type: string
+          format: date-time
+          description: Fecha de creación de la reseña
+      example:
+        _id: "64a7b8c9d1e2f3456789"
+        client:
+          id: "64a7b8c9d1e2f3456789"
+          name: "Juan Pérez"
+          contact: "juan@email.com"
+          avatar: "https://ui-avatars.com/api/?name=Juan+Pérez"
+          role: "client"
+        rating: 5
+        comment: "Excelente comida y servicio, muy recomendado"
+        date: "2024-01-15T10:30:00.000Z"
+
     AuthResponse:
       type: object
       properties:
@@ -124,7 +156,7 @@ components:
           name: "Juan Pérez"
           contact: "juan@email.com"
           avatar: "https://ui-avatars.com/api/?name=Juan+Pérez"
-          role: "user"
+          role: "client"
 
     Error:
       type: object
@@ -305,6 +337,152 @@ paths:
                 $ref: '#/components/schemas/Error'
         '401':
           description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # CLIENT MANAGEMENT ENDPOINTS (Admin Only)
+  /api/auth/clients:
+    get:
+      tags:
+        - Authentication
+      summary: Listar todos los clientes
+      description: Obtiene lista de todos los usuarios registrados (solo administradores)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Permisos insuficientes (solo admin)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/clients/{id}:
+    put:
+      tags:
+        - Authentication
+      summary: Editar cliente
+      description: Actualiza información de un cliente específico (solo administradores)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del cliente a editar
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nombre del cliente
+                contact:
+                  type: string
+                  description: Contacto del cliente
+                avatar:
+                  type: string
+                  description: URL del avatar
+                role:
+                  type: string
+                  enum: [client, admin]
+                  description: Rol del usuario
+              example:
+                name: "Juan Carlos Pérez"
+                contact: "juancarlos@email.com"
+                role: "client"
+      responses:
+        '200':
+          description: Cliente actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Permisos insuficientes (solo admin)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Cliente no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      tags:
+        - Authentication
+      summary: Eliminar cliente
+      description: Elimina un cliente del sistema (solo administradores)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del cliente a eliminar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cliente eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Cliente eliminado"
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Permisos insuficientes (solo admin)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Cliente no encontrado
           content:
             application/json:
               schema:
@@ -517,6 +695,128 @@ paths:
                       type: string
         '400':
           description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/items/grouped:
+    get:
+      tags:
+        - Menu
+      summary: Obtener menú agrupado por categorías
+      description: Retorna elementos del menú agrupados por categoría principal
+      responses:
+        '200':
+          description: Elementos del menú agrupados por categoría
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MenuItem'
+                example:
+                  "Comidas":
+                    - name: "Pizza Margherita"
+                      price: 18.99
+                      category: "Pizzas"
+                      mainCategory: "Comidas"
+                  "Bebidas":
+                    - name: "Coca Cola"
+                      price: 3.50
+                      category: "Gaseosas"
+                      mainCategory: "Bebidas"
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/items/bulk:
+    post:
+      tags:
+        - Menu
+      summary: Crear múltiples elementos del menú
+      description: Crea varios elementos del menú en una sola operación (solo administradores)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - price
+                  - category
+                  - mainCategory
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: number
+                  image:
+                    type: string
+                  category:
+                    type: string
+                  mainCategory:
+                    type: string
+                  variants:
+                    type: array
+                    items:
+                      type: string
+              example:
+                - name: "Pizza Margherita"
+                  description: "Pizza tradicional italiana"
+                  price: 18.99
+                  category: "Pizzas"
+                  mainCategory: "Comidas"
+                - name: "Coca Cola"
+                  description: "Bebida gaseosa"
+                  price: 3.50
+                  category: "Gaseosas"
+                  mainCategory: "Bebidas"
+      responses:
+        '201':
+          description: Elementos creados exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  insertedCount:
+                    type: integer
+                    description: Número de elementos insertados
+                  insertedIds:
+                    type: array
+                    items:
+                      type: string
+                    description: IDs de los elementos insertados
+                example:
+                  insertedCount: 2
+                  insertedIds: ["64a7b8c9d1e2f3456789", "64a7b8c9d1e2f3456790"]
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token inválido o faltante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Permisos insuficientes (solo admin)
           content:
             application/json:
               schema:

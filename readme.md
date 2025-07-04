@@ -1,12 +1,10 @@
-# Town Kitchen APIs (Fullstack)
+# Sushi Town APIs (Fullstack)
 
-Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) de la aplicación "Town Kitchen Menu", orquestados con Docker Compose.
+Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) de la aplicación "Sushi Town Menu", orquestados con Docker Compose.
 
 ---
 
-## 📢 Cambios y funcionalidades destacadas 
-
-- **✅ Carrusel de imágenes arreglado**: Se corrigieron las imágenes rotas del HeroSlider utilizando recursos locales en lugar de URLs externas.
+## 📢 Cambios y funcionalidades destacadas
 - **🎨 Modo claro/oscuro** con diseño moderno y responsivo en todo el frontend.
 - **👨‍💼 Gestión completa de admin**:
   - CRUD de platos (menú) y variantes con eliminación lógica.
@@ -104,7 +102,7 @@ APIs-Menu/                 # raíz del repositorio
 1. **Clona el repositorio** (si aún no lo tienes):
 
    ```bash
-   git clone https://github.com/tu-usuario/APIs-Menu.git
+   git clone https://github.com/AriadnaNaya/APIs-Menu
    cd APIs-Menu
    ```
 

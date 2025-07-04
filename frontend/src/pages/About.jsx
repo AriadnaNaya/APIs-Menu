@@ -7,7 +7,7 @@ export default function About() {
         <Container sx={{ py: 6 }}>
             <Typography variant="h3" gutterBottom>Sobre Nosotros</Typography>
             <Typography paragraph>
-                En Town Kitchen nacimos de la pasión por la cocina de fusión. Desde nuestros humildes comienzos en 2010, siempre hemos buscado...
+                En Sushi Town nacimos de la pasión por la cocina de fusión. Desde nuestros humildes comienzos en 2010, siempre hemos buscado...
             </Typography>
             <Box
                 component="img"

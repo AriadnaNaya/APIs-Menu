@@ -1,6 +1,6 @@
-# Town Kitchen APIs (Fullstack)
+# Sushi Town APIs (Fullstack)
 
-Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) de la aplicación "Town Kitchen Menu", orquestados con Docker Compose.
+Este repositorio contiene el frontend (React) y el backend (Node.js + MongoDB) de la aplicación "Sushi Town Menu", orquestados con Docker Compose.
 
 ---
 

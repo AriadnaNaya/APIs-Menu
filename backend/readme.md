@@ -2,14 +2,6 @@
 
 API REST desarrollada con Node.js, Express y MongoDB para la aplicación Town Kitchen Menu.
 
-## 🆕 Novedades y mejoras (2024)
-
-- **Endpoints de gestión de usuarios/clientes** para admin:
-  - Listar, editar, eliminar y agregar usuarios/clientes (`/api/auth/clients`)
-- **Endpoint POST /api/auth/clients**: permite al admin crear nuevos usuarios/clientes.
-- **Documentación Swagger** accesible en `/api-docs` (explora y prueba la API desde el navegador).
-- **Mejoras de seguridad y control de acceso** para rutas de admin.
-
 ## 🚀 Tecnologías
 
 - **Node.js** (v18+)
@@ -49,50 +41,11 @@ backend/
 
 ## 🔧 Instalación y configuración
 
-### Desarrollo local
-
-1. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
-
-2. **Configurar variables de entorno:**
-   Crear archivo `.env` en la raíz del backend:
-   ```env
-   PORT=5000
-   MONGO_URI=mongodb://localhost:27017/townkitchen
-   JWT_SECRET=miSecretoMuySeguro123!
-   ```
-
-3. **Iniciar MongoDB:**
-   ```bash
-   # Con Docker
-   docker run -d -p 27017:27017 --name mongo mongo:latest
-   
-   # O usar MongoDB local
-   mongod
-   ```
-
-4. **Ejecutar el servidor:**
-   ```bash
-   # Desarrollo (con nodemon)
-   npm run dev
-   
-   # Producción
-   npm start
-   ```
-
-5. **Poblar la base de datos (opcional):**
-   ```bash
-   node seed.js
-   node seed-items.js
-   ```
-
 ### Con Docker
 
 ```bash
 # Desde la raíz del proyecto
-docker-compose up -d
+docker-compose up --build
 ```
 
 ## 📊 Base de datos
@@ -283,22 +236,7 @@ Error MongoDB: MongoNetworkError: failed to connect to server
 ```
 **Solución**: Verificar que el usuario tenga role 'admin' para operaciones administrativas.
 
-## 🚀 Deployment
 
-### Variables de entorno para producción
-```env
-PORT=5000
-MONGO_URI=mongodb://usuario:password@host:puerto/basedatos
-JWT_SECRET=UnSecretoMuySeguroYComplejo123!
-NODE_ENV=production
-```
-
-### Scripts disponibles
-```bash
-npm start          # Iniciar servidor
-npm run dev        # Desarrollo con nodemon
-npm run seed       # Poblar base de datos
-```
 
 ## 📚 Documentación adicional
 

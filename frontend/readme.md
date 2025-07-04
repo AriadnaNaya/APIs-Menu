@@ -2,7 +2,7 @@
 
 Aplicación web moderna desarrollada con React y Vite para el sistema de menú digital del restaurante Town Kitchen. Incluye gestión de menú, reseñas y sistema de autenticación.
 
-## 🆕 Novedades y mejoras (2024)
+## 🆕 Novedades y mejoras 
 
 - **Modo claro/oscuro** con paleta moderna y coherente.
 - **Cards y modales** con imágenes siempre proporcionadas y diseño atractivo.
@@ -101,88 +101,23 @@ frontend/
 
 ## 🛠️ Instalación y desarrollo
 
-### Requisitos previos
-- **Node.js** (v16 o superior)
-- **npm** o **yarn**
-
-### Instalación
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone <repository-url>
-   cd frontend
-   ```
-
-2. **Instalar dependencias:**
-   ```bash
-   npm install
-   # o
-   yarn install
-   ```
-
-3. **Configurar variables de entorno:**
-   El frontend se conecta al backend a través del proxy configurado en `vite.config.js`. Por defecto apunta a `http://localhost:5000`.
-
-4. **Ejecutar en modo desarrollo:**
-   ```bash
-   npm run dev
-   # o
-   yarn dev
-   ```
-
-   La aplicación estará disponible en `http://localhost:3000`
-
-### Scripts disponibles
+### Con Docker
 
 ```bash
-npm run dev        # Servidor de desarrollo con hot reload
-npm run build      # Build de producción
-npm run preview    # Preview del build de producción
+# Desde la raíz del proyecto
+docker-compose up --build
 ```
+  La aplicación estará disponible en `http://localhost:3000`
+
 
 ## 🔧 Configuración
 
-### Proxy de API
-El archivo `vite.config.js` incluye configuración de proxy para las llamadas a la API:
-
-```javascript
-server: {
-  proxy: {
-    '/api': {
-      target: 'http://localhost:5000',
-      changeOrigin: true
-    }
-  }
-}
-```
 
 ### Tema personalizado
 El archivo `theme.js` contiene la configuración del tema de Material-UI con colores personalizados para el restaurante.
 
 ### Tailwind CSS
 Configurado para trabajar junto con Material-UI, proporcionando utilidades adicionales de CSS.
-
-## 🚀 Deployment
-
-### Con Docker
-
-```bash
-# Build de la imagen
-docker build -t townkitchen-frontend .
-
-# Ejecutar contenedor
-docker run -p 3000:80 townkitchen-frontend
-```
-
-### Deployment manual
-
-1. **Build de producción:**
-   ```bash
-   npm run build
-   ```
-
-2. **Servir archivos estáticos:**
-   Los archivos generados en `dist/` pueden servirse con cualquier servidor web estático (Nginx, Apache, etc.)
 
 ## 🎨 Componentes principales
 
@@ -334,22 +269,9 @@ npm install
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [React Router Documentation](https://reactrouter.com/)
 
-## 🤝 Contribución
-
-1. Fork del proyecto
-2. Crear rama para feature (`git checkout -b feature/AmazingFeature`)
-3. Commit de cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
 ## 📝 Notas de uso
 
 - El **admin** puede agregar, editar y eliminar tanto platos como usuarios/clientes desde el panel de administración.
-- El **carrusel superior** (HeroSlider) es rectangular y las imágenes siempre se ven bien.
 - El **modo claro/oscuro** se puede alternar desde el header y afecta toda la app.
 - Todas las imágenes y cards mantienen proporciones y diseño moderno.
 

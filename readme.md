@@ -108,20 +108,10 @@ APIs-Menu/                 # raíz del repositorio
    cd APIs-Menu
    ```
 
-2. **Configura variables de entorno del backend**:
-
-    * Crea `backend/.env` con las siguientes variables:
-
-      ```dotenv
-      PORT=5000
-      MONGO_URI=mongodb://mongo:27017/townkitchen
-      JWT_SECRET=tu_jwt_secret_key_aqui
-      ```
-
-3. **Inicia todos los servicios**:
+2. **Inicia todos los servicios**:
 
    ```bash
-   docker-compose up -d
+   docker-compose up --build
    ```
 
     * Esto descargará/buildará las imágenes y levantará:
@@ -129,7 +119,7 @@ APIs-Menu/                 # raíz del repositorio
         * **Backend** en `localhost:5000`
         * **Frontend** (React + Nginx) en `localhost:3000`
 
-4. **Verifica los logs** (opcional):
+3. **Verifica los logs** (opcional):
 
    ```bash
    # Logs combinados:
@@ -140,30 +130,11 @@ APIs-Menu/                 # raíz del repositorio
    docker-compose logs -f frontend
    ```
 
-5. **Accede a la aplicación**:
+4. **Accede a la aplicación**:
 
     * **Frontend**: 👉 `http://localhost:3000`
     * **API Backend**: `http://localhost:5000/api`
     * **Documentación Swagger**: `http://localhost:5000/api-docs`
-
----
-
-## 🔧 Desarrollo local (sin Docker)
-
-### Backend
-```bash
-cd backend
-npm install
-cp .env.example .env  # y configura las variables
-npm start
-```
-
-### Frontend  
-```bash
-cd frontend
-npm install
-npm run dev
-```
 
 ---
 

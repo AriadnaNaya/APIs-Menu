@@ -15,6 +15,9 @@ export default function HeroSection() {
                 right: '50%',
                 marginLeft: '-50vw',
                 marginRight: '-50vw',
+                /* Ajuste para llegar hasta el header */
+                marginTop: { xs: '-56px', sm: '-64px' },
+                paddingTop: { xs: '56px', sm: '64px' },
                 /* Altura responsive */
                 height: { xs: '38vh', md: '56vh' },
                 minHeight: 220,

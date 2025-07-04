@@ -46,10 +46,16 @@ export default function App() {
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 			<Header />
-			{/* Este Toolbar hace espacio igual al AppBar para que no tape el contenido */}
-			<Toolbar />
+			
+			{/* Conditional spacing - no toolbar space for pages with hero sections */}
+			{!['/', '/menu'].includes(location.pathname) && <Toolbar />}
 
-			<Box component="main" sx={{ flexGrow: 1, px: { xs: 2, sm: 3, md: 4 } }}>
+			<Box component="main" sx={{ 
+				flexGrow: 1, 
+				px: ['/admin', '/admin/platos', '/admin/usuarios'].includes(location.pathname) 
+					? 0  // No padding for admin pages (they handle their own)
+					: { xs: 2, sm: 3, md: 4 }  // Normal padding for other pages
+			}}>
 				<Routes>
 					<Route path="/"             element={<Home />} />
 					<Route path="/menu"         element={<Menu />} />
